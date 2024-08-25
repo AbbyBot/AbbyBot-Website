@@ -1,0 +1,42 @@
+.main-content, .subtitle, .title {
+    color: white !important;
+}
+
+
+/* Hacer que el body ocupe toda la altura de la página */
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: #b45428; /* Fondo específico para todas las páginas */
+}
+
+/* El contenido debe expandirse para llenar el espacio disponible */
+.main-content {
+    flex: 1;
+}
+
+/* Footer sticky */
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 1em 0;
+    text-align: center;
+}
+
+/* Estilos adicionales */
+.navbar {
+    margin-bottom: 20px;
+}
+
+.content {
+    color: #fff;
+}
+
+
+.bot-status {
+    background-color: #333;
+}
+
+
