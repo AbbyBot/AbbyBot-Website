@@ -1,0 +1,46 @@
+{% extends 'base/base.html' %}
+
+<title>{% block title %}AbbyBot - Overview{% endblock %}</title>
+
+{% block content %}
+
+
+<section class="main-content section">
+    <h1 style="margin-bottom: 10px; text-align: center;" class="title">Overview</h1>
+
+    <div class="container">
+        <section class="section">
+            <div class="columns">
+                
+                <div class="column is-half">
+                    
+                    <p class="subtitle">
+                        AbbyBot was created by combining two factors, a character and an idea. In this case, if you want to know more about
+                        this character, you can travel to <a style="color: aqua;" href="/about-her">this section</a>.
+                    </p>                    
+
+                </div>
+            </div>
+
+
+            <div class="colums">
+                <h1 style="margin-bottom: 10px;" class="title">Features</h1>    
+            </div>
+
+            
+        </section>
+
+    </div>
+</section>
+
+{% for command in help_commands %}
+<li>
+    <strong>{{ command.command_code }}</strong>: {{ command.command_description }}
+</li>
+{% endfor %}
+
+
+<!-- <img src="{{ url_for('static', filename='img/art/AbbyBot-Chibi_128.png') }}" alt="AbbyBot300x300"> -->
+
+
+{% endblock %}

@@ -1,6 +1,8 @@
 {% extends 'base/base.html' %}
 
-{% block content%}
+<title>{% block title %}AbbyBot - Home{% endblock %}</title>
+
+{% block content %}
 
 <section class="main-content section">
     <div class="container">
@@ -9,35 +11,72 @@
                 <div class="column is-half">
                     <h1 style="margin-bottom: 10px;" class="title">Introducing AbbyBot</h1>
                     <p class="subtitle">
-                        AbbyBot is a discord application with multipurpose purposes, 
-                        dedicated mainly to entertainment and the administrative sector. 
-                        AbbyBot has different functions through the use of slash commands, including multi-language support, 
-                        currently supporting the English and Spanish language.
+                        AbbyBot is a discord application with multipurpose purposes,
+                        dedicated mainly to entertainment and the administrative sector.
+                        AbbyBot has different functions through the use of slash commands, including multi-language
+                        support,
+                        currently supporting English and Spanish language.
                     </p>
                     <strong class="subtitle">
-                        The project is currently in an early phase of development. Each preview will be published on this website, see you soon!
+                        The project is currently in an early phase of development. Each preview will be published on
+                        this website, see you soon!
                     </strong>
+
+                    <div class="column">
+                        <a href="/wishlist" class="button is-link"> <span class="icon">
+                                <i class="fab fa-discord"></i>
+                            </span>
+                            <span>Add to wishlist</span></a>
+                        <a href="/overview" class="button is-light">Overview</a>
+                    </div>
                 </div>
                 <div class="column is-half">
                     <!-- AbbyBot image -->
                     <figure class="image">
-                        <img style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1); border-radius: 10px; transition: box-shadow 0.3s ease-in-out; margin-bottom: 20px;" src="{{ url_for('static', filename='img/logo/abbybot_logo.png') }}" alt="AbbyBot">
+                        <img style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1); border-radius: 10px; transition: box-shadow 0.3s ease-in-out; margin-bottom: 20px;"
+                            src="{{ url_for('static', filename='img/logo/abbybot_logo.png') }}" alt="AbbyBot">
                         <p style="color: white;">Abigail "Abby" Monroe, AbbyBot's physical appearance.</p>
                     </figure>
                 </div>
             </div>
 
-            <!-- Bot status sector -->
             <div>
                 <div class="bot-status box has-text-centered">
-                    <h1 class="subtitle">Bot status</h1>
-                    <p style="color: rgb(255, 0, 0);">● AbbyBot is currently offline. Try later.</p>
+                    <h1 class="subtitle">Currently status</h1>
+                    <p style="color: rgb(255, 187, 0);">● AbbyBot is in early development, check back later.</p>
                 </div>
             </div>
+
+            <div class="section">
+                <div class="bot-status box has-text-centered">
+                    <h2 class="subtitle">Number of servers where AbbyBot is added:</h2>
+                    <p style="color: white;">Currently added to: 
+                        {% for server in server_list %}
+                            <strong style="color: aqua;">{{ server.counter }}</strong>
+                            {% if not loop.last %}, {% endif %}
+                        {% endfor %}
+                        servers.
+                    </p>
+                    <p style="color: rgb(255, 144, 162);">You would help us a lot by adding AbbyBot to the <a style="color: aqua;" href="/wishlist">wishlist</a> <3</p>
+                </div>
+            </div>
+            
         </section>
+
+        <div class="buttons is-centered">
+            <a href="/" class="button is-primary">Home</a>
+            <a href="/about-her" class="button is-warning">About "her"</a>
+            <a href="/contribute" class="button is-info">Contribute</a>
+            <a href="https://github.com/your-github-organization" class="button is-light">
+                <span class="icon">
+                    <i class="fab fa-github"></i>
+                </span>
+                <span>GitHub Organization</span>
+            </a>
+            <a href="/about-her" class="button is-danger">Contact us</a>
+        </div>
+
     </div>
 </section>
-
-
 
 {% endblock %}
