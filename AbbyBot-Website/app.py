@@ -55,6 +55,25 @@ def overview():
     #get help commands english
     return render_template('overview.html', help_commands=en_commands_list)
 
+
+@app.route('/about-her')
+def abouther():
+    return render_template('about-her.html')
+
+
+@app.route('/contribute')
+def contribute():
+    return render_template('contribute.html')
+
+@app.route('/wishlist')
+def wishlist():
+    return render_template('wishlist.html')
+
+@app.route('/contact-us')
+def contact_us():
+    return render_template('contact-us.html')
+
+
 if __name__ == '__main__':
     app.run(debug=True)
 
