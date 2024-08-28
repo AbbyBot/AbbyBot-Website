@@ -1,0 +1,47 @@
+{% extends 'base/base.html' %}
+
+<title>{% block title %}AbbyBot - Commands{% endblock %}</title>
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/commands-list.css') }}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<section class="main-content section">
+    <div class="container">
+        <section class="section">
+            <h1 class="title has-text-centered">Commands</h1>
+            <p class="subtitle has-text-centered">List of all AbbyBot commands</p>
+
+            {% if commands %}
+            <div class="table-container">
+                <table class="table is-hoverable is-fullwidth custom-table">
+                    <thead>
+                        <tr>
+                            <th>Command</th>
+                            <th>Description</th>
+                            <th>Usage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for command in commands %}
+                        <tr>
+                            <td><code>{{ command.command_code }}</code></td>
+                            <td>{{ command.command_description }}</td>
+                            <td><code>{{ command.usage }}</code></td>
+                            {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="centered-container">
+                <p style="font-size: xx-large;" class="subtitle has-text-centered">At this time the command list is not available, please try again later. &#128534;</p>
+            </div>
+            {% endif %}
+        </section>
+    </div>
+</section>
+{% endblock %}

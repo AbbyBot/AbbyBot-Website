@@ -15,6 +15,10 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
+    {% block extra_css %}
+    <!-- Here the extra CSS for custom pages. -->
+    {% endblock %}
+
 
 </head>
 
@@ -40,6 +44,9 @@
                 <a class="navbar-item" href="/overview">
                     Overview
                 </a>
+                <a class="navbar-item" href="/commands-list">
+                    Commands
+                </a>
                 <a class="navbar-item" href="https://github.com/AbbyBot">
                     <span class="icon">
                         <i class="fab fa-github"></i>
@@ -58,11 +65,13 @@
                 <a class="navbar-item" href="/wishlist">
                     + Add to wishlist
                 </a>
+                <a class="navbar-item" href="/terms-and-conditions">
+                    terms and conditions
+                </a>
                 <a class="navbar-item" href="/contact-us">
                     Contact us
                 </a>
             </div>
-
         </div>
     </nav>
 

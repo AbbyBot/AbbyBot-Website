@@ -39,7 +39,25 @@ def home():
 
 @app.route('/overview')
 def overview():
-    # database
+
+    return render_template('overview.html')
+
+
+@app.route('/about-her')
+def abouther():
+    return render_template('about-her.html')
+
+
+@app.route('/contribute')
+def contribute():
+    return render_template('contribute.html')
+
+
+@app.route('/commands-list')
+def commands_list():
+
+
+        # database
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
 
@@ -52,18 +70,8 @@ def overview():
     cursor.close()
     conn.close()
 
-    #get help commands english
-    return render_template('overview.html', help_commands=en_commands_list)
+    return render_template('commands-list.html', commands=en_commands_list)
 
-
-@app.route('/about-her')
-def abouther():
-    return render_template('about-her.html')
-
-
-@app.route('/contribute')
-def contribute():
-    return render_template('contribute.html')
 
 @app.route('/wishlist')
 def wishlist():
@@ -72,6 +80,13 @@ def wishlist():
 @app.route('/contact-us')
 def contact_us():
     return render_template('contact-us.html')
+
+@app.route('/terms-and-conditions')
+def terms_and_conditions():
+    return render_template('terms-and-conditions.html')
+
+
+
 
 
 if __name__ == '__main__':

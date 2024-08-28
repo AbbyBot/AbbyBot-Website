@@ -4,7 +4,6 @@
 
 {% block content %}
 
-
 <section class="main-content section">
 
     <div class="container">
@@ -21,10 +20,6 @@
 
                 </div>
             </div>
-
-
-
-            
         </section>
 
         <section class="section">
@@ -33,25 +28,30 @@
                 <div class="column is-half">
                     
                     <h1 style="margin-bottom: 10px;" class="title">Features</h1>    
-                                       
 
+                    <ul style="list-style-type: none; padding-left: 0;">
+                        <li class="box">
+                            <strong>Language Support:</strong> AbbyBot can communicate in multiple languages (English / Spanish), allowing for greater accessibility and engagement across communities.
+                        </li>
+                        <li class="box">
+                            <strong>Tag Events:</strong> AbbyBot can respond you if you tag her. She has somewhat limited patience, so if you bother her more than three times in a row the responses will be somewhat more serious.
+                        </li>
+                        <li class="box">
+                            <strong>Server Management:</strong> Manage server settings, logs, and automated tasks seamlessly through AbbyBot’s administrative tools.
+                        </li>
+                        <li class="box">
+                            <strong>Enable/Disable events:</strong> You can choose if activate or deactivate AbbyBot events. Only if you are Admin in the server!
+                        </li>
+                    </ul>                   
+                    
                 </div>
+
             </div>
 
+            
+
         </section>
-
-
     </div>
 </section>
-
-<!-- {% for command in help_commands %}
-<li>
-    <strong>{{ command.command_code }}</strong>: {{ command.command_description }}
-</li>
-{% endfor %} -->
-
-
-<!-- <img src="{{ url_for('static', filename='img/art/AbbyBot-Chibi_128.png') }}" alt="AbbyBot300x300"> -->
-
 
 {% endblock %}
