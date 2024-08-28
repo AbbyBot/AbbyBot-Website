@@ -1,8 +1,11 @@
 {% extends 'base/base.html' %}
 
-<title>{% block title %}AbbyBot - wishlist{% endblock %}</title>
+{% block title %}Add AbbyBot to Wishlist{% endblock %}
 
 {% block content %}
+
+
+
 <section class="section">
   <div class="container">
     <div class="columns is-vcentered">
@@ -11,54 +14,52 @@
         <figure class="image is-1by1">
           <img
             style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1); border-radius: 10px; transition: box-shadow 0.3s ease-in-out; margin-bottom: 20px;"
-            src="static/img/art/AbbyBot-body.png" alt="AbbyBot">
-
+            src="{{ url_for('static', filename='img/art/AbbyBot-body.png') }}" alt="AbbyBot">
         </figure>
-        <p>-AbbyBot's team</p>
-
+        <p>- AbbyBot's team</p>
       </div>
 
       <div class="column is-half">
-        <h1 style="margin-bottom: 10px;" class="title">Add AbbyBot to Wishlist</h1>
+        <h1 class="title" style="margin-bottom: 10px;">Add AbbyBot to Wishlist</h1>
         <p class="subtitle">
           Do you want to use AbbyBot? If you are interested, fill out this short form to be notified when AbbyBot is
           released!
         </p>
-        <form action="#" method="POST">
+        <form action="{{ url_for('wishlist') }}" method="POST">
           <div class="field">
-            <label style="color: white;" class="label">Name (required field)</label>
+            <label class="label" style="color: white;">Name (required field)</label>
             <div class="control">
-              <input class="input" type="text" placeholder="Your name" required>
+              <input class="input" type="text" name="name" placeholder="Your name" required>
             </div>
           </div>
 
           <div class="field">
-            <label style="color: white;" class="label">Email (required field)</label>
+            <label class="label" style="color: white;">Email (required field)</label>
             <div class="control">
-              <input class="input" type="email" placeholder="Your email" required>
+              <input class="input" type="email" name="email" placeholder="Your email" required>
             </div>
           </div>
 
           <div class="field">
-            <label style="color: white;" class="label">
+            <label class="label" style="color: white;">
               Discord Username (optional field)<a href="#discordModal" style="color: cyan;">[What's this?]</a>
             </label>
             <div class="control">
-              <input class="input" type="text" placeholder="Your Discord Username">
+              <input class="input" type="text" name="discord_username" placeholder="Your Discord Username">
             </div>
           </div>
 
           <div class="field">
-            <label style="color: white;" class="label">Reason for using AbbyBot (optional field)</label>
+            <label class="label" style="color: white;">Reason for using AbbyBot (optional field)</label>
             <div class="control">
-              <textarea class="textarea" placeholder="Why do you want to use AbbyBot?"></textarea>
+              <textarea class="textarea" name="reason" placeholder="Why do you want to use AbbyBot?"></textarea>
             </div>
           </div>
 
           <div class="field">
-            <label style="color: white;" class="label">How did you learn about AbbyBot Project? (optional field)</label>
+            <label class="label" style="color: white;">How did you learn about AbbyBot Project? (optional field)</label>
             <div class="control">
-              <textarea class="textarea" placeholder="Where did you hear about AbbyBot?"></textarea>
+              <textarea class="textarea" name="how_learned" placeholder="Where did you hear about AbbyBot?"></textarea>
             </div>
           </div>
 
@@ -80,12 +81,10 @@
         </form>
       </div>
 
-
     </div>
   </div>
 </section>
 
-<!-- Modal for Discord Username Explanation -->
 <div id="discordModal" class="modal">
   <div class="modal-background"></div>
   <div class="modal-content">
@@ -93,14 +92,14 @@
       <strong style="color: black; font-size: x-large;">What is a Discord Username?</strong>
 
       <p>Your Discord username is the one you use to interact on the platform. Here's an example:</p>
-      
-      <!-- Example Image -->
+
       <figure class="image is-4by3">
         <img src="{{ url_for('static', filename='img/examples/modal_example.jpeg') }}" alt="Discord Username Example">
       </figure>
 
-      <p>You can find your Discord username by opening Discord and looking at the bottom left corner of the screen where your profile is displayed.</p>
-      
+      <p>You can find your Discord username by opening Discord and looking at the bottom left corner of the screen where
+        your profile is displayed.</p>
+
       <button class="button is-primary" id="closeModal">Close</button>
     </div>
   </div>
@@ -108,14 +107,10 @@
 </div>
 
 
-<script>
-  document.querySelector('#discordModal .modal-close, #closeModal').addEventListener('click', function () {
-    document.getElementById('discordModal').classList.remove('is-active');
-  });
-  document.querySelector('[href="#discordModal"]').addEventListener('click', function (event) {
-    event.preventDefault();
-    document.getElementById('discordModal').classList.add('is-active');
-  });
-</script>
+{% block javascript %}
+<script src="{{ url_for('static', filename='js/wishlist_script.js') }}"></script>
+{% endblock %}
+
+
 
 {% endblock %}

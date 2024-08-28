@@ -2,6 +2,13 @@
 
 <title>{% block title %}AbbyBot - Home{% endblock %}</title>
 
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home_styles.css') }}">
+{% endblock %}
+
+
+
 {% block content %}
 
 <section class="main-content section">
@@ -51,21 +58,24 @@
                 <div class="bot-status box has-text-centered">
                     <h2 class="subtitle">Number of servers where AbbyBot is added:</h2>
                     {% if server_list and server_list | sum(attribute='counter') > 0 %}
-                        <p style="color: white;">Currently added to: 
-                            {% for server in server_list %}
-                                <strong style="color: aqua;">{{ server.counter }}</strong>
-                                {% if not loop.last %}, {% endif %}
-                            {% endfor %}
-                            servers.
-                        </p>
+                    <p style="color: white;">Currently added to:
+                        {% for server in server_list %}
+                        <strong style="color: aqua;">{{ server.counter }}</strong>
+                        {% if not loop.last %}, {% endif %}
+                        {% endfor %}
+                        servers.
+                    </p>
                     {% else %}
-                        <p style="color: rgb(249, 0, 41);">We cannot verify the number of servers at this moment. Please try again later.</p>
+                    <p style="color: rgb(249, 0, 41);">We cannot verify the number of servers at this moment. Please try
+                        again later.</p>
                     {% endif %}
-                    <p style="color: rgb(55, 255, 0);">You would help us a lot by adding AbbyBot to the <a style="color: aqua;" href="/wishlist">wishlist</a> <3</p>
+                    <p style="color: rgb(55, 255, 0);">You would help us a lot by adding AbbyBot to the <a
+                            style="color: aqua;" href="/wishlist">wishlist</a>
+                        <3</p>
                 </div>
             </div>
-            
-            
+
+
         </section>
 
         <div class="buttons is-centered">
@@ -83,5 +93,29 @@
 
     </div>
 </section>
+
+
+<!-- Thank you mode if there is a flash message -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<div id="thankYouModal" class="modal is-active">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+        <div class="has-text-centered">
+            <p class="title">Thank you!</p>
+            <p class="subtitle">We will get back to you soon.</p>
+            <button class="button is-primary" id="closeModal">Close</button>
+        </div>
+    </div>
+    <button class="modal-close is-large" aria-label="close"></button>
+</div>
+{% endif %}
+{% endwith %}
+
+
+{% block javascript %}
+<script src="{{ url_for('static', filename='js/home_script.js') }}"></script>
+{% endblock %}
+
 
 {% endblock %}

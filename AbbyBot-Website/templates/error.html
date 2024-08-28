@@ -1,0 +1,16 @@
+{% extends 'base/base.html' %}
+
+<title>{% block title %}AbbyBot - Error{% endblock %}</title>
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <div class="content has-text-centered">
+            <h1 class="title">Oops! Something went wrong.</h1>
+            <p class="is-size-5">We couldn't find the page you were looking for.</p>
+            <p class="is-size-5">Please go back to the homepage and try again.</p>
+            <a href="/" class="button is-primary is-large mt-5">Back to Home</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

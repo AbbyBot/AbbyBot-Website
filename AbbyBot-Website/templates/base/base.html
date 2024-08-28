@@ -59,6 +59,9 @@
                 <a class="navbar-item" href="/contribute">
                     Contribute
                 </a>
+                <a style="color: gold;" class="navbar-item" href="/wip">
+                    Hall of Fame
+                </a>
             </div>
 
             <div class="navbar-end">
@@ -79,6 +82,10 @@
     <section class="main-content section">
         <div class="container">
             {% block content %}
+
+            {% block javascript %}
+            
+            {% endblock %}
 
             {% endblock %}
         </div>
