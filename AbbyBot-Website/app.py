@@ -9,7 +9,7 @@ load_dotenv()
 
 # Start Flask
 app = Flask(__name__)
-app.secret_key = '0wdis07zmg'
+app.secret_key = os.getenv('SECRET_KEY')
 
 # DB settings
 def get_db_connection():
