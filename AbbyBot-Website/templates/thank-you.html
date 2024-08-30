@@ -1,0 +1,21 @@
+{% extends 'base/base.html' %}
+
+{% block title %}AbbyBot - Thank You{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container has-text-centered">
+    <h1 class="title">Thank you for adding AbbyBot to your wishlist!</h1>
+    <p class="subtitle">We appreciate your interest and will notify you when AbbyBot is ready.</p>
+
+    <figure class="image is-128x128" style="margin: 0 auto; margin-bottom: 20px;">
+      <img src="{{ url_for('static', filename='img/art/AbbyBot-Chibi_Big.png') }}" alt="AbbyBot">
+    </figure>
+
+
+    <div class="buttons is-centered">
+      <a href="{{ url_for('home') }}" class="button is-primary">Go to Home</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

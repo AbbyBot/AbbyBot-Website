@@ -1,0 +1,31 @@
+.hero-body {
+    background-color: #b45428;
+}
+
+.side-wiki {
+    border-left: 2px solid #ccc;
+    padding-left: 20px;
+}
+
+.image-comparison img {
+    max-width: 100%;
+    border: 1px solid #ddd;
+    margin-bottom: 15px;
+}
+
+.about-content {
+    margin-bottom: 50px;
+}
+
+.centered-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.centered-content .container {
+    max-width: 960px; /* Limita el ancho del contenido centrado */
+}
