@@ -1,0 +1,25 @@
+#thankYouModal .modal-content {
+    background-color: #2b2b2b; /* Fondo oscuro */
+    color: white; /* Texto blanco */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Sombras más sutiles */
+  }
+
+  #thankYouModal .modal-content .box {
+    background-color: transparent; /* Hacer la caja transparente */
+    border: none; /* Eliminar bordes de la caja */
+  }
+
+  #thankYouModal .modal-content .title {
+    color: #fff; /* Asegura que el título también sea blanco */
+  }
+
+  #thankYouModal .modal-content .subtitle {
+    color: #bdbdbd; /* Color gris claro para el subtítulo */
+  }
+
+  #thankYouModal .modal-content button {
+    background-color: #00d1b2; /* Color del botón primario */
+    color: white; /* Texto del botón en blanco */
+  }
