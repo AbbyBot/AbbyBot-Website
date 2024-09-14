@@ -1,0 +1,180 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Times New Roman', serif;
+}
+
+body {
+    background-color: #b45428;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 1rem;
+}
+
+.monument {
+    background-color: #4f4f4f;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 800px;
+    padding: 2rem;
+    color: #fff;
+    text-align: center;
+    border: 10px solid #3b3b3b;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+header {
+    margin-bottom: 2rem;
+}
+
+.crest img {
+    width: 100px;
+    margin-bottom: 1rem;
+    border: 5px solid #d4af37; 
+    padding: 10px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); 
+    background-color: #3b3b3b; 
+}
+
+
+h1 {
+    font-size: 2.5rem;
+    letter-spacing: 3px;
+    color: #d4af37; /* Golden text */
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: #bfbfbf;
+    margin-top: 1rem;
+}
+
+.inscription {
+    margin: 2rem 0;
+    padding: 1rem;
+    background-color: #3a3a3a;
+    border-radius: 10px;
+    color: #e5e5e5;
+}
+
+.inscription h2 {
+    font-size: 2rem;
+    color: #d4af37;
+    margin-bottom: 1rem;
+}
+
+.inscription p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.contributors {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.contributor {
+    background-color: #3a3a3a;
+    padding: 1rem;
+    border-radius: 10px;
+    color: #e5e5e5;
+    border: 1px solid #2e2e2e;
+}
+
+.contributor h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+    color: #d4af37;
+}
+
+.contributor h3 span {
+    font-size: 1rem;
+    color: #bfbfbf;
+}
+
+.contributor p {
+    font-size: 1.1rem;
+    color: #e5e5e5;
+}
+
+footer {
+    margin-top: 2rem;
+    font-size: 1rem;
+    color: #bfbfbf;
+    border-top: 1px solid #666;
+    padding-top: 1rem;
+    text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+
+    .inscription h2 {
+        font-size: 1.8rem;
+    }
+
+    .inscription p {
+        font-size: 1rem;
+    }
+
+    .contributor h3 {
+        font-size: 1.2rem;
+    }
+
+    .contributor p {
+        font-size: 1rem;
+    }
+
+    .contributors {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    .monument {
+        padding: 1.5rem;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    .subtitle {
+        font-size: 0.9rem;
+    }
+
+    .inscription h2 {
+        font-size: 1.5rem;
+    }
+
+    .inscription p {
+        font-size: 0.9rem;
+    }
+
+    .contributor h3 {
+        font-size: 1rem;
+    }
+
+    .contributor p {
+        font-size: 0.9rem;
+    }
+
+    .contributors {
+        grid-template-columns: 1fr;
+    }
+}
+
+

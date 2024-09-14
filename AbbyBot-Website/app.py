@@ -178,6 +178,13 @@ def wip():
 def terms_and_conditions():
     return render_template('terms-and-conditions.html')
 
+# Hall of frame route
+@app.route('/hall-of-fame')
+def hall_of_fame():
+    return render_template('hall-of-fame.html')
+
+
+
 # Error handling route 404
 @app.errorhandler(404)
 def page_not_found(e):
