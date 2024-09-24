@@ -95,15 +95,23 @@
 </section>
 
 
-<!-- Thank you mode if there is a flash message -->
+<!-- Message if there is a flash message -->
 {% with messages = get_flashed_messages(with_categories=true) %}
 {% if messages %}
 <div id="thankYouModal" class="modal is-active">
     <div class="modal-background"></div>
     <div class="modal-content">
         <div class="has-text-centered">
-            <p class="title">Thank you!</p>
-            <p class="subtitle">We will get back to you soon.</p>
+            <p class="title">
+                {% for category, message in messages %}
+                    {{ category|capitalize }}
+                {% endfor %}
+            </p>
+            <p class="subtitle">
+                {% for category, message in messages %}
+                    {{ message }}
+                {% endfor %}
+            </p>
             <button class="button is-primary" id="closeModal">Close</button>
         </div>
     </div>
@@ -111,6 +119,7 @@
 </div>
 {% endif %}
 {% endwith %}
+
 
 
 {% block javascript %}
