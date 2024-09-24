@@ -6,8 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}AbbyBot{% endblock %}</title>
 
-
+    {% block favicon %}
     <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo/abbybot_logo.png') }}" type="image/x-icon">
+    {% endblock %}
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bulma/css/bulma.min.css') }}">
 
@@ -59,7 +60,7 @@
                 <a class="navbar-item" href="/contribute">
                     Contribute
                 </a>
-                <a style="color: gold;" class="navbar-item" href="/wip">
+                <a style="color: gold;" class="navbar-item" href="/hall-of-fame">
                     Hall of Fame
                 </a>
             </div>

@@ -1,0 +1,41 @@
+{% extends 'base/base.html' %}
+
+{% block title %}{{ person.name }}'s Contribution{% endblock %}
+
+{% block favicon %}
+<link rel="shortcut icon" href="{{ url_for('static', filename=person.image_url|replace('static/', '')) }}" type="image/x-icon">
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/person_detail.css') }}">
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    <div class="box has-text-centered" style="margin-top: 40px;">
+        <h1 class="title is-2 has-text-weight-bold">{{ person.name }}</h1>
+
+        <figure class="image is-128x128 is-inline-block">
+            <img class="is-rounded shadow" src="{{ url_for('static', filename=person.image_url|replace('static/', '')) }}" alt="{{ person.name }}">        </figure>
+
+        <p class="subtitle is-6">@{{ person.username }}</p>
+
+
+
+        <p class="subtitle is-4" style="margin-top: 20px;">{{ person.contributions }}</p>
+        
+        <div class="content is-medium" style="margin-top: 10px;">
+            <p>{{ person.comentary }}</p>
+        </div>
+
+        <a href="{{ url_for('hall_of_fame') }}" class="button is-link is-light is-rounded" style="margin-top: 20px;">
+            Back to Hall of Fame
+        </a>
+    </div>
+</div>
+
+
+
+
+{% endblock %}

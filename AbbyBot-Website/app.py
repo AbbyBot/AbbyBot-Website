@@ -181,7 +181,49 @@ def terms_and_conditions():
 # Hall of frame route
 @app.route('/hall-of-fame')
 def hall_of_fame():
-    return render_template('hall-of-fame.html')
+
+    # first query: contributors
+
+    connection = get_wishlist_db_connection()
+    cursor = connection.cursor(dictionary=True)
+    
+
+    cursor.execute("SELECT id, nickname AS name, username as username, user_image AS image_url, contributions FROM contributors")
+    hall_of_fame_data = cursor.fetchall()
+    
+    cursor.close()
+    connection.close()
+
+    # second query: users list names
+
+    connection = get_main_db_connection()
+    cursor = connection.cursor(dictionary=True)
+    
+
+    cursor.execute("select user_username as bro_username from dashboard where guild_id = 1176976421147648061 and is_bot = 0")
+    users_names_list = cursor.fetchall()
+
+    return render_template('hall_of_fame.html', hall_of_fame_data=hall_of_fame_data, users_names_list=users_names_list)
+
+
+@app.route('/hall-of-fame/contributor/<string:username>')
+def person_detail(username):
+
+    connection = get_wishlist_db_connection()
+    cursor = connection.cursor(dictionary=True)
+    
+    cursor.execute("SELECT id, nickname AS name, username, user_image AS image_url, contributions, comentary FROM contributors WHERE username = %s", (username,))
+    person = cursor.fetchone()
+    
+    cursor.close()
+    connection.close()
+
+    if person:
+        return render_template('person_detail.html', person=person)
+    else:
+        return "Person not found", 404
+
+
 
 
 
