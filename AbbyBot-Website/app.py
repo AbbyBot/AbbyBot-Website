@@ -181,7 +181,7 @@ def terms_and_conditions():
 def hall_of_fame():
     try:
         # Fetch hall of fame data
-        hall_of_fame_data = execute_query("wishlist", "SELECT id, nickname AS name, username as username, user_image AS image_url, contributions FROM contributors")
+        hall_of_fame_data = execute_query("wishlist", "SELECT id, nickname AS name, username as username, user_image AS image_url, contributions, custom_nickname FROM contributors")
         users_names_list = execute_query("main", "SELECT user_username as bro_username FROM dashboard WHERE guild_id = 1176976421147648061 AND is_bot = 0")
     except mysql.connector.Error as err:
         print(f"Error: {err}")
@@ -193,7 +193,7 @@ def hall_of_fame():
 def person_detail(username):
     try:
         person = execute_query("wishlist", """
-            SELECT id, nickname AS name, username, user_image AS image_url, contributions, comentary 
+            SELECT id, nickname AS name, username, user_image AS image_url, contributions, comentary, custom_nickname 
             FROM contributors WHERE username = %s
         """, (username,), fetchall=False)
     except mysql.connector.Error as err:
