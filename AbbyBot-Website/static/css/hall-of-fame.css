@@ -32,10 +32,10 @@
 }
 
 .box figure img {
-    width: 100%; /* Ensure the image takes 100% of the container */
-    height: auto; /* Maintain the image's aspect ratio */
-    border-radius: 5px; /* Rounded border for images */
-    
+    width: 100%; 
+    height: auto; 
+    object-fit: cover; 
+    border-radius: 5px;
 }
 
 /* Style for names on the cards */
@@ -54,9 +54,16 @@
 }
 
 /* Column adjustments for small screens */
+
 @media screen and (max-width: 768px) {
-    .column.is-one-quarter {
-        width: 100%; /* One card per row on small screens */
-        margin-bottom: 1rem;
+    .box {
+        width: 90%; 
+        margin: 0 auto; 
+    }
+
+    .box figure img {
+        max-width: 100%; 
+        height: auto; 
+        object-fit: contain; 
     }
 }
