@@ -2,84 +2,121 @@
 
 <title>{% block title %}AbbyBot - Overview{% endblock %}</title>
 
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/overview.css') }}">
+{% endblock %}
+
 {% block content %}
 
-<section class="main-content section">
+<section class="hero is-medium mb-5">
+    <div class="hero-body has-text-centered">
+        <div class="container">
+            <h1 class="title has-text-white is-size-2">
+                AbbyBot Overview
+            </h1>
+            <h2 class="subtitle has-text-white is-size-5">
+                AbbyBot was created by combining two factors, a character and an idea. In this case, if you want to know more about this character, you can travel to <a style="color: cyan;" href="/about-her">this section</a>. 
+            </h2>
+        </div>
+    </div>
+</section>
 
+<section class="section mb-5">
     <div class="container">
-        <section class="section">
-            <div class="columns">
 
-                <div class="column is-half">
-
-                    <h1 style="margin-bottom: 10px;" class="title">Overview</h1>
-                    <p class="subtitle">
-                        AbbyBot was created by combining two factors, a character and an idea. In this case, if you want
-                        to know more about
-                        this character, you can travel to <a style="color: aqua;" href="/about-her">this section</a>.
-                    </p>
-
-                </div>
+        <div class="columns">
+            <div class="column is-half">
+                <h1 class="title has-text-white is-size-2">AbbyBot Discord</h1>
+                <h1 class="subtitle has-text-white is-size-5">
+                    AbbyBot is a multipurpose tool for both entertainment and server management. The idea was born from combining an efficient tool with a character with charisma, below you can read the features.
+                </h1>
             </div>
-        </section>
-
-        <h1 style="margin-bottom: 10px;" class="title">Features</h1>
-
-
-        <section class="section">
-            <div class="columns">
-
-
-                <div class="column is-half">
-
-
-                    <ul style="list-style-type: none; padding-left: 0;">
-                        <li class="box">
-                            <strong>Language Support:</strong> AbbyBot can communicate in multiple languages (English /
-                            Spanish), allowing for greater accessibility and engagement across communities.
-                        </li>
-                        <li class="box">
-                            <strong>Tag Events:</strong> AbbyBot can respond you if you tag her. She has somewhat
-                            limited patience, so if you bother her more than three times in a row the responses will be
-                            somewhat more serious.
-                        </li>
-                        <li class="box">
-                            <strong>Server Management:</strong> Manage server settings, logs, and automated tasks
-                            seamlessly through AbbyBot’s administrative tools.
-                        </li>
-                        <li class="box">
-                            <strong>Enable/Disable events:</strong> You can choose if activate or deactivate AbbyBot
-                            events. Only if you are Admin in the server!
-                        </li>
-                    </ul>
-
-                </div>
-
-                <div class="column is-half">
-
-
-                    <ul style="list-style-type: none; padding-left: 0;">
-                        <li class="box">
-                            <strong>Tell stories:</strong> AbbyBot can tell you her story, AbbyBot's story will be told through pieces of history for the viewer's enjoyment.
-                        </li>
-                        <li class="box">
-                            <strong>Play minigames:</strong> You can play mini-games like rock-paper-scissors with AbbyBot to pass the time!
-                        </li>
-
-                    </ul>
-                    
-
-                </div>
-
+            <div class="column is-half">
+                <figure class="image hover-grow" style="width: 55%; height: auto;">
+                    <img src="{{ url_for('static', filename='img/AbbyBot_commands/Profile.svg') }}" alt="AbbyBot profile" style="width: 100%; height: auto;">
+                </figure>
             </div>
-
-        </section>
-
-        <p class="subtitle">
-            As time goes by, new features will be added so that the user can enjoy using AbbyBot, visit this frequently to find out about new developments.
-        </p>
+        </div>
 
     </div>
 </section>
+
+<section class="section mb-5">
+    <div class="container">
+
+        <div class="columns">
+            <div class="column is-half">
+                <figure class="image hover-grow" style="width: 70%; height: auto;">
+                    <img src="{{ url_for('static', filename='img/AbbyBot_commands/abouther.svg') }}" alt="About Her - Profile" style="width: 100%; height: auto;">
+                </figure>
+            </div>
+
+            <div class="column is-half">
+                <h1 class="title has-text-white is-size-2">Storytelling System</h1>
+                <h1 class="subtitle has-text-white is-size-5">
+                    AbbyBot can tell you her story. AbbyBot's story will be told through pieces of history for the viewer's enjoyment.
+                </h1>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="section mb-5">
+    <div class="container">
+
+        <div class="columns">
+            <div class="column is-half">
+                <h1 class="title has-text-white is-size-2">Language Support</h1>
+                <h1 class="subtitle has-text-white is-size-5">
+                    AbbyBot can communicate in multiple languages (English / Spanish), allowing for greater accessibility and engagement across communities.
+                </h1>
+            </div>
+            <div class="column is-half">
+
+                <figure class="image hover-grow" style="width: 55%; height: auto; margin-bottom: 20px;">
+                    <img src="{{ url_for('static', filename='img/AbbyBot_commands/message_english.svg') }}" alt="English message" style="width: 100%; height: auto;">
+                </figure>
+
+                <figure class="image hover-grow" style="width: 55%; height: auto;">
+                    <img src="{{ url_for('static', filename='img/AbbyBot_commands/message_spanish.svg') }}" alt="Spanish message" style="width: 100%; height: auto;">
+                </figure>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="section mb-5">
+    <div class="container">
+
+        <div class="columns">
+            <div class="column is-half">
+                <figure class="image hover-grow" style="width: 70%; height: auto;">
+                    <img src="{{ url_for('static', filename='img/AbbyBot_commands/events.svg') }}" alt="Events deactivated" style="width: 100%; height: auto;">
+                </figure>
+            </div>
+
+            <div class="column is-half">
+                <h1 class="title has-text-white is-size-2">Enable/Disable Events</h1>
+                <h1 class="subtitle has-text-white is-size-5">
+                    You can choose if activate or deactivate AbbyBot events. Only if you are Admin in the server!
+                </h1>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="hero is-medium mb-5">
+    <div class="hero-body has-text-centered">
+        <div class="container">
+            <h2 class="subtitle has-text-white is-size-5">
+                AbbyBot will be updated over time, adding more content. This page will mention the most important features so visit it frequently!</a>. 
+            </h2>
+        </div>
+    </div>
+</section>
+
 
 {% endblock %}
