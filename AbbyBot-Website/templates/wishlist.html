@@ -55,14 +55,14 @@
           <div class="field">
             <label class="label" style="color: white;"><i class="fa-solid fa-comments"></i> Any reason for using AbbyBot? (optional field)</label>
             <div class="control">
-              <textarea class="textarea" name="reason" placeholder="Why do you want to use AbbyBot?"></textarea>
+              <textarea class="textarea" name="reason" placeholder="Your text here"></textarea>
             </div>
           </div>
 
           <div class="field">
             <label class="label" style="color: white;"><i class="fa-solid fa-square-poll-vertical"></i> How did you learn about AbbyBot Project? (optional field)</label>
             <div class="control">
-              <textarea class="textarea" name="how_learned" placeholder="Where did you hear about AbbyBot?"></textarea>
+              <textarea class="textarea" name="how_learned" placeholder="Your text here"></textarea>
             </div>
           </div>
 
@@ -91,22 +91,26 @@
   <div class="modal-background"></div>
   <div class="modal-content">
     <div class="box">
-      <strong style="color: black; font-size: x-large;">What is a Discord Username?</strong>
+      <strong class="has-text-white" style="font-size: x-large;">What is your Discord Username?</strong>
 
-      <p>Your Discord username is the one you use to interact on the platform. Here's an example:</p>
+      <p class="mt-4">Your Discord username is the one you use to interact on the platform. Here's an example:</p>
 
-      <figure class="image is-4by3">
+      <figure class="image is-4by3 mt-4">
         <img src="{{ url_for('static', filename='img/examples/modal_example.jpeg') }}" alt="Discord Username Example">
       </figure>
 
-      <p>You can find your Discord username by opening Discord and looking at the bottom left corner of the screen where
-        your profile is displayed.</p>
+      <p class="mt-4">You can find your Discord username by opening Discord and looking at the bottom left corner of the screen where your profile is displayed.</p>
 
-      <button class="button is-primary" id="closeModal">Close</button>
+      <div class="buttons is-centered mt-4">
+        <button class="button is-primary is-medium" id="closeModal">Close</button>
+      </div>
     </div>
   </div>
+
   <button class="modal-close is-large" aria-label="close"></button>
 </div>
+
+
 
 
 {% block javascript %}
