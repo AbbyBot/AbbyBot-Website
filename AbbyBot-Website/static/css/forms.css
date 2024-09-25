@@ -1,0 +1,31 @@
+.light-mode {
+    --text-color: #ffffff;
+    --input-background-color: #f7f7f7;
+    --input-text-color: #000000;
+    --input-border-color: #dddddd;
+
+    background-color: var(--background-color) !important;
+    color: var(--text-color) !important;
+}
+
+.light-mode input,
+.light-mode textarea {
+    background-color: var(--input-background-color) !important;
+    color: var(--input-text-color) !important;
+    border-color: var(--input-border-color) !important;
+}
+
+.light-mode input::placeholder,
+.light-mode textarea::placeholder {
+    color: #616161;
+    opacity: 1;
+}
+
+.light-mode .box {
+    background-color: #ffffff !important;
+    color: var(--text-color) !important;
+}
+
+.light-mode .modal {
+    background-color: #ffffff !important;
+}
