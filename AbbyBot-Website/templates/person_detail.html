@@ -19,11 +19,18 @@
         <figure class="image is-128x128 is-inline-block">
             <img class="is-rounded shadow" src="{{ url_for('static', filename=person.image_url|replace('static/', '')) }}" alt="{{ person.name }}">        </figure>
 
+        <p class="subtitle is-4">"{{ person.custom_nickname }}"</p>
         <p class="subtitle is-6">@{{ person.username }}</p>
 
-
-
-        <p class="subtitle is-4" style="margin-top: 20px;">{{ person.contributions }}</p>
+             
+        <div class="content is-medium" style="margin-top: 10px;">
+            <h1 class="title is-4 has-text-weight-bold">{{ person.name }}'s contributions</h1>
+            <ol class="contribution-list">
+                {% for contribution in contributions %}
+                <li>{{ contribution.contribution }}</li>
+                {% endfor %}
+            </ol>
+        </div>
         
         <div class="content is-medium" style="margin-top: 10px;">
             <p>{{ person.comentary }}</p>

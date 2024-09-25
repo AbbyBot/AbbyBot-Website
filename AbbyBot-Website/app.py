@@ -181,29 +181,50 @@ def terms_and_conditions():
 def hall_of_fame():
     try:
         # Fetch hall of fame data
-        hall_of_fame_data = execute_query("wishlist", "SELECT id, nickname AS name, username as username, user_image AS image_url, contributions, custom_nickname FROM contributors")
-        users_names_list = execute_query("main", "SELECT user_username as bro_username FROM dashboard WHERE guild_id = 1176976421147648061 AND is_bot = 0")
+        hall_of_fame_data = execute_query("wishlist", """
+            SELECT id, nickname AS name, username as username, user_image AS image_url, custom_nickname 
+            FROM contributors
+        """)
+        users_names_list = execute_query("main", """
+            SELECT user_username as bro_username 
+            FROM dashboard 
+            WHERE guild_id = 1176976421147648061 AND is_bot = 0
+        """)
     except mysql.connector.Error as err:
         print(f"Error: {err}")
         return render_template('error.html', message="Database connection failed.")
 
     return render_template('hall_of_fame.html', hall_of_fame_data=hall_of_fame_data, users_names_list=users_names_list)
 
+
 @app.route('/hall-of-fame/contributor/<string:username>')
 def person_detail(username):
     try:
+        # Inquire for contributor information
         person = execute_query("wishlist", """
-            SELECT id, nickname AS name, username, user_image AS image_url, contributions, comentary, custom_nickname 
+            SELECT id, nickname AS name, username, user_image AS image_url, comentary, custom_nickname 
             FROM contributors WHERE username = %s
         """, (username,), fetchall=False)
+        
+        # If the contributor exists, search for their contributions
+        if person:
+            # Inquiry for related contributions
+            contributions = execute_query("wishlist", """
+                SELECT contribution 
+                FROM contributions WHERE contributor_id = %s
+            """, (person['id'],))
+        else:
+            return "Person not found", 404
+    
     except mysql.connector.Error as err:
         print(f"Error: {err}")
         return render_template('error.html', message="Database connection failed.")
     
     if person:
-        return render_template('person_detail.html', person=person)
+        return render_template('person_detail.html', person=person, contributions=contributions)
     else:
         return "Person not found", 404
+
 
 # Error handling route 404
 @app.errorhandler(404)
