@@ -4,7 +4,9 @@
 
 {% block extra_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/hall-of-fame.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/contributors_animations.css') }}">
 {% endblock %}
+
 
 {% block content %}
 <div class="container">
@@ -16,7 +18,7 @@
 
     <div class="columns is-multiline is-centered">
         {% for person in hall_of_fame_data %}
-        <div class="column is-one-quarter-tablet is-one-fifth-desktop">
+        <div class="column is-one-quarter-tablet is-one-fifth-desktop fade-in-up">
             <a href="{{ url_for('person_detail', username=person.username) }}">
                 <div class="box bot-status has-text-white">
                     <figure class="image is-4by3">
@@ -25,7 +27,7 @@
                     <div class="content mt-3">
                         <p class="title is-5">{{ person.name }}</p>
                         <p class="subtitle is-6">"{{ person.custom_nickname }}"</p>
-                        <p class="subtitle is-7 ">@{{ person.username }}</p>
+                        <p class="subtitle is-7 "><span class="icon"><i class="fab fa-discord"></i></span>{{ person.username }}</p>
                     </div>
                 </div>
             </a>
@@ -64,7 +66,7 @@
             <div class="columns is-multiline is-centered">
                 {% for bro in users_names_list %}
                 <div class="column is-narrow">
-                    <p class="subtitle is-6">{{ bro.bro_username }}</p>
+                    <p class="subtitle is-6 fade-in-up">{{ bro.bro_username }}</p>
                 </div>
                 {% endfor %}
             </div>
@@ -73,4 +75,12 @@
     </div>
     
 </div>
+
+
+{% block javascript %}
+<script src="{{ url_for('static', filename='js/contributors_script.js') }}"></script>
+{% endblock %}
+
+
+
 {% endblock %}

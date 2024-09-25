@@ -18,7 +18,6 @@ CREATE TABLE messages (
 
 
 
-
 CREATE TABLE IF NOT EXISTS contributors (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nickname` VARCHAR(255) NOT NULL,
@@ -48,15 +47,15 @@ VALUES
  '✨Soledad✨ has brought AbbyBot to life visually with her amazing artwork 🎨! She created the iconic AbbyBot image and defined the artistic style of the project 🎉. Her contributions have given AbbyBot a face and personality that stands out in every way 🌟. A true artist with a vision that shines! ✨', 
  'static/img/contributor/soledadlml.png', 'The Visionary Artist'),
 
-('anzarkept', 'anzarkept', 
- 'anzarkept has engineered the backbone of AbbyBot\'s functionality 🚀! From building the entire AbbyBot Dashboard to creating the dynamic themes system 🎨, their work has shaped the user experience. Not to mention, they expertly implemented the Discord API into the dashboard 🔧, making everything run smoothly. A technical wizard whose contributions are invaluable 🛠️!', 
+('Sr. Teoremilla', 'anzarkept', 
+ 'Sr. Teoremilla has engineered the backbone of AbbyBot\'s functionality 🚀! From building the entire AbbyBot Dashboard to creating the dynamic themes system 🎨, their work has shaped the user experience. Not to mention, they expertly implemented the Discord API into the dashboard 🔧, making everything run smoothly. A technical wizard whose contributions are invaluable 🛠️!', 
  'static/img/contributor/anzarkept.png', 'The Dashboard Architect');
 
 
 
 INSERT INTO contributions (`contributor_id`, `contribution`)
 VALUES
--- Contribuciones de AstronautMarkus (contributor_id = 1)
+-- AstronautMarkus Contributions (contributor_id = 1)
 (1, 'Create AbbyBot Project'),
 (1, 'AbbyBot GitHub Organization'),
 (1, 'AbbyBot Discord Bot code'),
@@ -64,11 +63,11 @@ VALUES
 (1, 'A few of front-end'),
 (1, 'AbbyBot-website'),
 
--- Contribuciones de ✨Soledad✨ (contributor_id = 2)
+-- ✨Soledad✨ Contributions (contributor_id = 2)
 (2, 'Create AbbyBot actual image'),
 (2, 'Art style images'),
 
--- Contribuciones de anzarkept (contributor_id = 3)
+-- Sr. Teoremilla Contributions (contributor_id = 3)
 (3, 'Create AbbyBot Dashboard'),
 (3, 'Contribute to AbbyBot-website'),
 (3, 'AbbyBot Dashboard themes system'),

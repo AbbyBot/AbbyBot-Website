@@ -1,6 +1,6 @@
 {% extends 'base/base.html' %}
 
-{% block title %}{{ person.name }}'s Contribution{% endblock %}
+{% block title %}{{ person.name }}'s Contributions{% endblock %}
 
 {% block favicon %}
 <link rel="shortcut icon" href="{{ url_for('static', filename=person.image_url|replace('static/', '')) }}" type="image/x-icon">
@@ -8,40 +8,48 @@
 
 {% block extra_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/person_detail.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/contributors_animations.css') }}">
 {% endblock %}
-
 
 {% block content %}
 <div class="container">
-    <div class="box has-text-centered" style="margin-top: 40px;">
-        <h1 class="title is-2 has-text-weight-bold">{{ person.name }}</h1>
+    <div class="box bot-status has-text-centered" style="margin-top: 60px; padding: 40px;">
+        <h1 class="title is-2 has-text-weight-bold" style="color: #b45428;">{{ person.name }}</h1>
 
         <figure class="image is-128x128 is-inline-block">
-            <img class="is-rounded shadow" src="{{ url_for('static', filename=person.image_url|replace('static/', '')) }}" alt="{{ person.name }}">        </figure>
+            <img class="is-rounded shadow" src="{{ url_for('static', filename=person.image_url|replace('static/', '')) }}" alt="{{ person.name }}">
+        </figure>
 
-        <p class="subtitle is-4">"{{ person.custom_nickname }}"</p>
-        <p class="subtitle is-6">@{{ person.username }}</p>
+        <p class="subtitle is-3 has-text-light">"{{ person.custom_nickname }}"</p>
+        <p class="subtitle is-5 has-text-grey-lighter">@{{ person.username }}</p>
 
-             
-        <div class="content is-medium" style="margin-top: 10px;">
-            <h1 class="title is-4 has-text-weight-bold">{{ person.name }}'s contributions</h1>
-            <ol class="contribution-list">
+        <div class="content is-large" style="margin-top: 30px;">
+            <h2 class="title is-3 has-text-weight-bold has-text-light">The Contributions of {{ person.name }}</h2>
+
+            <div class="columns is-multiline is-centered" style="margin-top: 30px;">
                 {% for contribution in contributions %}
-                <li>{{ contribution.contribution }}</li>
+                <div class="column is-one-third">
+                    <div class="box bot-status fade-in-up" style="height: 200px; display: flex; justify-content: center; align-items: center;">
+                        <h3 class="title is-4 has-text-weight-bold" style="color: #b45428;">{{ contribution.contribution }}</h3>
+                    </div>
+                </div>                
                 {% endfor %}
-            </ol>
-        </div>
-        
-        <div class="content is-medium" style="margin-top: 10px;">
-            <p>{{ person.comentary }}</p>
+            </div>
         </div>
 
-        <a href="{{ url_for('hall_of_fame') }}" class="button is-link is-light is-rounded" style="margin-top: 20px;">
+        <div class="content is-medium" style="margin-top: 30px;">
+            <p class="has-text-light">{{ person.comentary }}</p>
+        </div>
+
+        <a href="{{ url_for('hall_of_fame') }}" class="button is-link is-light is-rounded" style="margin-top: 30px;">
             Back to Hall of Fame
         </a>
     </div>
 </div>
 
+{% block javascript %}
+<script src="{{ url_for('static', filename='js/contributors_script.js') }}"></script>
+{% endblock %}
 
 
 
