@@ -30,19 +30,19 @@
                     </strong>
 
                     <div class="column">
-                        <a href="/wishlist" class="button is-link"> <span class="icon">
-                                <i class="fab fa-discord"></i>
-                            </span>
-                            <span>Add to wishlist</span></a>
-                        <a href="/overview" class="button is-light">Overview</a>
+                        <a href="/wishlist" class="button is-link"><span class="icon"><i class="fab fa-discord"></i></span><span>Add to wishlist</span></a>
+                        
+                        <a href="/overview" class="button is-light"><span class="icon"><i class="fa-solid fa-file-lines"></i></span><span>Add to wishlist</span></a>
+
                     </div>
+
                 </div>
                 <div class="column is-half">
-                    <!-- AbbyBot image -->
+                    
                     <figure class="image">
                         <img style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1); border-radius: 10px; transition: box-shadow 0.3s ease-in-out; margin-bottom: 20px;"
                             src="{{ url_for('static', filename='img/logo/abbybot_logo.png') }}" alt="AbbyBot">
-                        <p style="color: white;">Abigail "Abby" Monroe, AbbyBot's physical appearance.</p>
+                        <p style="color: white;">Abigail "Abby" Monroe, AbbyBot's character icon.</p>
                     </figure>
                 </div>
             </div>
@@ -50,7 +50,7 @@
             <div>
                 <div class="bot-status box has-text-centered">
                     <h1 class="subtitle">Currently status</h1>
-                    <p style="color: rgb(255, 187, 0);">● AbbyBot is in early development, check back later.</p>
+                    <p class="subtitle">AbbyBot is in early development, check back later. 🙂‍↔️</p>
                 </div>
             </div>
 
@@ -58,7 +58,7 @@
                 <div class="bot-status box has-text-centered">
                     <h2 class="subtitle">Number of servers where AbbyBot is added:</h2>
                     {% if server_list and server_list | sum(attribute='counter') > 0 %}
-                    <p style="color: white;">Currently added to:
+                    <p style="color: white; margin-bottom: 20px;">Currently added to:
                         {% for server in server_list %}
                         <strong style="color: aqua;">{{ server.counter }}</strong>
                         {% if not loop.last %}, {% endif %}
@@ -69,26 +69,19 @@
                     <p style="color: rgb(249, 0, 41);">We cannot verify the number of servers at this moment. Please try
                         again later.</p>
                     {% endif %}
-                    <p style="color: rgb(55, 255, 0);">You would help us a lot by adding AbbyBot to the <a
-                            style="color: aqua;" href="/wishlist">wishlist</a>
-                        <3</p>
+                    <p class="subtitle">Would you like to help increase this number? you can do it if you add AbbyBot to the <a style="color: aqua;" href="/wishlist">wishlist</a> 💙</p>
                 </div>
             </div>
 
-
         </section>
 
-        <div class="buttons is-centered">
-            <a href="/" class="button is-primary">Home</a>
-            <a href="/about-her" class="button is-warning">About "her"</a>
-            <a href="/contribute" class="button is-info">Contribute</a>
-            <a href="https://github.com/your-github-organization" class="button is-light">
-                <span class="icon">
-                    <i class="fab fa-github"></i>
-                </span>
-                <span>GitHub Organization</span>
-            </a>
-            <a href="/contact-us" class="button is-danger">Contact us</a>
+        <div class="buttons is-centered">   
+            <a href="/" class="button is-primary"><span class="icon"><i class="fa-solid fa-house"></i></span><span>Home</span></a>
+            <a href="/about-her" class="button is-link"><span class="icon"><i class="fa-solid fa-robot"></i></span><span>About Her</span></a>
+            <a href="/contribute" class="button is-info"><span class="icon"><i class="fa-solid fa-handshake-simple"></i></span><span>Contribute</span></a>
+            <a href="https://github.com/your-github-organization" class="button is-light"><span class="icon"><i class="fab fa-github"></i></span><span>GitHub Organization</span></a>
+            <a href="https://github.com/your-github-organization" class="button is-warning"><span class="icon"><i class="fa-solid fa-address-card"></i></span><span>Contact us</span></a>
+
         </div>
 
     </div>
