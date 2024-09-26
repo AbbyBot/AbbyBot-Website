@@ -528,6 +528,120 @@ def delete_contributor(contributor_id):
 
     return redirect(url_for('admin_manage_contributors'))
 
+# contributions system
+
+# get all contributions
+
+@app.route('/admin-contributions/<int:contributor_id>')
+@login_required
+def manage_contributions(contributor_id):
+    
+    # Get the name and id of the contributor
+    contributor = execute_query("wishlist", """
+        SELECT id, nickname FROM contributors WHERE id = %s
+    """, (contributor_id,))
+    
+    if not contributor:
+        return render_template('error.html', message="Contributor not found.")
+
+    # Get contributions from contributor
+    contributions = execute_query("wishlist", """
+        SELECT id, contribution FROM contributions WHERE contributor_id = %s
+    """, (contributor_id,))
+
+    return render_template('admin_manage_contributions.html', contributor=contributor[0], contributions=contributions)
+
+
+
+# add a contribution
+
+@app.route('/admin-add_contribution/<int:contributor_id>', methods=['GET', 'POST'])
+@login_required
+def add_contribution(contributor_id):
+    if request.method == 'POST':
+        contribution_text = request.form['contribution']
+
+        try:
+            connection = get_db_connection(db_type="wishlist")
+            cursor = connection.cursor()
+            cursor.execute("""
+                INSERT INTO contributions (contributor_id, contribution) 
+                VALUES (%s, %s)
+            """, (contributor_id, contribution_text))
+            connection.commit()
+        except mysql.connector.Error as err:
+            print(f"Error: {err}")
+            return render_template('error.html', message="Error adding contribution.")
+        finally:
+            cursor.close()
+            connection.close()
+
+        return redirect(url_for('manage_contributions', contributor_id=contributor_id))
+
+    return render_template('admin_add_contribution.html', contributor_id=contributor_id)
+
+# edit contribution
+
+@app.route('/admin-edit_contribution/<int:contribution_id>', methods=['GET', 'POST'])
+@login_required
+def edit_contribution(contribution_id):
+    if request.method == 'POST':
+        contribution_text = request.form['contribution']
+
+        try:
+            connection = get_db_connection(db_type="wishlist")
+            cursor = connection.cursor()
+            cursor.execute("""
+                UPDATE contributions 
+                SET contribution = %s 
+                WHERE id = %s
+            """, (contribution_text, contribution_id))
+            connection.commit()
+        except mysql.connector.Error as err:
+            print(f"Error: {err}")
+            return render_template('error.html', message="Error updating contribution.")
+        finally:
+            cursor.close()
+            connection.close()
+
+        return redirect(url_for('manage_contributions', contributor_id=request.form['contributor_id']))
+
+    # Get contribution by Id
+    contribution = execute_query("wishlist", """
+        SELECT id, contribution, contributor_id FROM contributions WHERE id = %s
+    """, (contribution_id,))
+    
+    # Make sure the contribution exists
+    if not contribution:
+        return render_template('error.html', message="Contribution not found.")
+
+    return render_template('admin_edit_contribution.html', contribution=contribution[0])
+
+
+# delete contribution
+
+@app.route('/admin-delete_contribution/<int:contribution_id>', methods=['POST'])
+@login_required
+def delete_contribution(contribution_id):
+    try:
+        connection = get_db_connection(db_type="wishlist")
+        cursor = connection.cursor()
+        cursor.execute("""
+            DELETE FROM contributions WHERE id = %s
+        """, (contribution_id,))
+        connection.commit()
+    except mysql.connector.Error as err:
+        print(f"Error: {err}")
+        return render_template('error.html', message="Error deleting contribution.")
+    finally:
+        cursor.close()
+        connection.close()
+
+    return redirect(url_for('manage_contributions', contributor_id=request.form['contributor_id']))
+
+
+
+
 
 # start system
 
