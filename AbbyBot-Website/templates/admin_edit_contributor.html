@@ -39,7 +39,7 @@
                 <label class="label" for="user_image">Upload User Image:</label>
                 <div class="file has-name">
                     <label class="file-label">
-                        <input class="file-input" type="file" id="user_image" name="user_image" accept="image/*">
+                        <input class="file-input" type="file" id="user_image" name="user_image" accept="image/*" onchange="previewImage(event)">
                         <span class="file-cta">
                             <span class="file-icon">
                                 <i class="fas fa-upload"></i>
@@ -52,6 +52,12 @@
                             {{ contributor.user_image }}
                         </span>
                     </label>
+                </div>
+                <!-- Preview image if new one is selected -->
+                <div class="field">
+                    <figure class="image is-128x128">
+                        <img id="image_preview" src="#" alt="Image Preview" style="display: none;" />
+                    </figure>
                 </div>
             </div>
 
@@ -77,4 +83,10 @@
 
     </div>
 </section>
+
+{% block javascript %}
+<script src="{{ url_for('static', filename='js/previewImage.js') }}"></script>
+{% endblock %}
+
+
 {% endblock %}
