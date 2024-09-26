@@ -1,0 +1,86 @@
+{% extends 'base/base.html' %}
+
+{% block title %}AbbyBot Hall of Fame{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/hall-of-fame.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/contributors_animations.css') }}">
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+
+    <div class="has-text-centered mb-6">
+        <h1 class="title is-2">AbbyBot Hall of Fame</h1>
+        <h2 class="subtitle is-4">The heroes who helped develop AbbyBot:</h2>
+    </div>
+
+    <div class="columns is-multiline is-centered">
+        {% for person in hall_of_fame_data %}
+        <div class="column is-one-quarter-tablet is-one-fifth-desktop fade-in-up">
+            <a href="{{ url_for('person_detail', username=person.username) }}">
+                <div class="box bot-status has-text-white">
+                    <figure class="image is-4by3">
+                        <img src="{{ person.image_url }}" alt="{{ person.name }}" style="border-radius: 8px;">
+                    </figure>
+                    <div class="content mt-3">
+                        <p class="title is-5">{{ person.name }}</p>
+                        <p class="subtitle is-6">"{{ person.custom_nickname }}"</p>
+                        <p class="subtitle is-7 "><span class="icon"><i class="fab fa-discord"></i></span>{{ person.username }}</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+
+
+    <div class="has-text-centered mt-6">
+        <div class="notification bot-status is-rounded">
+            <p class="subtitle is-5">
+                <span style="font-size: 1.2rem; font-weight: bold; color: #ffdd57;">"The hearts and minds"</span> that helped shape the AbbyBot project have given life to this "creature." From <strong>small</strong> to <strong>large contributions</strong>, each effort has added a piece to the puzzle, making the project grow step by step. Whether their help was <span style="color: #00d1b2; font-weight: bold;">a little or a lot</span>, each contribution, <strong>in time and dedication</strong>, has had a <span style="text-decoration: underline;">tremendous impact</span> on what AbbyBot is today. 
+                <br>
+                My gratitude is <span style="color: #48c774;">eternal</span> 💚
+            </p>
+            <p><strong>- Marcos Reyes (AstronautMarkus)</strong></p>
+        </div>
+    </div>
+
+
+    <div class="has-text-centered mt-6">
+        <h2 class="title is-3">Special Shoutout</h2>
+        <div class="notification bot-status is-rounded">
+            <p class="subtitle is-5">
+                A huge shoutout to special persons for AstronautMarkus: <strong style="color: rgb(0, 119, 255);">Daniel Carrasco</strong>, <strong style="color: red;">SwordHunterZ</strong>, <strong style="color: rgb(154, 0, 225);">Sevxn</strong>, <strong style="color: aquamarine;">♡CALY♡</strong> and <strong style="color: yellow;">Vorish</strong>! Thank you for all the laughs, the late night talks and the support, You're definitely the best thing that ever happened to me." Y'all are great! 🎉</p>
+        </div>
+    </div>
+
+    <div class="has-text-centered mt-6">
+        <h2 class="title is-5">And... finally</h2>
+        <div class="notification bot-status is-rounded">
+            <p class="subtitle is-5">
+                A special shoutout to all members from the official AbbyBot Discord! You're all a key part of this journey. Let's keep building, keep laughing, and keep growing together! 💚
+            </p>
+                
+            <div class="columns is-multiline is-centered">
+                {% for bro in users_names_list %}
+                <div class="column is-narrow">
+                    <p class="subtitle is-6 fade-in-up">{{ bro.bro_username }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        
+        </div>
+    </div>
+    
+</div>
+
+
+{% block javascript %}
+<script src="{{ url_for('static', filename='js/contributors_script.js') }}"></script>
+{% endblock %}
+
+
+
+{% endblock %}

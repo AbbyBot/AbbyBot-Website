@@ -1,0 +1,69 @@
+/* Style for the main title and subtitle */
+.title.is-1 {
+    font-size: 3.5rem;
+    color: #fff; /* White text */
+    text-transform: uppercase; /* Uppercase letters */
+    font-weight: bold;
+}
+
+.subtitle.is-4 {    
+    font-size: 1.75rem;
+    color: #fff; /* White text */
+    margin-bottom: 2rem;
+}
+
+/* Style for the cards */
+.box {
+    border-radius: 10px;
+    padding: 10px;
+    transform: rotate(-3deg); /* Initial rotation of the cards */
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2); /* Soft shadow */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.box:hover {
+    transform: rotate(0deg) scale(1.05); /* Hover effect for the whole card */
+    box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.3); /* Stronger shadow on hover */
+}
+
+/* Style for images inside the cards */
+.box figure {
+    margin: 0;
+}
+
+.box figure img {
+    width: 100%; 
+    height: auto; 
+    object-fit: cover; 
+    border-radius: 5px;
+}
+
+/* Style for names on the cards */
+.box p {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+    color: #ffffff; /* White */
+    padding: 10px;
+}
+
+/* Card layout adjustments */
+.columns.is-multiline.is-centered {
+    margin-top: 2rem;
+}
+
+/* Column adjustments for small screens */
+
+@media screen and (max-width: 768px) {
+    .box {
+        width: 90%; 
+        margin: 0 auto; 
+    }
+
+    .box figure img {
+        max-width: 100%; 
+        height: auto; 
+        object-fit: contain; 
+    }
+}

@@ -6,14 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}AbbyBot{% endblock %}</title>
 
-
+    {% block favicon %}
     <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo/abbybot_logo.png') }}" type="image/x-icon">
+    {% endblock %}
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bulma/css/bulma.min.css') }}">
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
     {% block extra_css %}
     <!-- Here the extra CSS for custom pages. -->
@@ -26,10 +27,12 @@
     <nav class="navbar is-dark bot-status" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
             <a class="navbar-item" href="/">
+                <img src="{{ url_for('static', filename='img/logo/abbybot_logo.png') }}" alt="AbbyBot Profile">
                 <h1 class="has-text-light">AbbyBot</h1>
-            </a>
+            </a>            
 
             <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+                <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
@@ -38,14 +41,11 @@
 
         <div id="navbarMenu" class="navbar-menu">
             <div class="navbar-start">
-                <a class="navbar-item" href="/">
-                    Home
-                </a>
                 <a class="navbar-item" href="/overview">
-                    Overview
+                    <i class="fa-solid fa-file-lines"></i> Overview
                 </a>
                 <a class="navbar-item" href="/commands-list">
-                    Commands
+                    <i class="fa-solid fa-terminal"></i> Commands
                 </a>
                 <a class="navbar-item" href="https://github.com/AbbyBot">
                     <span class="icon">
@@ -54,25 +54,25 @@
                     GitHub Organization
                 </a>
                 <a class="navbar-item" href="/about-her">
-                    About "her"
+                    <i class="fa-solid fa-circle-info"></i> About Her
                 </a>
                 <a class="navbar-item" href="/contribute">
-                    Contribute
+                    <i class="fa-solid fa-handshake-simple"></i> Contribute
                 </a>
-                <a style="color: gold;" class="navbar-item" href="/wip">
-                    Hall of Fame
+                <a style="color: gold;" class="navbar-item" href="/hall-of-fame">
+                    <i class="fa-solid fa-users-gear"></i> Hall of Fame
                 </a>
             </div>
 
             <div class="navbar-end">
                 <a class="navbar-item" href="/wishlist">
-                    + Add to wishlist
+                    <i class="fa-solid fa-hand-holding-heart"></i> Add To Wishlist
                 </a>
                 <a class="navbar-item" href="/terms-and-conditions">
-                    terms and conditions
+                    <i class="fa-solid fa-scale-balanced"></i> Terms And Conditions
                 </a>
                 <a class="navbar-item" href="/contact-us">
-                    Contact us
+                    <i class="fa-regular fa-address-card"></i> Contact us
                 </a>
             </div>
         </div>

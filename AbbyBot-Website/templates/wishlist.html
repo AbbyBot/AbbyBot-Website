@@ -2,11 +2,14 @@
 
 {% block title %}Add AbbyBot to Wishlist{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/forms.css') }}">
+{% endblock %}
+
+
 {% block content %}
 
-
-
-<section class="section">
+<section class="section light-mode">
   <div class="container">
     <div class="columns is-vcentered">
 
@@ -27,14 +30,14 @@
         </p>
         <form action="{{ url_for('wishlist') }}" method="POST">
           <div class="field">
-            <label class="label" style="color: white;">Name (required field)</label>
+            <label class="label" style="color: white;"><i class="fa-solid fa-signature"></i> Name (required field)</label>
             <div class="control">
               <input class="input" type="text" name="name" placeholder="Your name" required>
             </div>
           </div>
 
           <div class="field">
-            <label class="label" style="color: white;">Email (required field)</label>
+            <label class="label" style="color: white;"><i class="fa-solid fa-envelope"></i> Email (required field)</label>
             <div class="control">
               <input class="input" type="email" name="email" placeholder="Your email" required>
             </div>
@@ -42,7 +45,7 @@
 
           <div class="field">
             <label class="label" style="color: white;">
-              Discord Username (optional field)<a href="#discordModal" style="color: cyan;">[What's this?]</a>
+              <i class="fa-brands fa-discord"></i> Discord Username (optional field) <a href="#discordModal" style="color: cyan;"> [What's this?]</a>
             </label>
             <div class="control">
               <input class="input" type="text" name="discord_username" placeholder="Your Discord Username">
@@ -50,16 +53,16 @@
           </div>
 
           <div class="field">
-            <label class="label" style="color: white;">Reason for using AbbyBot (optional field)</label>
+            <label class="label" style="color: white;"><i class="fa-solid fa-comments"></i> Any reason for using AbbyBot? (optional field)</label>
             <div class="control">
-              <textarea class="textarea" name="reason" placeholder="Why do you want to use AbbyBot?"></textarea>
+              <textarea class="textarea" name="reason" placeholder="Your text here"></textarea>
             </div>
           </div>
 
           <div class="field">
-            <label class="label" style="color: white;">How did you learn about AbbyBot Project? (optional field)</label>
+            <label class="label" style="color: white;"><i class="fa-solid fa-square-poll-vertical"></i> How did you learn about AbbyBot Project? (optional field)</label>
             <div class="control">
-              <textarea class="textarea" name="how_learned" placeholder="Where did you hear about AbbyBot?"></textarea>
+              <textarea class="textarea" name="how_learned" placeholder="Your text here"></textarea>
             </div>
           </div>
 
@@ -72,10 +75,9 @@
               </label>
             </div>
           </div>
-
           <div class="field">
             <div class="control">
-              <button class="button is-primary" type="submit">Send Message</button>
+              <button class="button is-link" type="submit"><i class="fa-solid fa-hand-holding-heart"></i> Add to wishlist!</button>
             </div>
           </div>
         </form>
@@ -89,22 +91,26 @@
   <div class="modal-background"></div>
   <div class="modal-content">
     <div class="box">
-      <strong style="color: black; font-size: x-large;">What is a Discord Username?</strong>
+      <strong class="has-text-white" style="font-size: x-large;">What is your Discord Username?</strong>
 
-      <p>Your Discord username is the one you use to interact on the platform. Here's an example:</p>
+      <p class="mt-4">Your Discord username is the one you use to interact on the platform. Here's an example:</p>
 
-      <figure class="image is-4by3">
+      <figure class="image is-4by3 mt-4">
         <img src="{{ url_for('static', filename='img/examples/modal_example.jpeg') }}" alt="Discord Username Example">
       </figure>
 
-      <p>You can find your Discord username by opening Discord and looking at the bottom left corner of the screen where
-        your profile is displayed.</p>
+      <p class="mt-4">You can find your Discord username by opening Discord and looking at the bottom left corner of the screen where your profile is displayed.</p>
 
-      <button class="button is-primary" id="closeModal">Close</button>
+      <div class="buttons is-centered mt-4">
+        <button class="button is-primary is-medium" id="closeModal">Close</button>
+      </div>
     </div>
   </div>
+
   <button class="modal-close is-large" aria-label="close"></button>
 </div>
+
+
 
 
 {% block javascript %}

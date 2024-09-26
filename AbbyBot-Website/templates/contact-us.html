@@ -2,8 +2,14 @@
 
 {% block title %}AbbyBot - Contact Us{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/forms.css') }}">
+{% endblock %}
+
+
 {% block content %}
-<section class="section">
+
+<section class="section light-mode">
   <div class="container">
     <div class="columns is-vcentered">
 
@@ -14,26 +20,27 @@
         </p>
         <form action="{{ url_for('contact_us') }}" method="POST">
           <div class="field">
-            <label style="color: white;" class="label">Name (required field)</label>
+            <label style="color: white;" class="label"><i class="fa-solid fa-signature"></i> Name (required field)</label>
             <div class="control">
               <input class="input" type="text" name="name" placeholder="Your name" required>
             </div>
           </div>
           <div class="field">
-            <label style="color: white;" class="label">Email (required field)</label>
+            <label style="color: white;" class="label"><i class="fa-solid fa-envelope"></i> Email (required field)</label>
             <div class="control">
               <input class="input" type="email" name="email" placeholder="Your email" required>
             </div>
           </div>
           <div class="field">
-            <label style="color: white;" class="label">Message (required field)</label>
+            <label style="color: white;" class="label"><i class="fa-solid fa-message"></i> Message (required field)</label>
             <div class="control">
               <textarea class="textarea" name="message" placeholder="Your message" required></textarea>
             </div>
           </div>
+
           <div class="field">
             <div class="control">
-              <button class="button is-primary" type="submit">Send Message</button>
+              <button class="button is-info" type="submit"><i class="fa-regular fa-paper-plane"></i> Send Message!</button>
             </div>
           </div>
         </form>
