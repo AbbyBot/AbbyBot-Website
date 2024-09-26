@@ -1,0 +1,23 @@
+{% extends 'base/admin_base.html' %}
+
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <h1 class="title is-3">Message Details</h1>
+        <p class="subtitle">Here are the full details for the selected message.</p>
+
+        <div class="box">
+            <p><strong>ID:</strong> {{ wishlist.id }}</p>
+            <p><strong>Name:</strong> {{ wishlist.name }}</p>
+            <p><strong>Email:</strong> {{ wishlist.email }}</p>
+            <p><strong>Discord username:</strong> {% if wishlist.discord_username %}<td>{{ wishlist.discord_username }}</td>{% else %}<td>No username provided.</td>{% endif %}</p>
+            <p><strong>Reason to use AbbyBot:</strong> {% if wishlist.reason %}<td>{{ wishlist.reason }}</td>{% else %}<td>No reason provided.</td>{% endif %}</p>
+            <p><strong>How user learned:</strong> {% if wishlist.how_learned %}<td>{{ wishlist.how_learned }}</td>{% else %}<td>The user did not specify how it learned about AbbyBot.</td>{% endif %}</p>
+            <p><strong>Submitted at:</strong> {{ wishlist.submitted_at }}</p>
+        </div>
+
+        <a href="/admin-manage_wishlist" class="button is-link">Back to List</a>
+    </div>
+</section>
+{% endblock %}

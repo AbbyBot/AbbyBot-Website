@@ -1,0 +1,78 @@
+{% extends 'base/base.html' %}
+
+{% block title %}AbbyBot - Login{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/forms.css') }}">
+{% endblock %}
+
+
+{% block content %}
+
+<section class="hero custom-height light-mode">
+  <div class="hero-body" style="display: flex; justify-content: center; align-items: center;">
+    <div class="container has-text-centered">
+      <div class="box" style="max-width: 600px; margin: 0 auto; padding: 3rem; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);">
+        
+        <div class="has-text-centered">
+          <h1 class="title is-3">
+            <i class="fa-solid fa-user-tie" style="font-size: 80px; color: black;"></i>
+            <p class="has-text-black is-size-3">AbbyBot Login</p>
+          </h1>
+        </div>
+        
+
+        <form method="POST">
+          <div class="field">
+            <label class="label has-text-black is-size-5" for="username">Username</label>
+            <div class="control">
+              <input class="input" type="text" name="username" required placeholder="Enter your username">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label has-text-black is-size-5" for="password">Password</label>
+            <div class="control">
+              <input class="input" type="password" name="password" required placeholder="Enter your password">
+            </div>
+          </div>
+
+          <!-- Error or success messages -->
+          {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <ul>
+              {% for category, message in messages %}
+              <li>
+                {% if 'Error' in category %}
+                  <strong class="is-size-5" style="color: red;">{{ category.title() }}</strong> <p class="has-text-black is-size-6">{{ message }}</p> 
+                {% else %}
+                <strong class="is-size-5" style="color: green;">{{ category.title() }}</strong> <p class="has-text-black is-size-6">{{ message }}</p> 
+                {% endif %}
+              </li>
+            {% endfor %}
+            </ul>
+          {% endif %}
+          {% endwith %}
+
+          <!-- Login and Back buttons -->
+          <div class="field is-grouped is-grouped-centered">
+            <p class="control">
+              <button class="button is-link" type="submit" style="width: 100%;">Login</button>
+            </p>
+            <p class="control">
+              <a href="/" class="button is-light" style="width: 100%;">Back</a>
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .custom-height {
+    height: 70vh;
+  }
+</style>
+
+{% endblock %}

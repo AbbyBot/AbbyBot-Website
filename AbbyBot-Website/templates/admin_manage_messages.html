@@ -1,0 +1,40 @@
+{% extends 'base/admin_base.html' %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <h1 class="title is-2">Manage Messages</h1>
+        <p class="subtitle">List of all messages in the database. Click on any message to view more details.</p>
+
+        
+        <table class="table is-fullwidth is-hoverable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Date Created</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for message in messages %}
+                <tr>
+                    <td>{{ message.id }}</td>
+                    <td>{{ message.name }}</td>
+                    <td>{{ message.created_at }}</td>
+                    <td>
+                        <a href="/admin-message/{{ message.id }}" class="button is-link is-small">
+                            View Details
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        
+    </div>
+</section>
+{% endblock %}
+
+

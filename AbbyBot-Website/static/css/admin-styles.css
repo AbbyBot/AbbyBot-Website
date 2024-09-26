@@ -1,0 +1,84 @@
+/* General Admin Styling */
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: #2b2b2b; 
+}
+
+.main-content {
+    flex: 1;
+    background-color: #333; 
+    padding: 2rem;
+}
+
+.title, .subtitle, .content {
+    color: #fff; 
+}
+
+.footer {
+    background-color: #1c1c1c;
+    color: #fff;
+    padding: 1em 0;
+    text-align: center;
+}
+
+
+.navbar {
+    background-color: #1c1c1c; 
+    margin-bottom: 20px;
+}
+
+.navbar-item {
+    color: #fff !important; 
+}
+
+.navbar-burger span {
+    background-color: #fff !important; 
+}
+
+
+
+.navbar-item:hover {
+    background-color: #b45428; /* AbbyBot color hover */
+    color: #fff;
+}
+
+
+.navbar-item[style="color: gold;"] {
+    color: gold;
+}
+
+
+.main-content {
+    background-color: #333333;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+
+@media (max-width: 768px) {
+    .navbar-burger {
+        display: block;
+    }
+
+    .navbar-menu {
+        display: none;
+    }
+
+    .navbar-burger.is-active + .navbar-menu {
+        display: block;
+    }
+
+    .main-content {
+        padding: 1rem;
+    }
+}
+
+
+.title, .subtitle {
+    color: #fff !important;
+}
+

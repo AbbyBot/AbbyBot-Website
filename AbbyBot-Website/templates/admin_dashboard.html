@@ -1,0 +1,40 @@
+{% extends 'base/admin_base.html' %}
+
+{% block content %}
+    <section class="section">
+        <div class="container">
+            <h1 class="title is-2">Admin Dashboard</h1>
+            <p class="subtitle">Welcome to the AbbyBot Admin Panel. Use the buttons below to manage the bot's data and settings.</p>
+
+            
+            <div class="buttons">
+                <a href="/admin-manage_messages" class="button is-info is-dark">
+                    <span class="icon"><i class="fas fa-envelope"></i></span>
+                    <span>Manage Messages</span>
+                </a>
+                <a href="/admin-manage_wishlist" class="button is-warning is-dark">
+                    <span class="icon"><i class="fas fa-list"></i></span>
+                    <span>Manage Wishlists</span>
+                </a>
+                <a href="/admin-manage_contributors" class="button is-danger is-dark">
+                    <span class="icon"><i class="fas fa-users"></i></span>
+                    <span>Manage Contributors</span>
+                </a>
+            </div>
+
+            
+            <div class="content">
+                <h2 class="title is-4">Instructions</h2>
+                <ul>
+                    <li>To manage bot messages, click the "Manage Messages" button. This section allows you to view the messages received by users and sent by AbbyBot.</li>
+                    <li>To manage wish lists, use the "Manage Wish Lists" button. You can list all users along with their forms in the bot's wishlist feature.</li>
+                    <li>To manage contributors, go to the "Manage contributors" section. This allows you to track and adjust the members of the hall-of-fame page, along with viewing, adding/removing contributions made by a user.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+
+{% endblock %}
+
+

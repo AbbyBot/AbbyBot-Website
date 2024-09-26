@@ -4,6 +4,12 @@ from dotenv import load_dotenv
 import os
 from contextlib import contextmanager
 
+from flask_login import UserMixin
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import LoginManager, login_user, logout_user, login_required, current_user
+
+from werkzeug.utils import secure_filename
+
 # Load dotenv variables
 load_dotenv()
 
@@ -202,7 +208,7 @@ def person_detail(username):
     try:
         # Inquire for contributor information
         person = execute_query("wishlist", """
-            SELECT id, nickname AS name, username, user_image AS image_url, comentary, custom_nickname 
+            SELECT id, nickname AS name, username, user_image AS image_url, commentary, custom_nickname 
             FROM contributors WHERE username = %s
         """, (username,), fetchall=False)
         
@@ -230,6 +236,300 @@ def person_detail(username):
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('error.html', message="The page you are looking for does not exist."), 404
+
+
+
+
+
+
+# List of allowed file extensions
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+
+# Configure the folder where the images will be saved
+UPLOAD_FOLDER = os.path.join(os.getcwd(), 'static/img/contributor')
+
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['ALLOWED_EXTENSIONS'] = ALLOWED_EXTENSIONS
+
+
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
+
+
+
+class Admin(UserMixin):
+    def __init__(self, id, username, email, password_hash):
+        self.id = id
+        self.username = username
+        self.email = email
+        self.password_hash = password_hash  
+
+    @staticmethod
+    def get_admin_by_username(username):
+        result = execute_query("wishlist", "SELECT * FROM admins WHERE username = %s", (username,), fetchall=False)
+        if result:
+            return Admin(result['id'], result['username'], result['email'], result['password'])  # use hash
+
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)  # compare hash with normal password
+
+# login routes
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'login'
+
+@login_manager.user_loader
+def load_user(user_id):
+    result = execute_query("wishlist", "SELECT * FROM admins WHERE id = %s", (user_id,), fetchall=False)
+    if result:
+        return Admin(result['id'], result['username'], result['email'], result['password'])
+    return None
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        
+        admin = Admin.get_admin_by_username(username)
+        if admin:
+            if admin.check_password(password):
+                login_user(admin)
+                flash('Logged in successfully.', 'Success')
+                return redirect(url_for('admin_dashboard'))
+            else:
+                flash('Incorrect password.', 'Error')
+        else:
+            flash('User not found.', 'Error')
+    
+    return render_template('login.html')
+
+# logout
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash('You have been logged out.', 'Success')
+    return redirect(url_for('login'))
+
+# dashboard base
+
+@app.route('/admin-dashboard')
+@login_required
+def admin_dashboard():
+    return render_template('admin_dashboard.html')
+
+# manage all messages
+
+@app.route('/admin-manage_messages')
+@login_required
+def admin_manage_messages():
+    try:
+            # Get all messages
+            all_messages = execute_query("wishlist", """
+                SELECT id, name, email, message, created_at FROM messages
+            """)
+    except mysql.connector.Error as err:
+            print(f"Error: {err}")
+            return render_template('error.html', message="Database connection failed.")
+    return render_template('admin_manage_messages.html', messages=all_messages)
+
+# manage message by id
+
+@app.route('/admin-message/<int:message_id>')
+@login_required
+def view_message_details(message_id):
+    try:
+        # Get the message details from the database using its ID
+        message = execute_query("wishlist", """
+            SELECT id, name, email, message, created_at FROM messages WHERE id = %s
+        """, (message_id,))
+        
+        if not message:
+            return render_template('error.html', message="Message not found.")
+
+    except mysql.connector.Error as err:
+        print(f"Error: {err}")
+        return render_template('error.html', message="Database connection failed.")
+
+    return render_template('view_message_details.html', message=message[0])
+
+# manage wishlists
+
+@app.route('/admin-manage_wishlist')
+@login_required
+def admin_manage_wishlist():
+    try:
+            # Get all messages
+            all_wishlist = execute_query("wishlist", """
+                SELECT id, name, email, discord_username, reason, how_learned, submitted_at FROM wishlist
+            """)
+    except mysql.connector.Error as err:
+            print(f"Error: {err}")
+            return render_template('error.html', wishlists="Database connection failed.")
+    return render_template('admin_manage_wishlist.html', wishlists=all_wishlist)
+
+# manage wishlist by id
+
+@app.route('/admin-wishlist/<int:wishlist_id>')
+@login_required
+def view_wishlist_details(wishlist_id):
+    try:
+        # Get the wishlist details from the database using its ID
+        wishlist = execute_query("wishlist", """
+            SELECT id, name, email, discord_username, reason, how_learned, submitted_at FROM wishlist where id = %s
+        """, (wishlist_id,))
+        
+        if not wishlist:
+            return render_template('error.html', wishlist="Message not found.")
+
+    except mysql.connector.Error as err:
+        print(f"Error: {err}")
+        return render_template('error.html', wishlist="Database connection failed.")
+
+    return render_template('view_wishlist_details.html', wishlist=wishlist[0])
+
+# manage contributors
+
+@app.route('/admin-manage_contributors')
+@login_required
+def admin_manage_contributors():
+    try:
+        # Get all contributors
+        connection = get_db_connection(db_type="wishlist")
+        cursor = connection.cursor(dictionary=True)
+        cursor.execute("""
+            SELECT id, nickname, username, commentary, user_image, custom_nickname FROM contributors
+        """)
+        all_contributors = cursor.fetchall()
+    except mysql.connector.Error as err:
+        print(f"Error: {err}")
+        return render_template('error.html', contributors="Database connection failed.")
+    finally:
+        cursor.close()
+        connection.close()
+
+    return render_template('admin_manage_contributors.html', contributors=all_contributors)
+
+
+# add contributor
+
+@app.route('/admin-add_contributor', methods=['GET', 'POST'])
+@login_required
+def add_contributor():
+    if request.method == 'POST':
+        nickname = request.form['nickname']
+        username = request.form['username']
+        commentary = request.form['commentary']
+        custom_nickname = request.form['custom_nickname']
+        user_image_url = 'static/img/contributor/default.png' # default image
+
+        # Check if there is an uploaded file
+        if 'user_image' in request.files:
+            file = request.files['user_image']
+            if file and allowed_file(file.filename):
+                # Generate a unique name to avoid conflicts
+                filename = secure_filename(file.filename)
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                user_image_url = f'static/img/contributor/{filename}'
+
+        try:
+            connection = get_db_connection(db_type="wishlist")
+            cursor = connection.cursor()
+            cursor.execute("""
+                INSERT INTO contributors (nickname, username, commentary, user_image, custom_nickname) 
+                VALUES (%s, %s, %s, %s, %s)
+            """, (nickname, username, commentary, user_image_url, custom_nickname))
+            connection.commit()
+        except mysql.connector.Error as err:
+            print(f"Error: {err}")
+            return render_template('error.html', contributor="Error adding contributor.")
+        finally:
+            cursor.close()
+            connection.close()
+
+        return redirect(url_for('admin_manage_contributors'))
+
+    return render_template('admin_add_contributor.html')
+
+
+
+# update contributor
+
+@app.route('/admin-edit_contributor/<int:contributor_id>', methods=['GET', 'POST'])
+@login_required
+def edit_contributor(contributor_id):
+    if request.method == 'POST':
+        nickname = request.form['nickname']
+        username = request.form['username']
+        commentary = request.form['commentary']
+        custom_nickname = request.form['custom_nickname']
+        
+        # Get the current image of the contributor
+        contributor = execute_query("wishlist", """
+            SELECT user_image FROM contributors WHERE id = %s
+        """, (contributor_id,))
+        user_image_url = contributor[0]['user_image']
+
+        # Check if a file is uploaded
+        if 'user_image' in request.files:
+            file = request.files['user_image']
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                user_image_url = f'static/img/contributor/{filename}'
+
+        try:
+            connection = get_db_connection(db_type="wishlist")
+            cursor = connection.cursor()
+            cursor.execute("""
+                UPDATE contributors 
+                SET nickname=%s, username=%s, commentary=%s, user_image=%s, custom_nickname=%s 
+                WHERE id=%s
+            """, (nickname, username, commentary, user_image_url, custom_nickname, contributor_id))
+            connection.commit()
+        except mysql.connector.Error as err:
+            print(f"Error: {err}")
+            return render_template('error.html', contributor="Error updating contributor.")
+        finally:
+            cursor.close()
+            connection.close()
+
+        return redirect(url_for('admin_manage_contributors'))
+
+    contributor = execute_query("wishlist", """
+        SELECT id, nickname, username, commentary, user_image, custom_nickname 
+        FROM contributors WHERE id = %s
+    """, (contributor_id,))
+    
+    return render_template('admin_edit_contributor.html', contributor=contributor[0])
+
+
+
+# delete contributor
+
+@app.route('/admin-delete_contributor/<int:contributor_id>', methods=['POST'])
+@login_required
+def delete_contributor(contributor_id):
+    try:
+        connection = get_db_connection(db_type="wishlist")
+        cursor = connection.cursor()
+        cursor.execute("DELETE FROM contributors WHERE id = %s", (contributor_id,))
+        connection.commit()
+    except mysql.connector.Error as err:
+        print(f"Error: {err}")
+        return render_template('error.html', contributor="Error deleting contributor.")
+    finally:
+        cursor.close()
+        connection.close()
+
+    return redirect(url_for('admin_manage_contributors'))
+
+
+# start system
 
 if __name__ == '__main__':
     app.run(host="127.0.0.1", port=5000, debug=True)

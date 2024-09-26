@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}AbbyBot Admin{% endblock %}</title>
+
+    {% block favicon %}
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo/abbybot_logo.png') }}" type="image/x-icon">
+    {% endblock %}
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bulma/css/bulma.min.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin-styles.css') }}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    {% block extra_css %}
+    <!-- Extra CSS for custom pages -->
+    {% endblock %}
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar is-dark bot-status" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="/admin-dashboard">
+                <img src="{{ url_for('static', filename='img/logo/abbybot_logo.png') }}" alt="AbbyBot Profile">
+                <h1 class="has-text-light">AbbyBot Admin</h1>
+            </a>            
+
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div id="navbarMenu" class="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item" href="/admin-manage_messages">
+                    <i class="fa-solid fa-envelope"></i> Manage Messages
+                </a>
+                <a class="navbar-item" href="/admin-manage_wishlist">
+                    <i class="fa-solid fa-heart"></i> Manage Wishlists
+                </a>
+                <a class="navbar-item" href="/admin-manage_contributors">
+                    <i class="fa-solid fa-user-friends"></i> Manage Contributors
+                </a>
+            </div>
+
+            <div class="navbar-end">
+                <a class="navbar-item" href="/profile-settings">
+                    <i class="fa-solid fa-user-cog"></i> Profile Settings
+                </a>
+                <a class="navbar-item" href="/logout">
+                    <i class="fa-solid fa-sign-out-alt"></i> Logout
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Section -->
+    <section class="main-content section">
+        <div class="container">
+            {% block content %}
+            <!-- Content for the admin pages goes here -->
+            {% endblock %}
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="content has-text-centered">
+            <p>
+                <strong>AbbyBot Admin Dashboard</strong> by <a href="https://reyesandfriends.cl" style="color: #b45428;">reyesandfriends.cl</a>. All rights reserved.
+            </p>
+            <p>Powered by</p>
+            <p> 
+                <img src="https://img.shields.io/badge/discord.py-7289DA?style=for-the-badge&logo=python&logoColor=white" alt="discord.py">
+                <img src="https://img.shields.io/badge/flask-black?style=for-the-badge&logo=flask&logoColor=white" alt="flask">
+                <img src="https://img.shields.io/badge/Bulma-00D1B2?style=for-the-badge&logo=bulma&logoColor=white" alt="bulma">
+                <img src="https://img.shields.io/badge/Apache-red?style=for-the-badge&logo=apache&logoColor=white" alt="apache">
+                <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL">
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    
+    {% block javascript %}
+    <!-- Additional JavaScript can go here -->
+    {% endblock %}
+
+    <!-- if flash messages -->
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div id="thankYouModal" class="modal is-active">
+            <div class="modal-background"></div>
+            <div class="modal-content">
+                <div class="box has-text-centered">
+                    <p class="title">
+                        {% for category, message in messages %}
+                            {% if category == 'Success' %}
+                                {{ category|capitalize }}
+                            {% endif %}
+                        {% endfor %}
+                    </p>
+                    <p class="subtitle">
+                        {% for category, message in messages %}
+                            {% if category == 'Success' %}
+                                {{ message }}
+                            {% endif %}
+                        {% endfor %}
+                    </p>
+                    <button class="button is-primary" id="closeModal">Close</button>
+                </div>
+            </div>
+            <button class="modal-close is-large" aria-label="close"></button>
+        </div>
+    
+        <script>
+            document.getElementById('closeModal').addEventListener('click', function() {
+                document.getElementById('thankYouModal').classList.remove('is-active');
+            });
+    
+            document.querySelector('.modal-close').addEventListener('click', function() {
+                document.getElementById('thankYouModal').classList.remove('is-active');
+            });
+        </script>
+
+    {% endif %}
+    {% endwith %}
+    
+
+
+</body>
+
+</html>

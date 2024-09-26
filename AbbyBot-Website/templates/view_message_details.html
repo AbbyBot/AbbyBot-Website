@@ -1,0 +1,21 @@
+{% extends 'base/admin_base.html' %}
+
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <h1 class="title is-3">Message Details</h1>
+        <p class="subtitle">Here are the full details for the selected message.</p>
+
+        <div class="box">
+            <p><strong>ID:</strong> {{ message.id }}</p>
+            <p><strong>Name:</strong> {{ message.name }}</p>
+            <p><strong>Email:</strong> {{ message.email }}</p>
+            <p><strong>Message:</strong> {{ message.message }}</p>
+            <p><strong>Created At:</strong> {{ message.created_at }}</p>
+        </div>
+
+        <a href="/admin-manage_messages" class="button is-link">Back to List</a>
+    </div>
+</section>
+{% endblock %}
