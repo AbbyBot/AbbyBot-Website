@@ -1,21 +1,41 @@
 {% extends 'base/admin_base.html' %}
 
-
 {% block content %}
 <section class="section">
     <div class="container">
-        <h1 class="title is-3">Message Details</h1>
-        <p class="subtitle">Here are the full details for the selected message.</p>
+        <h1 class="title is-3 has-text-centered">Message Details</h1>
+        <p class="subtitle has-text-centered">Here are the full details for the selected message.</p>
 
-        <div class="box">
-            <p><strong>ID:</strong> {{ message.id }}</p>
-            <p><strong>Name:</strong> {{ message.name }}</p>
-            <p><strong>Email:</strong> {{ message.email }}</p>
-            <p><strong>Message:</strong> {{ message.message }}</p>
-            <p><strong>Created At:</strong> {{ message.created_at }}</p>
+        <div class="table-container is-flex is-justify-content-center">
+            <table class="table is-striped is-hoverable is-centered">
+                <tbody>
+                    <tr>
+                        <th>ID:</th>
+                        <td>{{ message.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Name:</th>
+                        <td>{{ message.name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Email:</th>
+                        <td>{{ message.email }}</td>
+                    </tr>
+                    <tr>
+                        <th>Message:</th>
+                        <td>{{ message.message }}</td>
+                    </tr>
+                    <tr>
+                        <th>Created At:</th>
+                        <td>{{ message.created_at }}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
-        <a href="/admin-manage_messages" class="button is-link">Back to List</a>
+        <div class="has-text-centered">
+            <a href="/admin-manage_messages" class="button is-link">Back to List</a>
+        </div>
     </div>
 </section>
 {% endblock %}

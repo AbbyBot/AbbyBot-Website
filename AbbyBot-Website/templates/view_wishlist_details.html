@@ -1,23 +1,49 @@
 {% extends 'base/admin_base.html' %}
 
-
 {% block content %}
 <section class="section">
     <div class="container">
-        <h1 class="title is-3">Message Details</h1>
-        <p class="subtitle">Here are the full details for the selected message.</p>
+        <h1 class="title is-3 has-text-centered">Message Details</h1>
+        <p class="subtitle has-text-centered">Here are the full details for the selected message.</p>
 
-        <div class="box">
-            <p><strong>ID:</strong> {{ wishlist.id }}</p>
-            <p><strong>Name:</strong> {{ wishlist.name }}</p>
-            <p><strong>Email:</strong> {{ wishlist.email }}</p>
-            <p><strong>Discord username:</strong> {% if wishlist.discord_username %}<td>{{ wishlist.discord_username }}</td>{% else %}<td>No username provided.</td>{% endif %}</p>
-            <p><strong>Reason to use AbbyBot:</strong> {% if wishlist.reason %}<td>{{ wishlist.reason }}</td>{% else %}<td>No reason provided.</td>{% endif %}</p>
-            <p><strong>How user learned:</strong> {% if wishlist.how_learned %}<td>{{ wishlist.how_learned }}</td>{% else %}<td>The user did not specify how it learned about AbbyBot.</td>{% endif %}</p>
-            <p><strong>Submitted at:</strong> {{ wishlist.submitted_at }}</p>
+        <div class="table-container is-flex is-justify-content-center">
+            <table class="table is-striped is-hoverable is-centered">
+                <tbody>
+                    <tr>
+                        <th>ID:</th>
+                        <td>{{ wishlist.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Name:</th>
+                        <td>{{ wishlist.name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Email:</th>
+                        <td>{{ wishlist.email }}</td>
+                    </tr>
+                    <tr>
+                        <th>Discord username:</th>
+                        <td>{% if wishlist.discord_username %}{{ wishlist.discord_username }}{% else %}No username provided.{% endif %}</td>
+                    </tr>
+                    <tr>
+                        <th>Reason to use AbbyBot:</th>
+                        <td>{% if wishlist.reason %}{{ wishlist.reason }}{% else %}No reason provided.{% endif %}</td>
+                    </tr>
+                    <tr>
+                        <th>How user learned:</th>
+                        <td>{% if wishlist.how_learned %}{{ wishlist.how_learned }}{% else %}The user did not specify how it learned about AbbyBot.{% endif %}</td>
+                    </tr>
+                    <tr>
+                        <th>Submitted at:</th>
+                        <td>{{ wishlist.submitted_at }}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
-        <a href="/admin-manage_wishlist" class="button is-link">Back to List</a>
+        <div class="has-text-centered">
+            <a href="/admin-manage_wishlist" class="button is-link">Back to List</a>
+        </div>
     </div>
 </section>
 {% endblock %}
