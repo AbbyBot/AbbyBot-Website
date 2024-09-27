@@ -9,7 +9,7 @@
             
             <!-- Nickname -->
             <div class="field">
-                <label class="label" for="nickname">Nickname:</label>
+                <label class="label has-text-white" for="nickname">Nickname:</label>
                 <div class="control">
                     <input class="input" type="text" id="nickname" name="nickname" value="{{ contributor.nickname }}" required>
                 </div>
@@ -17,18 +17,18 @@
 
             <!-- Username -->
             <div class="field">
-                <label class="label" for="username">Username:</label>
+                <label class="label has-text-white" for="username">Username (Discord):</label>
                 <div class="control has-icons-left">
                     <input class="input" type="text" id="username" name="username" value="{{ contributor.username }}" required>
-                    <span class="icon is-small is-left">
-                        <i class="fas fa-user"></i>
+                    <span class="icon is-small is-left has-text-black">
+                        <i class="fab fa-discord"></i>
                     </span>
                 </div>
             </div>
 
             <!-- Commentary -->
             <div class="field">
-                <label class="label" for="commentary">Commentary:</label>
+                <label class="label has-text-white" for="commentary">Commentary:</label>
                 <div class="control">
                     <textarea class="textarea" id="commentary" name="commentary" required>{{ contributor.commentary }}</textarea>
                 </div>
@@ -36,7 +36,7 @@
 
             <!-- Upload User Image -->
             <div class="field">
-                <label class="label" for="user_image">Upload User Image:</label>
+                <label class="label has-text-white" for="user_image">Upload User Image:</label>
                 <div class="file has-name">
                     <label class="file-label">
                         <input class="file-input" type="file" id="user_image" name="user_image" accept="image/*" onchange="previewImage(event)">
@@ -63,7 +63,7 @@
 
             <!-- Custom Nickname -->
             <div class="field">
-                <label class="label" for="custom_nickname">Custom Nickname:</label>
+                <label class="label has-text-white" for="custom_nickname">Custom Nickname:</label>
                 <div class="control">
                     <input class="input" type="text" id="custom_nickname" name="custom_nickname" value="{{ contributor.custom_nickname }}" required>
                 </div>
