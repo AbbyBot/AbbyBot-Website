@@ -6,13 +6,13 @@ from werkzeug.security import generate_password_hash
 # Load dotenv variables
 load_dotenv()
 
-# DB Connect
+# DB Connect to Asuka
 def get_db_connection():
     return mysql.connector.connect(
-        host=os.getenv("WISHLIST_DB_HOST"),
-        user=os.getenv("WISHLIST_DB_USER"),
-        password=os.getenv("WISHLIST_DB_PASSWORD"),
-        database=os.getenv("WISHLIST_DB_NAME")
+        host=os.getenv("ASUKA_DB_HOST"),
+        user=os.getenv("ASUKA_DB_USER"),
+        password=os.getenv("ASUKA_DB_PASSWORD"),
+        database=os.getenv("ASUKA_DB_NAME")
     )
 
 # Create admin
@@ -30,7 +30,7 @@ def create_admin(username, email, password):
         """, (username, email, password_hash))
         
         conn.commit()
-        print("Manager created successfully.")
+        print("Admin created successfully.")
     
     except mysql.connector.Error as err:
         print(f"Error: {err}")

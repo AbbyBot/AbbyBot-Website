@@ -18,51 +18,63 @@ app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY')
 
 # Consolidated DB connection function
-def get_db_connection(db_type="main"):
-    if db_type == "main":
+def get_db_connection(db_type="rei"):
+    if db_type == "rei":
         return mysql.connector.connect(
-            host=os.getenv("DB_HOST"),
-            user=os.getenv("DB_USER"),
-            password=os.getenv("DB_PASSWORD"),
-            database=os.getenv("DB_NAME")
+            host=os.getenv("REI_DB_HOST"),
+            user=os.getenv("REI_DB_USER"),
+            password=os.getenv("REI_DB_PASSWORD"),
+            database=os.getenv("REI_DB_NAME")
         )
-    elif db_type == "wishlist":
+    elif db_type == "asuka":
         return mysql.connector.connect(
-            host=os.getenv("WISHLIST_DB_HOST"),
-            user=os.getenv("WISHLIST_DB_USER"),
-            password=os.getenv("WISHLIST_DB_PASSWORD"),
-            database=os.getenv("WISHLIST_DB_NAME")
+            host=os.getenv("ASUKA_DB_HOST"),
+            user=os.getenv("ASUKA_DB_USER"),
+            password=os.getenv("ASUKA_DB_PASSWORD"),
+            database=os.getenv("ASUKA_DB_NAME")
         )
 
 # Context Manager for both DBs
 @contextmanager
-def db_connection(db_type="main"):
-    conn = get_db_connection(db_type)
+def db_connection(db_type="rei"):
+    conn = None
     try:
+        conn = get_db_connection(db_type)
         yield conn
     finally:
-        conn.close()
+        if conn is not None:
+            conn.close()
+
 
 # Helper function to execute queries
 def execute_query(db_type, query, params=None, fetchall=True, commit=False):
-    with db_connection(db_type) as conn:
-        cursor = conn.cursor(dictionary=True)
-        cursor.execute(query, params or ())
-        if commit:
-            conn.commit()
-        if fetchall:
-            result = cursor.fetchall()
-        else:
-            result = cursor.fetchone()
-        cursor.close()
-    return result
+    try:
+        with db_connection(db_type) as conn:
+            with conn.cursor(dictionary=True) as cursor:
+                cursor.execute(query, params or ())
+                if commit:
+                    conn.commit()
+                if fetchall:
+                    result = cursor.fetchall()
+                else:
+                    result = cursor.fetchone()
+        return result
+    
+    except mysql.connector.Error as err:
+        print(f"Database Error: {err}")
+        raise  # Rethrow the exception so it can be handled by the calling function
+    
+    except Exception as e:
+        print(f"Unexpected Error: {e}")
+        raise  # Rethrow any other unexpected exceptions
+
 
 
 # Home route
 @app.route('/')
 def home():
     try:
-        server_list = execute_query("main", "SELECT COUNT(guild_id) as counter FROM abbybot.server_settings;")
+        server_list = execute_query("rei", "SELECT COUNT(guild_id) as counter FROM server_settings;")
     except mysql.connector.Error as err:
         print(f"Error: {err}")
         return render_template('error.html', message="Database connection failed.")
@@ -113,7 +125,7 @@ def wishlist():
 
         try:
             # Insert the data into the wishlist database
-            execute_query("wishlist", """
+            execute_query("asuka", """
                 INSERT INTO wishlist (name, email, discord_username, reason, how_learned)
                 VALUES (%s, %s, %s, %s, %s)
             """, (name, email, discord_username, reason, how_learned), fetchall=False, commit=True)
@@ -148,8 +160,8 @@ def contact_us():
             return redirect(url_for('contact_us'))
 
         try:
-            # Insert data into the messages table
-            execute_query("wishlist", """
+            # Insert data into the messages table (Asuka DB)
+            execute_query("asuka", """
                 INSERT INTO messages (name, email, message)
                 VALUES (%s, %s, %s)
             """, (name, email, message), fetchall=False, commit=True)
@@ -166,6 +178,7 @@ def contact_us():
             print(f"Unexpected Error: {e}")
 
     return render_template('contact-us.html')
+
 
 
 
@@ -187,14 +200,16 @@ def terms_and_conditions():
 def hall_of_fame():
     try:
         # Fetch hall of fame data
-        hall_of_fame_data = execute_query("wishlist", """
+        hall_of_fame_data = execute_query("asuka", """
             SELECT id, nickname AS name, username as username, user_image AS image_url, custom_nickname 
             FROM contributors
         """)
-        users_names_list = execute_query("main", """
-            SELECT user_username as bro_username 
-            FROM dashboard 
-            WHERE guild_id = 1176976421147648061 AND is_bot = 0
+        users_names_list = execute_query("rei", """
+            SELECT up.user_username AS bro_username
+            FROM dashboard d
+            JOIN user_profile up ON d.user_profile_id = up.id
+            WHERE d.guild_id = 1176976421147648061 
+            AND d.is_bot = 0;
         """)
     except mysql.connector.Error as err:
         print(f"Error: {err}")
@@ -207,7 +222,7 @@ def hall_of_fame():
 def person_detail(username):
     try:
         # Inquire for contributor information
-        person = execute_query("wishlist", """
+        person = execute_query("asuka", """
             SELECT id, nickname AS name, username, user_image AS image_url, commentary, custom_nickname 
             FROM contributors WHERE username = %s
         """, (username,), fetchall=False)
@@ -215,7 +230,7 @@ def person_detail(username):
         # If the contributor exists, search for their contributions
         if person:
             # Inquiry for related contributions
-            contributions = execute_query("wishlist", """
+            contributions = execute_query("asuka", """
                 SELECT contribution 
                 FROM contributions WHERE contributor_id = %s
             """, (person['id'],))
@@ -280,7 +295,7 @@ class Admin(UserMixin):
 
     @staticmethod
     def get_admin_by_username(username):
-        result = execute_query("wishlist", "SELECT * FROM admins WHERE username = %s", (username,), fetchall=False)
+        result = execute_query("asuka", "SELECT * FROM admins WHERE username = %s", (username,), fetchall=False)
         if result:
             return Admin(result['id'], result['username'], result['email'], result['password'])  # use hash
 
@@ -295,7 +310,7 @@ login_manager.login_view = 'login'
 
 @login_manager.user_loader
 def load_user(user_id):
-    result = execute_query("wishlist", "SELECT * FROM admins WHERE id = %s", (user_id,), fetchall=False)
+    result = execute_query("asuka", "SELECT * FROM admins WHERE id = %s", (user_id,), fetchall=False)
     if result:
         return Admin(result['id'], result['username'], result['email'], result['password'])
     return None
@@ -342,7 +357,7 @@ def admin_dashboard():
 def admin_manage_messages():
     try:
             # Get all messages
-            all_messages = execute_query("wishlist", """
+            all_messages = execute_query("asuka", """
                 SELECT id, name, email, message, created_at FROM messages
             """)
     except mysql.connector.Error as err:
@@ -357,7 +372,7 @@ def admin_manage_messages():
 def view_message_details(message_id):
     try:
         # Get the message details from the database using its ID
-        message = execute_query("wishlist", """
+        message = execute_query("asuka", """
             SELECT id, name, email, message, created_at FROM messages WHERE id = %s
         """, (message_id,))
         
@@ -377,7 +392,7 @@ def view_message_details(message_id):
 def admin_manage_wishlist():
     try:
             # Get all messages
-            all_wishlist = execute_query("wishlist", """
+            all_wishlist = execute_query("asuka", """
                 SELECT id, name, email, discord_username, reason, how_learned, submitted_at FROM wishlist
             """)
     except mysql.connector.Error as err:
@@ -392,7 +407,7 @@ def admin_manage_wishlist():
 def view_wishlist_details(wishlist_id):
     try:
         # Get the wishlist details from the database using its ID
-        wishlist = execute_query("wishlist", """
+        wishlist = execute_query("asuka", """
             SELECT id, name, email, discord_username, reason, how_learned, submitted_at FROM wishlist where id = %s
         """, (wishlist_id,))
         
@@ -406,26 +421,33 @@ def view_wishlist_details(wishlist_id):
     return render_template('view_wishlist_details.html', wishlist=wishlist[0])
 
 # manage contributors
-
 @app.route('/admin-manage_contributors')
 @login_required
 def admin_manage_contributors():
+    connection = None
+    cursor = None
     try:
         # Get all contributors
-        connection = get_db_connection(db_type="wishlist")
+        connection = get_db_connection(db_type="asuka")
         cursor = connection.cursor(dictionary=True)
         cursor.execute("""
             SELECT id, nickname, username, commentary, user_image, custom_nickname FROM contributors
         """)
         all_contributors = cursor.fetchall()
     except mysql.connector.Error as err:
-        print(f"Error: {err}")
+        print(f"Database Error: {err}")
         return render_template('error.html', contributors="Database connection failed.")
+    except Exception as e:
+        print(f"Unexpected Error: {e}")
+        return render_template('error.html', contributors="An unexpected error occurred.")
     finally:
-        cursor.close()
-        connection.close()
+        if cursor:
+            cursor.close()
+        if connection:
+            connection.close()
 
     return render_template('admin_manage_contributors.html', contributors=all_contributors)
+
 
 
 # add contributor
@@ -450,7 +472,7 @@ def add_contributor():
                 user_image_url = f'static/img/contributor/{filename}'
 
         try:
-            connection = get_db_connection(db_type="wishlist")
+            connection = get_db_connection(db_type="asuka")
             cursor = connection.cursor()
             cursor.execute("""
                 INSERT INTO contributors (nickname, username, commentary, user_image, custom_nickname) 
@@ -482,7 +504,7 @@ def edit_contributor(contributor_id):
         custom_nickname = request.form['custom_nickname']
         
         # Get the current image of the contributor
-        contributor = execute_query("wishlist", """
+        contributor = execute_query("asuka", """
             SELECT user_image FROM contributors WHERE id = %s
         """, (contributor_id,))
         user_image_url = contributor[0]['user_image']
@@ -496,7 +518,7 @@ def edit_contributor(contributor_id):
                 user_image_url = f'static/img/contributor/{filename}'
 
         try:
-            connection = get_db_connection(db_type="wishlist")
+            connection = get_db_connection(db_type="asuka")
             cursor = connection.cursor()
             cursor.execute("""
                 UPDATE contributors 
@@ -513,7 +535,7 @@ def edit_contributor(contributor_id):
 
         return redirect(url_for('admin_manage_contributors'))
 
-    contributor = execute_query("wishlist", """
+    contributor = execute_query("asuka", """
         SELECT id, nickname, username, commentary, user_image, custom_nickname 
         FROM contributors WHERE id = %s
     """, (contributor_id,))
@@ -528,7 +550,7 @@ def edit_contributor(contributor_id):
 @login_required
 def delete_contributor(contributor_id):
     try:
-        connection = get_db_connection(db_type="wishlist")
+        connection = get_db_connection(db_type="asuka")
         cursor = connection.cursor()
         cursor.execute("DELETE FROM contributors WHERE id = %s", (contributor_id,))
         connection.commit()
@@ -550,7 +572,7 @@ def delete_contributor(contributor_id):
 def manage_contributions(contributor_id):
     
     # Get the name and id of the contributor
-    contributor = execute_query("wishlist", """
+    contributor = execute_query("asuka", """
         SELECT id, nickname FROM contributors WHERE id = %s
     """, (contributor_id,))
     
@@ -558,7 +580,7 @@ def manage_contributions(contributor_id):
         return render_template('error.html', message="Contributor not found.")
 
     # Get contributions from contributor
-    contributions = execute_query("wishlist", """
+    contributions = execute_query("asuka", """
         SELECT id, contribution FROM contributions WHERE contributor_id = %s
     """, (contributor_id,))
 
@@ -575,7 +597,7 @@ def add_contribution(contributor_id):
         contribution_text = request.form['contribution']
 
         try:
-            connection = get_db_connection(db_type="wishlist")
+            connection = get_db_connection(db_type="asuka")
             cursor = connection.cursor()
             cursor.execute("""
                 INSERT INTO contributions (contributor_id, contribution) 
@@ -602,7 +624,7 @@ def edit_contribution(contribution_id):
         contribution_text = request.form['contribution']
 
         try:
-            connection = get_db_connection(db_type="wishlist")
+            connection = get_db_connection(db_type="asuka")
             cursor = connection.cursor()
             cursor.execute("""
                 UPDATE contributions 
@@ -620,7 +642,7 @@ def edit_contribution(contribution_id):
         return redirect(url_for('manage_contributions', contributor_id=request.form['contributor_id']))
 
     # Get contribution by Id
-    contribution = execute_query("wishlist", """
+    contribution = execute_query("asuka", """
         SELECT id, contribution, contributor_id FROM contributions WHERE id = %s
     """, (contribution_id,))
     
@@ -637,7 +659,7 @@ def edit_contribution(contribution_id):
 @login_required
 def delete_contribution(contribution_id):
     try:
-        connection = get_db_connection(db_type="wishlist")
+        connection = get_db_connection(db_type="asuka")
         cursor = connection.cursor()
         cursor.execute("""
             DELETE FROM contributions WHERE id = %s

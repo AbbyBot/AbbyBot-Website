@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS contributors (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nickname` VARCHAR(255) NOT NULL,
   `username` VARCHAR(45) NOT NULL,
-  `comentary` TEXT NOT NULL,
+  `commentary` TEXT NOT NULL,
   `user_image` VARCHAR(255) NOT NULL,
   `custom_nickname` VARCHAR(255) NOT NULL, -- Apodo generado por ti
   PRIMARY KEY (`id`)
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS contributions (
 );
 
 
-INSERT INTO contributors (`nickname`, `username`, `comentary`, `user_image`, `custom_nickname`) 
+INSERT INTO contributors (`nickname`, `username`, `commentary`, `user_image`, `custom_nickname`) 
 VALUES 
 ('AstronautMarkus', 'astronautmarkus', 
  'AstronautMarkus has launched the AbbyBot project 🚀, building everything from scratch: GitHub organization, Discord bot code, and even the original concept. 🛠️✨ Their contribution is the spark that brought AbbyBot to life 🔥, and they have also done an incredible job on the front-end and website! 🌐 This creator knows no limits 🌟', 

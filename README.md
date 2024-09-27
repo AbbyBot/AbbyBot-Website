@@ -1,10 +1,10 @@
 
 # AbbyBot-Website
 
-Welcome to the AbbyBot-Website
- project! This project is a Flask-based web application that serves as the frontend for AbbyBot, a multipurpose bot for Discord. The webpage provides information about AbbyBot, its features, and allows users to interact with certain aspects of the bot, like the wishlist system.
+Welcome to the AbbyBot-Website project! This project is a Flask-based web application that serves as the frontend for AbbyBot, a multipurpose bot for Discord. The webpage provides information about AbbyBot, its features, and allows users to interact with certain aspects of the bot, like the wishlist system.
 
 ## Table of Contents
+
 - [Installation](#installation)
   - [Dependencies](#dependencies)
   - [Environment Variables](#environment-variables)
@@ -57,20 +57,19 @@ You need to create a `.env` file in the root directory of the project to store y
 Here's an example of what your `.env` file should look like:
 
 ```env
-# Main Database (for get Discord Bot data like messages, members, etc)
-DB_HOST=your_main_db_host
-DB_USER=your_main_db_user
-DB_PASSWORD=your_main_db_password
-DB_NAME=your_main_db_name
+# Main Database (for getting Discord Bot data like messages, members, etc)
+REI_DB_HOST=your_main_db_host
+REI_DB_USER=your_main_db_user
+REI_DB_PASSWORD=your_main_db_password
+REI_DB_NAME=your_main_db_name
 
 # AbbyBot Wishlist Database (for forms, contact messages, etc)
-WISHLIST_DB_HOST=your_wishlist_db_host
-WISHLIST_DB_USER=your_wishlist_db_user
-WISHLIST_DB_PASSWORD=your_wishlist_db_password
-WISHLIST_DB_NAME=your_wishlist_db_name
+ASUKA_DB_HOST=your_wishlist_db_host
+ASUKA_DB_USER=your_wishlist_db_user
+ASUKA_DB_PASSWORD=your_wishlist_db_password
+ASUKA_DB_NAME=your_wishlist_db_name
 
 # Flask secret key
-
 SECRET_KEY=generate_a_secret_key
 ```
 
