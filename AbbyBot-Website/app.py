@@ -100,7 +100,7 @@ def contribute():
 @app.route('/commands-list')
 def commands_list():
     try:
-        en_commands_list = execute_query("main", "SELECT * FROM abbybot.help WHERE language_id = 1;")
+        en_commands_list = execute_query("rei", "SELECT * FROM help WHERE language_id = 1;")
     except mysql.connector.Error as err:
         print(f"Error: {err}")
         return render_template('error.html', message="Database connection failed.")
