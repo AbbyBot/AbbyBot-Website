@@ -220,16 +220,15 @@ def person_detail(username):
                 FROM contributions WHERE contributor_id = %s
             """, (person['id'],))
         else:
-            return "Person not found", 404
+            # Render the custom error page for person not found
+            return render_template('error.html', message="Person not found.", code=404), 404
     
     except mysql.connector.Error as err:
         print(f"Error: {err}")
-        return render_template('error.html', message="Database connection failed.")
+        return render_template('error.html', message="Database connection failed.", code=500), 500
     
-    if person:
-        return render_template('person_detail.html', person=person, contributions=contributions)
-    else:
-        return "Person not found", 404
+    # Render the detail page for the person if found
+    return render_template('person_detail.html', person=person, contributions=contributions)
 
 
 # Error handling route for all HTTP errors
