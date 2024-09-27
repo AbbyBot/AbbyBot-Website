@@ -7,6 +7,8 @@ from flask_login import UserMixin
 from werkzeug.security import check_password_hash
 from flask_login import LoginManager, login_user, logout_user, login_required
 from werkzeug.utils import secure_filename
+from werkzeug.exceptions import HTTPException
+
 
 # Load dotenv variables
 load_dotenv()
@@ -230,14 +232,28 @@ def person_detail(username):
         return "Person not found", 404
 
 
-# Error handling route 404
-@app.errorhandler(404)
-def page_not_found(e):
-    return render_template('error.html', message="The page you are looking for does not exist."), 404
+# Error handling route for all HTTP errors
+@app.errorhandler(Exception)
+def handle_error(e):
+    code = 500  # Default to internal server error
+    message = "An unexpected error occurred."
 
+    # If it's an HTTPException, get the error code and message
+    if isinstance(e, HTTPException):
+        code = e.code
+        message = e.description
 
+    # Custom messages for specific HTTP codes
+    if code == 404:
+        message = "The page you are looking for does not exist."
+    elif code == 403:
+        message = "You don't have permission to access this resource."
+    elif code == 500:
+        message = "Internal server error. Please try again later."
+    elif code == 401:
+        message = "Unauthorized access. Please log in to continue."
 
-
+    return render_template('error.html', message=message, code=code), code
 
 
 # List of allowed file extensions
