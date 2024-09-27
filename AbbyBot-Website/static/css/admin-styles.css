@@ -82,3 +82,30 @@ html, body {
     color: #fff !important;
 }
 
+       /* Dark theme for modal messages */
+       .modal-content {
+        background-color: #1c1c1c !important; /* Dark background */
+        color: #f5f5f5 !important; /* Light text */
+    }
+
+    .box {
+        background-color: #2e2e2e !important; /* Darker box background */
+        color: #f5f5f5 !important; /* Light text */
+        border: 1px solid #444444; /* Subtle border */
+    }
+
+    .button.is-primary {
+        background-color: #b45428 !important; /* Custom AbbyBot color */
+        color: #ffffff !important;
+    }
+
+    .button.is-primary:hover {
+        background-color: #a54824 !important;
+        color: #ffffff !important;
+    }
+
+    /* Modal close button dark */
+    .modal-close {
+        background-color: #444444 !important;
+        color: #ffffff !important;
+    }
