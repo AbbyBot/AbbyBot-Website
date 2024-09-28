@@ -38,3 +38,21 @@ html, body {
 }
 
 
+@media screen and (max-width: 768px) {
+    .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000; /* Make sure it is above the content */
+    }
+
+    /* Make sure the main content is not covered by the fixed navbar */
+    .main-content {
+        margin-top: 70px; /* Adjust the value according to the height of the navbar */
+    }
+
+    .footer {
+        margin-bottom: 70px; /* Optional, if you have a fixed footer on mobile */
+    }
+}
