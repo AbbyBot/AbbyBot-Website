@@ -1,0 +1,58 @@
+{% extends 'base/admin_base.html' %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+
+        <h1 class="title is-2">Manage Contributors</h1>
+        <p class="subtitle">You can see the entire list of contributors. If you want to add/delete contributions, you must click on 'edit' on the contributor to be selected.</p>
+        
+        <h1 class="subtitle is-4">Contributors List</h1>
+
+        <!-- Botón para añadir un nuevo contribuidor -->
+        <a href="{{ url_for('add_contributor') }}" class="button is-primary mb-3">Add New Contributor</a>
+    
+        <table class="table is-fullwidth is-hoverable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nickname</th>
+                    <th>Username</th>
+                    <th>Commentary</th>
+                    <th>Custom Nickname</th>
+                    <th>Actions</th>
+                    <th>Contributions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for contributor in contributors %}
+                <tr>
+                    <td>{{ contributor.id }}</td>
+                    <td>{{ contributor.nickname }}</td>
+                    <td>{{ contributor.username }}</td>
+                    <td>{{ contributor.commentary }}</td>
+                    <td>{{ contributor.custom_nickname }}</td>
+                    
+                    <td>    
+                        <a class="button is-warning is-small mr-2" href="{{ url_for('edit_contributor', contributor_id=contributor.id) }}">Edit</a>
+                        
+                        
+                        <form action="{{ url_for('delete_contributor', contributor_id=contributor.id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this contributor? This action cannot be undone.');">
+                            <input type="hidden" name="contributor_id" value="{{ contributor.id }}">
+                            <button class="button is-danger is-small" type="submit">Delete</button>
+                        </form>
+                        
+                    </td>
+
+                    <td>
+                        
+                        <a class="button is-info is-small ml-2" href="{{ url_for('manage_contributions', contributor_id=contributor.id) }}">Manage Contributions</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+</section>
+{% endblock %}

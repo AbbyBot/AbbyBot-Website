@@ -1,0 +1,29 @@
+{% extends 'base/admin_base.html' %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <h1 class="title is-3">Add Contribution</h1>
+
+        <form action="{{ url_for('add_contribution', contributor_id=contributor_id) }}" method="POST">
+            <!-- Contribution text -->
+            <div class="field">
+                <label class="label has-text-white" for="contribution">Contribution:</label>
+                <div class="control">
+                    <textarea class="textarea" id="contribution" name="contribution" required></textarea>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="field is-grouped">
+                <div class="control">
+                    <button class="button is-link">Add Contribution</button>
+                </div>
+                <div class="control">
+                    <a class="button is-light" href="{{ url_for('manage_contributions', contributor_id=contributor_id) }}">Back to List</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}

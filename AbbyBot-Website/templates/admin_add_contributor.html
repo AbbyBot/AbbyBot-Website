@@ -1,0 +1,89 @@
+{% extends 'base/admin_base.html' %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        
+        <h1 class="title is-3">Add New Contributor</h1>
+
+        <form action="{{ url_for('add_contributor') }}" method="POST" enctype="multipart/form-data">
+
+            <!-- Nickname -->
+            <div class="field">
+                <label class="label has-text-white" for="nickname">Nickname:</label>
+                <div class="control">
+                    <input class="input" type="text" id="nickname" name="nickname" required>
+                </div>
+            </div>
+
+            <!-- Username -->
+            <div class="field">
+                <label class="label has-text-white" for="username">Username (Discord):</label>
+                <div class="control has-icons-left">
+                    <input class="input" type="text" id="username" name="username" required>
+                    <span class="icon is-small is-left">
+                        <i class="fab fa-discord"></i>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Commentary -->
+            <div class="field">
+                <label class="label has-text-white" for="commentary">Commentary:</label>
+                <div class="control">
+                    <textarea class="textarea" id="commentary" name="commentary" required></textarea>
+                </div>
+            </div>
+
+            <!-- Upload User Image -->
+            <div class="field">
+                <label class="label has-text-white" for="user_image">Upload User Image:</label>
+                <div class="file has-name">
+                    <label class="file-label">
+                        <input class="file-input" type="file" id="user_image" name="user_image" accept="image/*" onchange="previewImage(event)">
+                        <span class="file-cta">
+                            <span class="file-icon">
+                                <i class="fas fa-upload"></i>
+                            </span>
+                            <span class="file-label">
+                                Choose a file…
+                            </span>
+                        </span>
+                    </label>
+                </div>
+                <!-- Preview image -->
+                <div class="field">
+                    <figure class="image is-128x128">
+                        <img id="image_preview" src="#" alt="Image Preview" style="display: none;" />
+                    </figure>
+                </div>
+            </div>
+
+            <!-- Custom Nickname -->
+            <div class="field">
+                <label class="label has-text-white" for="custom_nickname">Custom Nickname:</label>
+                <div class="control">
+                    <input class="input" type="text" id="custom_nickname" name="custom_nickname" required>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="field is-grouped">
+                <div class="control">
+                    <button class="button is-link">Add Contributor</button>
+                </div>
+                <div class="control">
+                    <a class="button is-light" href="{{ url_for('admin_manage_contributors') }}">Back to List</a>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</section>
+
+{% block javascript %}
+<script src="{{ url_for('static', filename='js/previewImage.js') }}"></script>
+{% endblock %}
+
+{% endblock %}

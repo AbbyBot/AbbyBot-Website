@@ -1,0 +1,44 @@
+{% extends 'base/admin_base.html' %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <h1 class="title is-2">Manage Wishlist</h1>
+        <p class="subtitle">List all users who added AbbyBot in the Wishlist section. You can review your data here.</p>
+
+        
+        <table class="table is-fullwidth is-hoverable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Discord username</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for wishlist in wishlists %}
+                <tr>
+                    <td>{{ wishlist.id }}</td>
+                    <td>{{ wishlist.name }}</td>
+                    {% if wishlist.discord_username %}
+                    <td>{{ wishlist.discord_username }}</td>
+                    {% else %}
+                    <td>No username provided.</td>
+                    {% endif %}
+                    <td>
+                        <a href="/admin-wishlist/{{ wishlist.id }}" class="button is-link is-small">
+                            View Details
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+       
+    </div>
+</section>
+{% endblock %}
+
+

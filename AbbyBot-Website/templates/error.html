@@ -1,14 +1,26 @@
 {% extends 'base/base.html' %}
 
-<title>{% block title %}AbbyBot - Error{% endblock %}</title>
+<title>{% block title %}AbbyBot - Error {{ code }}{% endblock %}</title>
 
 {% block content %}
 <section class="section">
     <div class="container">
         <div class="content has-text-centered">
-            <h1 class="title">Oops! Something went wrong.</h1>
-            <p class="is-size-5">We couldn't find the page you were looking for.</p>
-            <p class="is-size-5">Please go back to the homepage and try again.</p>
+            <h1 class="title">Oops! Error {{ code }}</h1>
+            <p class="is-size-5">{{ message }}</p>
+
+            {% if code == 404 %}
+                <p class="is-size-5">The page you're looking for doesn't exist or has been moved.</p>
+            {% elif code == 500 %}
+                <p class="is-size-5">Something went wrong on our end. Please try again later.</p>
+            {% elif code == 403 %}
+                <p class="is-size-5">You don't have permission to access this page.</p>
+            {% elif code == 401 %}
+                <p class="is-size-5">You need to be logged in to access this page.</p>
+            {% else %}
+                <p class="is-size-5">An unexpected error occurred. Please try again later.</p>
+            {% endif %}
+
             <a href="/" class="button is-primary is-large mt-5">Back to Home</a>
         </div>
     </div>
