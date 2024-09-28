@@ -106,15 +106,34 @@
             <button class="button is-primary" id="closeModal">Close</button>
         </div>
     </div>
-    <button class="modal-close is-large" aria-label="close"></button>
+    <button class="modal-close is-large" aria-label="close" id="closeX"></button>
 </div>
 {% endif %}
 {% endwith %}
 
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Select the elements
+        const modal = document.getElementById('thankYouModal');
+        const closeModalBtn = document.getElementById('closeModal');
+        const closeXBtn = document.getElementById('closeX');
+        
+        // Function to close the modal
+        const closeModal = () => {
+            modal.classList.remove('is-active');
+        };
+
+        // Event listeners for closing the modal
+        closeModalBtn.addEventListener('click', closeModal);
+        closeXBtn.addEventListener('click', closeModal);
+    });
+</script>
+
+
 
 
 {% block javascript %}
-<script src="{{ url_for('static', filename='js/home_script.js') }}"></script>
+
 {% endblock %}
 
 
