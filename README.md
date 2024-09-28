@@ -26,6 +26,14 @@ To set up this project locally, you'll need to install the required dependencies
 
 2. **Create a virtual environment:**
 
+   - On Windows:
+
+   ```bash
+   python -m venv venv
+   ```
+
+   - On Linux/MacOS:
+
    ```bash
    python3 -m venv venv
    ```
@@ -57,13 +65,13 @@ You need to create a `.env` file in the root directory of the project to store y
 Here's an example of what your `.env` file should look like:
 
 ```env
-# Main Database (for getting Discord Bot data like messages, members, etc)
+# AbbyBot 'Rei' Database (for getting Discord Bot data like messages, members, etc)
 REI_DB_HOST=your_main_db_host
 REI_DB_USER=your_main_db_user
 REI_DB_PASSWORD=your_main_db_password
 REI_DB_NAME=your_main_db_name
 
-# AbbyBot Wishlist Database (for forms, contact messages, etc)
+# AbbyBot 'Asuka' Database (for forms, contact messages, etc)
 ASUKA_DB_HOST=your_wishlist_db_host
 ASUKA_DB_USER=your_wishlist_db_user
 ASUKA_DB_PASSWORD=your_wishlist_db_password
@@ -74,6 +82,24 @@ SECRET_KEY=generate_a_secret_key
 ```
 
 Ensure you replace the placeholders (`your_main_db_host`, `your_main_db_user`, etc.) with your actual database credentials.
+
+**We would like to clarify that we use the code names 'Rei' and 'Asuka' merely for reasons of comfort and ease of remembering, I hope it does not cause you any discomfort.**
+
+
+- **Save the file:** You must save the .env file in `AbbyBot-Website` directory, between `app.py`
+
+
+
+```plaintext
+Repository Root
+│
+├── AbbyBot-Website/
+│   ├── app.py
+│   └── .env
+│
+└── README.md
+```
+
 
 ## Technologies Used
 
@@ -105,4 +131,5 @@ If you wish to contribute to the development of AbbyBot's webpage, follow these 
 
 ## License
 
-This project is licensed under the MIT License. See the `LICENSE` file for more details.
+This project is under the MIT license along with an extra clause. See the **[`LICENSE`](https://github.com/AbbyBot/AbbyBot-Website/blob/main/LICENSE):** file for more details.
+
