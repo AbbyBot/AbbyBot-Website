@@ -74,6 +74,19 @@
                 <a class="navbar-item" href="/contact-us">
                     <i class="fa-regular fa-address-card"></i> Contact us
                 </a>
+
+                {% if current_user.is_authenticated %}
+
+                <a class="navbar-item" href="/admin-dashboard">
+                    <i class="fa-solid fa-repeat"></i> Switch to Admin Dashboard
+                </a>
+
+                <a class="navbar-item" href="/logout">
+                    <i class="fa-solid fa-sign-out-alt"></i> Logout
+                </a>
+
+                {% endif %}
+
             </div>
         </div>
     </nav>
