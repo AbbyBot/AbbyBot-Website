@@ -2,6 +2,10 @@ from flask import Flask, Blueprint, render_template
 import mysql.connector
 from dotenv import load_dotenv
 from ..utilities.db_connections import execute_query
+from flask import Flask, flash, redirect, url_for, render_template, request
+import re
+
+
 
 # Load dotenv variables
 load_dotenv()
@@ -77,6 +81,72 @@ def abbybot_privileges():
     return render_template('abbybot-privileges.html', privileges=server_list)
 
 
+# Email regex pattern
+EMAIL_REGEX = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
+DISCORD_REGEX = r'^[\w.]{2,32}$'  # New format without hashtags, allows letters, numbers, underscores, and periods.
+
+@main_bp.route('/wishlist', methods=['GET', 'POST'])
+def wishlist():
+    if request.method == 'POST':
+        # Get form data with .get() to avoid KeyErrors
+        name = request.form.get('name', '').strip()
+        email = request.form.get('email', '').strip()
+        discord_username = request.form.get('discord_username', '').strip()
+        reason = request.form.get('reason', '').strip()
+        how_learned = request.form.get('how_learned', '').strip()
+        terms_accepted = request.form.get('terms', None)
+
+        # Create an errors dictionary to pass to the template
+        errors = {}
+
+        # Validate required fields
+        if not name:
+            errors['name'] = "Name is required."
+
+        if not email:
+            errors['email'] = "Email is required."
+        elif not re.match(EMAIL_REGEX, email):
+            errors['email'] = "Invalid email format."
+
+        # Validate Discord username if provided
+        if discord_username and not re.match(DISCORD_REGEX, discord_username):
+            errors['discord_username'] = "Invalid Discord username format! Only letters, numbers, underscores, and periods are allowed."
+
+        # Validate checkbox
+        if not terms_accepted:
+            errors['terms'] = "You must accept the terms and conditions."
+
+        # Check if there are any errors
+        if errors:
+            flash("Please correct the errors in the form.", 'danger')
+            return render_template('wishlist.html', name=name, email=email, discord_username=discord_username, reason=reason, how_learned=how_learned, errors=errors, terms_accepted=terms_accepted)
+
+        try:
+            # Insert the data into the wishlist database
+            execute_query("asuka", """
+                INSERT INTO wishlist (name, email, discord_username, reason, how_learned)
+                VALUES (%s, %s, %s, %s, %s)
+            """, (name, email, discord_username, reason, how_learned), fetchall=False, commit=True)
+            
+            flash("Your wishlist submission has been received successfully!", 'success')
+            return redirect(url_for('main.index', modal='show'))
+
+        except mysql.connector.Error as err:
+            flash(f"Database Error: {err}", 'danger')
+            print(f"Database Error: {err}")
+
+        except Exception as e:
+            flash(f"Unexpected Error: {e}", 'danger')
+            print(f"Unexpected Error: {e}")
+
+    return render_template('wishlist.html', errors={}) 
+
+
+
+
+
+
+
 # Error handlers
 
 @main_bp.app_errorhandler(404)
@@ -91,10 +161,6 @@ def internal_server_error(error):
 def handle_generic_error(error):
     # Display the error message if available, or a generic message
     return render_template('error.html', message=str(error) if error else "An unexpected error occurred."), 500
-
-
-
-
 
 
 app.register_blueprint(main_bp)

@@ -14,7 +14,7 @@
             <i class="fa-solid fa-exclamation-circle"></i> Oops!
         </h1>
         <img src="{{ url_for('static', filename='img/error_handler/404.gif') }}" alt="Error" class="error-gif" data-aos="zoom-in" data-aos-delay="300">
-        <p data-aos="fade-up" data-aos-delay="300">{{ message }}</p>
+        <p data-aos="fade-up" data-aos-delay="300">{{ message }} <i class="fa-solid fa-face-sad-cry"></i></p>
     </div>
 </section>
 {% endblock %}

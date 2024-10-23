@@ -1,0 +1,87 @@
+{% extends "base/base.html" %}
+
+{% block title %}Wishlist - AbbyBot{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/wishlist.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="wishlist-section">
+    <div class="wishlist-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="wishlist-image-section">
+            <img src="{{ url_for('static', filename='img/AbbyBot_Art/AbbyBot_full.png') }}" alt="AbbyBot Image">
+            <p class="mt-3 text-light">- AbbyBot Project Team</p>
+        </div>
+        <div class="wishlist-form-section">
+            <h2>Add AbbyBot to Wishlist</h2>
+            <p>Would you like to have AbbyBot on your Discord server? If you’re interested, fill out this form to be notified when AbbyBot officially launches!<br><br> By adding AbbyBot to your "Wishlist," you'll unlock exclusive benefits such as the <a href="/abbybot-privileges"><strong class="text-info">Wishlist Users 📜</strong></a> Privilege, which grants XP boosts and access to special features!</p>
+            <form action="{{ url_for('main.wishlist') }}" method="POST">
+                <div class="field">
+                    <label class="label">Name (required field)</label>
+                    <div class="control">
+                        <input class="input {{ 'input-error' if errors.get('name') }}" type="text" name="name" placeholder="Your name" value="{{ name or '' }}" required>
+                        {% if errors.get('name') %}
+                            <p class="error-message">{{ errors['name'] }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Email (required field)</label>
+                    <div class="control">
+                        <input class="input {{ 'input-error' if errors.get('email') }}" type="email" name="email" placeholder="Your email" value="{{ email or '' }}" required>
+                        {% if errors.get('email') %}
+                            <p class="error-message">{{ errors['email'] }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Discord Username (optional field)</label>
+                    <div class="control">
+                        <input class="input {{ 'input-error' if errors.get('discord_username') }}" type="text" name="discord_username" placeholder="Your Discord Username" value="{{ discord_username or '' }}">
+                        {% if errors.get('discord_username') %}
+                            <p class="error-message">{{ errors['discord_username'] }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Any reason for using AbbyBot? (optional field)</label>
+                    <div class="control">
+                        <textarea class="textarea" name="reason" placeholder="Your text here">{{ reason or '' }}</textarea>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">How did you learn about AbbyBot Project? (optional field)</label>
+                    <div class="control">
+                        <textarea class="textarea" name="how_learned" placeholder="Your text here">{{ how_learned or '' }}</textarea>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="control">
+                        <label class="checkbox {{ 'input-error' if errors.get('terms') }}">
+                            <input type="checkbox" name="terms" {% if terms_accepted %}checked{% endif %} required>
+                            I agree to the <a class="text-info" href="/#terms-and-conditions" target="_blank">terms and conditions</a>
+                        </label>
+                        {% if errors.get('terms') %}
+                            <p class="error-message">{{ errors['terms'] }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <br><strong>We kindly ask you to fill out the form sincerely and double-check that your information is accurate to ensure you receive all benefits When AbbyBot is released. Thank you!</strong></br>
+
+                <div class="field">
+                    <div class="control">
+                        <button class="button is-link" type="submit">Add to wishlist!</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

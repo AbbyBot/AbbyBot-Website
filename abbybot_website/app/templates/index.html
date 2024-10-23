@@ -241,7 +241,7 @@
 </section>
 
 
-<section class="terms-section py-5">
+<section class="terms-section py-5" id="terms-and-conditions">
     <div class="container text-center">
         <h2 class="mb-4" data-aos="fade-down">Terms & Conditions</h2>
         <p class="lead mb-5" data-aos="fade-down" data-aos-delay="200">
@@ -340,6 +340,32 @@
     </div>
 </section>
 
+<!-- Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="successModalLabel">Success!</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Your wishlist submission has been received successfully! Thank you for your interest in AbbyBot.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
 
-
+{% block extra_js %}
+<script>
+    // Check if the URL has a modal query parameter to show the success modal
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('modal') && urlParams.get('modal') === 'show') {
+        var myModal = new bootstrap.Modal(document.getElementById('successModal'));
+        myModal.show();
+    }
+</script>
 {% endblock %}

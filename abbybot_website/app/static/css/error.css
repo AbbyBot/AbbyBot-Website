@@ -1,4 +1,7 @@
-
+body
+{
+    background: linear-gradient(180deg, #b45428 0%, #9d5432 40%, #b65930 100%);
+}
 
 
 .error-section {
