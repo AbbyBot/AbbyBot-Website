@@ -1,0 +1,48 @@
+.status-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.status-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.status-card h3 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    color: #fff;
+}
+
+.status-card p {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ddd;
+}
+
+.status-card small {
+    font-size: 0.9rem;
+    color: #aaa;
+}
+
+/* Iconos del estado del bot */
+#bot-status-icon {
+    transition: color 0.3s ease;
+}
+
+#bot-status-text {
+    font-weight: 500;
+    font-size: 1.2rem;
+}
+
+/* Colores dinámicos para el estado del bot (basado en el estado) */
+.status-online #bot-status-icon {
+    color: #28a745; /* Verde para online */
+}
+
+.status-offline #bot-status-icon {
+    color: #dc3545; /* Rojo para offline */
+}
+
+.status-maintenance #bot-status-icon {
+    color: #ffc107; /* Amarillo para mantenimiento */
+}

@@ -37,12 +37,14 @@
                     <li class="text-danger">
                         <i class="fas fa-times-circle me-2"></i>
                         {% set funny_features = [
+                            "Winning the lottery for you",
                             "World domination planning for aspiring overlords.",
                             "Quantum supercomputing simulations in your garage.",
                             "Hyperspace travel guides for intergalactic adventurers.",
                             "Matrix-hacking support for breaking free from reality.",
                             "Dragon Ball hunting expeditions for ambitious collectors.",
                             "Kamehameha practice mode for perfecting energy blasts.",
+                            "Beat Zun in Touhou",
                             "Comprehensive Pokémon-catching strategies for trainers.",
                             "‘The Force’ tutorials with frequent troubleshooting tips.",
                             "Nether cooking recipes for aspiring digital chefs.",
@@ -55,10 +57,13 @@
                             "Exodia summoning guidance for card game strategists.",
                             "Coffee brewing mastery for caffeine enthusiasts.",
                             "DLC-style life upgrades for premium experience.",
+                            "Buy a Tesla Cybertruck"
                             "Binge-watching support with One Piece episode marathons.",
                             "Gacha luck boosters for successful five-star pulls.",
                             "Speedrun techniques for optimizing daily tasks.",
                             "Secret ending discovery for completionist users.",
+                            "Avengers recruitment opportunities with delayed callbacks.",
+                            "Reviving Satoru Gojo",
                             "Avengers recruitment opportunities with delayed callbacks.",
                             "Inventory management upgrades for increased capacity.",
                             "Holy Grail quest mapping with advanced GPS skills.",
@@ -177,7 +182,7 @@
             <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="400">
                 <div class="stat-card bg-dark text-light p-4 rounded">
                     <i class="fas fa-server fa-3x mb-3 text-primary"></i>
-                    <h3 class="stat-number" id="server-count">no data available</h3>
+                    <h3 class="stat-number">{{ server_count }}</h3>
                     <p class="stat-description">Servers using AbbyBot</p>
                 </div>
             </div>
@@ -185,19 +190,19 @@
             <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="600">
                 <div class="stat-card bg-dark text-light p-4 rounded">
                     <i class="fas fa-users fa-3x mb-3 text-success"></i>
-                    <h3 class="stat-number" id="user-count">no data available</h3>
+                    <h3 class="stat-number">{{ total_members }}</h3>
                     <p class="stat-description">Total users served</p>
                 </div>
             </div>
-
+            
             <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="800">
                 <div class="stat-card bg-dark text-light p-4 rounded position-relative">
                     <i class="fas fa-chart-bar fa-3x mb-3 text-info"></i>
-                    <h3 class="stat-number" id="total-xp-count">no data available</h3>
+                    <h3 class="stat-number" id="total-xp-count">{{ total_xp }}</h3>
                     <p class="stat-description">Total XP Earned</p>
                 </div>
             </div>
-            
+                        
         </div>
     </div>
 </section>
@@ -317,7 +322,7 @@
 </section>
 
 
-<!-- Sección Final de Llamada a la Acción -->
+
 <section id="cta-section" class="cta-section py-5 text-center">
     <div class="container">
         <h2 class="mb-4" data-aos="fade-down">Ready to Join the Journey?</h2>

@@ -1,0 +1,55 @@
+import mysql.connector
+from dotenv import load_dotenv
+from contextlib import contextmanager
+import os
+
+load_dotenv()
+
+# Consolidated DB connection function
+def get_db_connection(db_type="rei"):
+    if db_type == "rei":
+        return mysql.connector.connect(
+            host=os.getenv("REI_DB_HOST"),
+            user=os.getenv("REI_DB_USER"),
+            password=os.getenv("REI_DB_PASSWORD"),
+            database=os.getenv("REI_DB_NAME")
+        )
+    elif db_type == "asuka":
+        return mysql.connector.connect(
+            host=os.getenv("ASUKA_DB_HOST"),
+            user=os.getenv("ASUKA_DB_USER"),
+            password=os.getenv("ASUKA_DB_PASSWORD"),
+            database=os.getenv("ASUKA_DB_NAME")
+        )
+
+@contextmanager
+def db_connection(db_type="rei"):
+    conn = None
+    try:
+        conn = get_db_connection(db_type)
+        yield conn
+    finally:
+        if conn is not None:
+            conn.close()
+
+# Helper function to execute queries
+def execute_query(db_type, query, params=None, fetchall=True, commit=False):
+    try:
+        with db_connection(db_type) as conn:
+            with conn.cursor(dictionary=True) as cursor:
+                cursor.execute(query, params or ())
+                if commit:
+                    conn.commit()
+                if fetchall:
+                    result = cursor.fetchall()
+                else:
+                    result = cursor.fetchone()
+        return result
+    
+    except mysql.connector.Error as err:
+        print(f"Database Error: {err}")
+        raise  # Rethrow the exception so it can be handled by the calling function
+    
+    except Exception as e:
+        print(f"Unexpected Error: {e}")
+        raise  # Rethrow any other unexpected exceptions
