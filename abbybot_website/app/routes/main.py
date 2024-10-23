@@ -64,6 +64,38 @@ def status_data():
 def bot_status():
     return render_template('bot-status.html')
 
+@main_bp.route('/abbybot-privileges')
+def abbybot_privileges():
+    try:
+        # Make Query
+        server_list = execute_query("rei", "SELECT privilege_name, value, rol_meaning, how_to_get, xp_multiplier, exclusive_access FROM privileges;")
+
+    except mysql.connector.Error as err:
+        print(f"Error: {err}")
+        return render_template('error.html', message="Database connection failed.")
+
+    return render_template('abbybot-privileges.html', privileges=server_list)
+
+
+# Error handlers
+
+@main_bp.app_errorhandler(404)
+def page_not_found(error):
+    return render_template('error.html', message="Sorry, the page you are looking for does not exist."), 404
+
+@main_bp.app_errorhandler(500)
+def internal_server_error(error):
+    return render_template('error.html', message="An unexpected error occurred. Please try again later."), 500
+
+@main_bp.app_errorhandler(Exception)
+def handle_generic_error(error):
+    # Display the error message if available, or a generic message
+    return render_template('error.html', message=str(error) if error else "An unexpected error occurred."), 500
+
+
+
+
+
 
 app.register_blueprint(main_bp)
 
