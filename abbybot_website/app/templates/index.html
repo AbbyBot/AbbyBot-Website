@@ -1,0 +1,339 @@
+{% extends "base/base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="hero-section d-flex align-items-center justify-content-center text-light">
+    <div class="container-fluid text-center d-flex flex-column align-items-center">
+        <div class="text-content" data-aos="fade-right">
+            <h1 class="display-4">Welcome to AbbyBot ✨</h1>
+        </div>
+        <div class="image-content mb-4" data-aos="zoom-in" data-aos-delay="300">
+            <img src="{{ url_for('static', filename='img/icon/abbybot_logo.png') }}" alt="AbbyBot" class="profile-image rounded-circle">
+        </div>
+        <div class="text-content mb-4" data-aos="fade-up" data-aos-delay="600">
+            <p class="lead"><i class="fab fa-discord nav-icon me-2"></i> Your Loyal Discord Ally!</p>
+        </div>
+    </div>
+</section>
+
+
+<section id="overview-section" class="overview-section py-5">
+    <div class="container">
+        <div class="row align-items-center mb-5">
+            <div class="col-md-6" data-aos="fade-left">
+                <h2>Discover AbbyBot</h2>
+                <p>AbbyBot is a multi-functional app designed to be your faithful companion on your Discord server, offering a wide variety of management and entertainment features to improve your experience on your server.</p>
+                <ul class="list-unstyled">
+                    <li><i class="fas fa-check-circle me-2 text-success"></i> Automated moderation and customizable commands.</li>
+                    <li><i class="fas fa-check-circle me-2 text-success"></i> Multi-language support for better experience.</li>
+                    <li><i class="fas fa-check-circle me-2 text-success"></i> Dynamic leveling system with rewards.</li>
+            
+                    
+                    <li class="text-danger">
+                        <i class="fas fa-times-circle me-2"></i>
+                        {% set funny_features = [
+                            "World domination planning for aspiring overlords.",
+                            "Quantum supercomputing simulations in your garage.",
+                            "Hyperspace travel guides for intergalactic adventurers.",
+                            "Matrix-hacking support for breaking free from reality.",
+                            "Dragon Ball hunting expeditions for ambitious collectors.",
+                            "Kamehameha practice mode for perfecting energy blasts.",
+                            "Comprehensive Pokémon-catching strategies for trainers.",
+                            "‘The Force’ tutorials with frequent troubleshooting tips.",
+                            "Nether cooking recipes for aspiring digital chefs.",
+                            "Wisdom searches powered by Gandalf's ancient knowledge.",
+                            "Dance battle challenges with Thanos for confident movers.",
+                            "One Piece-inspired sailing adventures for digital pirates.",
+                            "Escape simulations to outsmart Agent Smith.",
+                            "Heist planning sessions with Lupin for mastermind users.",
+                            "Master Sword crafting instructions for heroic endeavors.",
+                            "Exodia summoning guidance for card game strategists.",
+                            "Coffee brewing mastery for caffeine enthusiasts.",
+                            "DLC-style life upgrades for premium experience.",
+                            "Binge-watching support with One Piece episode marathons.",
+                            "Gacha luck boosters for successful five-star pulls.",
+                            "Speedrun techniques for optimizing daily tasks.",
+                            "Secret ending discovery for completionist users.",
+                            "Avengers recruitment opportunities with delayed callbacks.",
+                            "Inventory management upgrades for increased capacity.",
+                            "Holy Grail quest mapping with advanced GPS skills.",
+                            "Elden Ring build optimizations for flawless victories.",
+                            "Story expansion writing with continuous lore updates.",
+                            "Puzzle-solving skills without the help of walkthroughs.",
+                            "Effortless XP grinding for passive level gains.",
+                            "Reality debugging tools to fix simulation glitches.",
+                            "Mana regeneration tracking with cooldown notifications.",
+                            "Chore min-maxing advice for maximum efficiency.",
+                            "Critical hit avoidance strategies for life’s battles.",
+                            "Motivation-enhancing side quests with daily rewards.",
+                            "Ultra Instinct training plans for intense focus sessions.",
+                            "Familiar summoning spells for loyal animal companions."
+                        ] %}
+                        {{ funny_features|random }}
+                        
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-md-6" data-aos="fade-right">
+                <img style="width: 256px;" src="{{ url_for('static', filename='img/overview/abbybot_overview.png') }}" alt="Overview Image" class="img-fluid rounded">
+            </div>
+            
+        </div>
+
+        
+        <div class="row text-center">
+            <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="card bg-dark text-light h-100">
+                    <div class="card-body">
+                        <h4 class="card-title"><i class="fas fa-robot me-2"></i> Automated Moderation</h4>
+                        <p class="card-text">AbbyBot provides customizable moderation tools to keep your server safe and well-organized.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="400">
+                <div class="card bg-dark text-light h-100">
+                    <div class="card-body">
+                        <h4 class="card-title"><i class="fa-solid fa-toggle-on"></i> Total control</h4>
+                        <p class="card-text">Activate or deactivate any AbbyBot automated system whenever you want.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="600">
+                <div class="card bg-dark text-light h-100">
+                    <div class="card-body">
+                        <h4 class="card-title"><i class="fas fa-trophy me-2"></i> XP level system</h4>
+                        <p class="card-text">Gain experience to obtain new levels and features.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="600">
+                <div class="card bg-dark text-light h-100">
+                    <div class="card-body">
+                        <h4 class="card-title"><i class="fa-solid fa-language"></i> Multi-language system</h4>
+                        <p class="card-text">English/Spanish language support for better user and server experience.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="600">
+                <div class="card bg-dark text-light h-100">
+                    <div class="card-body">
+                        <h4 class="card-title"><i class="fa-solid fa-user"></i> Profile system</h4>
+                        <p class="card-text">Your level, experience, privileges and everything related is shared across all servers you are on with AbbyBot!</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="600">
+                <div class="card bg-dark text-light h-100">
+                    <div class="card-body">
+                        <h4 class="card-title"><i class="fa-solid fa-cake-candles"></i> Birthdays!</h4>
+                        <p class="card-text">If you tell AbbyBot what your birthday is, she'll take care of the rest...</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="additional-info py-5">
+    <div class="container text-center">
+        <h2>Join the AbbyBot Community</h2>
+        <p>Be a part of the AbbyBot community to receive updates, share ideas, and get involved in the development. Together, we can make AbbyBot better every day!</p>
+        
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-4 mb-3">
+                <h4><i class="fa-solid fa-bullhorn me-2"></i> Community Updates</h4>
+                <p>Stay updated with the latest features, bug fixes, and announcements.</p>
+            </div>
+            <div class="col-md-4 mb-3">
+                <h4><i class="fa-solid fa-question-circle me-2"></i> Support & FAQ</h4>
+                <p>Get help from our support team or check the FAQ section for common questions.</p>
+            </div>
+            <div class="col-md-4 mb-3">
+                <h4><i class="fa-solid fa-hands-helping me-2"></i> Contribute</h4>
+                <p>Contribute to AbbyBot's development or donate to support our work!</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section id="stats-section" class="additional-info py-5">
+    <div class="container text-center">
+        <h2 class="mb-4" data-aos="fade-down">AbbyBot Usage Statistics</h2>
+        <p class="lead mb-5" data-aos="fade-down" data-aos-delay="200">Discover the reach of AbbyBot across Discord servers and users.</p>
+        
+        <div class="row">
+            <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="400">
+                <div class="stat-card bg-dark text-light p-4 rounded">
+                    <i class="fas fa-server fa-3x mb-3 text-primary"></i>
+                    <h3 class="stat-number" id="server-count">no data available</h3>
+                    <p class="stat-description">Servers using AbbyBot</p>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="600">
+                <div class="stat-card bg-dark text-light p-4 rounded">
+                    <i class="fas fa-users fa-3x mb-3 text-success"></i>
+                    <h3 class="stat-number" id="user-count">no data available</h3>
+                    <p class="stat-description">Total users served</p>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="800">
+                <div class="stat-card bg-dark text-light p-4 rounded position-relative">
+                    <i class="fas fa-chart-bar fa-3x mb-3 text-info"></i>
+                    <h3 class="stat-number" id="total-xp-count">no data available</h3>
+                    <p class="stat-description">Total XP Earned</p>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+<section class="privacy-section py-5">
+    <div class="container text-center">
+        <h2 class="mb-4" data-aos="fade-down">Privacy & Security</h2>
+        <p class="lead mb-5" data-aos="fade-down" data-aos-delay="200">
+            Your privacy and data security are our top priorities. AbbyBot only stores essential information and follows strict security guidelines to keep your data safe.
+        </p>
+        <div class="row justify-content-center">
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="info-card bg-dark text-light p-4 rounded h-100">
+                    <i class="fas fa-user-shield fa-3x mb-3 text-warning"></i>
+                    <h4>Data Protection</h4>
+                    <p>We use standard encryption measures to ensure data integrity and protect information.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="500">
+                <div class="info-card bg-dark text-light p-4 rounded h-100">
+                    <i class="fas fa-lock fa-3x mb-3 text-primary"></i>
+                    <h4>Secure Communication</h4>
+                    <p>All AbbyBot connections are encrypted to keep your information private and secure.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="700">
+                <div class="info-card bg-dark text-light p-4 rounded h-100">
+                    <i class="fas fa-database fa-3x mb-3 text-success"></i>
+                    <h4>Minimal Data Storage</h4>
+                    <p>We only store essential information and never share your data with third parties without your consent.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="terms-section py-5">
+    <div class="container text-center">
+        <h2 class="mb-4" data-aos="fade-down">Terms & Conditions</h2>
+        <p class="lead mb-5" data-aos="fade-down" data-aos-delay="200">
+            By using AbbyBot, you agree to comply with our guidelines and policies. Read below to understand your responsibilities as a user.
+        </p>
+        <div class="row justify-content-center">
+            <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
+                <div class="terms-card bg-dark text-light p-4 rounded">
+                    <h4>User Responsibilities</h4>
+                    <p>Users must adhere to community guidelines and avoid abusive or illegal activities while using AbbyBot.</p>
+                    <a href="/user-responsibilities" class="btn btn-outline-light mt-3">Read Full Terms</a>
+                </div>
+            </div>
+            <div class="col-md-6" data-aos="fade-up" data-aos-delay="500">
+                <div class="terms-card bg-dark text-light p-4 rounded">
+                    <h4>Bot Policies</h4>
+                    <p>AbbyBot follows strict policies regarding data collection, usage, and retention to protect your privacy.</p>
+                    <a href="/bot-policies" class="btn btn-outline-light mt-3">Read Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<section id="staff-section" class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-4 additional-info" data-aos="fade-down">Meet the Team</h2>
+        <p class="text-center lead mb-5 additional-info" data-aos="fade-down" data-aos-delay="200">
+            Get to know the amazing people behind AbbyBot!
+        </p>
+        
+        <div class="row justify-content-center">
+            
+            <div class="col-md-4 col-lg-3 mb-4" data-aos="fade-up">
+                <div class="card text-center border-0 shadow-sm">
+                    <img src="{{ url_for('static', filename='img/staff_profiles/astronautmarkus.png') }}" alt="Member 1" class="card-img-top rounded-circle mx-auto mt-4" style="width: 120px; height: 120px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title mb-1">AstronautMarkus</h5>
+                        <p class="card-text text-muted mb-2">Project Leader</p>
+                        <div class="social-icons">
+                            <a href="https://www.linkedin.com/in/markusreyes/" class="text-light me-2"><i class="fab fa-linkedin"></i></a>
+                            <a href="https://github.com/AstronautMarkus" class="text-light me-2"><i class="fab fa-github"></i></a>
+                            <a href="https://www.instagram.com/sky._marc/" class="text-light"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-lg-3 mb-4" data-aos="fade-up">
+                <div class="card text-center border-0 shadow-sm">
+                    <img src="{{ url_for('static', filename='img/staff_profiles/anzarkept.png') }}" alt="Member 1" class="card-img-top rounded-circle mx-auto mt-4" style="width: 120px; height: 120px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title mb-1">Sr. Teorema</h5>
+                        <p class="card-text text-muted mb-2">Dashboard Manager</p>
+                        <div class="social-icons">
+                            <a href="https://github.com/anzar2" class="text-light me-2"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-lg-3 mb-4" data-aos="fade-up">
+                <div class="card text-center border-0 shadow-sm">
+                    <img src="{{ url_for('static', filename='img/staff_profiles/soledadlml.png') }}" alt="Member 1" class="card-img-top rounded-circle mx-auto mt-4" style="width: 120px; height: 120px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title mb-1">✨Soledad✨</h5>
+                        <p class="card-text text-muted mb-2">Art designer</p>
+                        <div class="social-icons">
+                            <a href="https://github.com/Albedofan69420" class="text-light me-2"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- Sección Final de Llamada a la Acción -->
+<section id="cta-section" class="cta-section py-5 text-center">
+    <div class="container">
+        <h2 class="mb-4" data-aos="fade-down">Ready to Join the Journey?</h2>
+        <p class="lead mb-4" data-aos="fade-down" data-aos-delay="200">
+            Add AbbyBot to your wishlist and be the first to experience new features and updates!
+        </p>
+        <a href="/wishlist" class="btn btn-primary btn-lg btn-transition" data-aos="fade-up" data-aos-delay="100">
+            <i class="fa-solid fa-address-book me-2"></i> Add AbbyBot to Wishlist
+        </a>
+        
+        <p class="mt-4" data-aos="fade-up" data-aos-delay="600">
+            Thank you for being part of the AbbyBot community!
+        </p>
+    </div>
+</section>
+
+
+
+{% endblock %}
