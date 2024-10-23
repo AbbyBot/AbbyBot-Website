@@ -1,3 +1,35 @@
+/* General style for profile image */
+.profile-image {
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 50%; 
+    position: relative;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5), 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Status indicator with shadow */
+.status-indicator {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+    border: 2px solid #333; 
+    transition: background-color 0.3s ease;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5), 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.status-indicator.text-success {
+    background-color: #28a745; 
+}
+
+.status-indicator.text-danger {
+    background-color: #dc3545; 
+}
+
+/* Style for cards */
 .status-card {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -13,6 +45,10 @@
     color: #fff;
 }
 
+.aditional-text{
+    color: white;
+}
+
 .status-card p {
     font-size: 1.5rem;
     font-weight: 700;
@@ -24,25 +60,38 @@
     color: #aaa;
 }
 
-/* Iconos del estado del bot */
-#bot-status-icon {
+/* Bot status icons */
+#bot-status-icon,
+#heart-icon {
     transition: color 0.3s ease;
 }
 
-#bot-status-text {
-    font-weight: 500;
-    font-size: 1.2rem;
-}
+/* Responsive styling for smaller screens */
+@media (max-width: 768px) {
+    .hero-section {
+        flex-direction: column;
+        text-align: center;
+        padding: 3rem 1rem; 
+        min-height: 55vh; 
+    }
 
-/* Colores dinámicos para el estado del bot (basado en el estado) */
-.status-online #bot-status-icon {
-    color: #28a745; /* Verde para online */
-}
+    .profile-image {
+        width: 140px; 
+        height: 140px;
+    }
 
-.status-offline #bot-status-icon {
-    color: #dc3545; /* Rojo para offline */
-}
+    .hero-section .text-content h1 {
+        font-size: 2.4rem; 
+        line-height: 1.2; 
+        margin-bottom: 0.5rem; 
+    }
 
-.status-maintenance #bot-status-icon {
-    color: #ffc107; /* Amarillo para mantenimiento */
+    .hero-section .text-content p {
+        font-size: 1.1rem; 
+        margin-top: 0.5rem; 
+    }
+
+    .hero-section .text-content {
+        margin-top: 1rem; 
+    }
 }
