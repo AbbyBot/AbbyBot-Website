@@ -1,0 +1,62 @@
+{% extends "base/base.html" %}
+
+{% block title %}Connect with Us - AbbyBot{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/socials.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="hero-section hero-socials d-flex align-items-center justify-content-center text-light">
+    <div class="container text-center">
+        <div class="text-content" data-aos="fade-right">
+            <h1>Connect with AbbyBot</h1>
+        </div>
+
+        <div class="text-content mb-4" data-aos="fade-up" data-aos-delay="300">
+            <p class="lead">Stay updated with the latest news, projects, and announcements. Follow us on our social media channels!</p>
+        </div>
+    </div>
+</section>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-4 mb-4" data-aos="flip-left" data-aos-delay="100">
+            <div class="card h-100 social-card instagram-card">
+                <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                    <i class="fa-brands fa-instagram social-icon"></i>
+                    <h5 class="card-title mt-3">Instagram</h5>
+                    <p class="card-text">Follow us for updates, artwork, and behind-the-scenes.</p>
+                    <a href="https://instagram.com/abbybotproject" class="btn btn-instagram mt-auto" target="_blank">Follow Us</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4 mb-4" data-aos="flip-left" data-aos-delay="200">
+            <div class="card h-100 social-card github-card">
+                <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                    <i class="fa-brands fa-github social-icon"></i>
+                    <h5 class="card-title mt-3">GitHub</h5>
+                    <p class="card-text">Explore the code and contribute to our open-source projects.</p>
+                    <a href="https://github.com/abbybot" class="btn btn-github mt-auto" target="_blank">Visit GitHub</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4" data-aos="flip-left" data-aos-delay="300">
+            <div class="card h-100 social-card website-card">
+                <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                    <i class="fa-brands fa-discord social-icon"></i>
+                    <h5 class="card-title mt-3">AbbyBot Stuff & Dev</h5>
+                    <p class="card-text">Check out our official Discord Server!</p>
+                    <a href="https://yourwebsite.com" class="btn btn-website mt-auto" target="_blank">Visit Website</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5 mb-5 text-center" data-aos="fade-up" data-aos-delay="400">
+    <a href="{{ url_for('main.index') }}" class="btn btn-secondary btn-lg" role="button">Return to Home</a>
+</div>
+{% endblock %}

@@ -175,6 +175,10 @@ def news_detail(news_id):
 def wip():
  return render_template('wip.html')
 
+@main_bp.route('/socials')
+def socials():
+ return render_template('socials.html')
+
 # Error handlers
 
 @main_bp.app_errorhandler(404)
