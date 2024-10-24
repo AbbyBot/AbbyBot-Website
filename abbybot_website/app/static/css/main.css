@@ -114,6 +114,12 @@ a {
     margin-right: 0.5rem;
 }
 
+
+.additional-info{
+    color: white;
+}
+
+
 @media (max-width: 768px) {
     .navbar-brand {
         font-size: 1.2rem;

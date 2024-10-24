@@ -2,7 +2,7 @@ from flask import Flask, Blueprint, render_template
 import mysql.connector
 from dotenv import load_dotenv
 from ..utilities.db_connections import execute_query
-from flask import Flask, flash, redirect, url_for, render_template, request
+from flask import Flask, flash, redirect, url_for, render_template, request, abort
 import re
 
 
@@ -142,7 +142,34 @@ def wishlist():
     return render_template('wishlist.html', errors={}) 
 
 
+# News views
 
+@main_bp.route('/abbybot-news')
+def news_list():
+    query = """
+    SELECT news.id, news.title, news.description, news.content, news.image_url, categories.name AS category, news.created_at
+    FROM news
+    LEFT JOIN categories ON news.category_id = categories.id
+    ORDER BY news.created_at DESC
+    """
+    news_items = execute_query("asuka", query)
+    return render_template('news_list.html', news=news_items)
+
+# News detail
+@main_bp.route('/abbybot-news/<int:news_id>')
+def news_detail(news_id):
+    
+    query = """
+    SELECT news.id, news.title, news.content, news.image_url, categories.name AS category, news.created_at
+    FROM news
+    LEFT JOIN categories ON news.category_id = categories.id
+    WHERE news.id = %s
+    """
+    news_item = execute_query("asuka", query, (news_id,), fetchall=False)
+    
+    if not news_item:
+        abort(404)  # If no new, return 404
+    return render_template('news_detail.html', news=news_item)
 
 
 

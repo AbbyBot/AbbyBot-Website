@@ -1,0 +1,40 @@
+{% extends "base/base.html" %}
+
+{% block title %}{{ news.title }} - AbbyBot{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/news.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5 news-detail-container additional-info">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="mb-4 news-title additional-info">{{ news.title }}</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="text-center mb-4">
+                <img src="{{ news.image_url or url_for('static', filename='img/AbbyBot_Art/default.png') }}" 
+                     class="img-fluid news-image additional-info" 
+                     alt="{{ news.title }}"
+                     style="max-width: 75%; height: auto;"onerror="this.onerror=null; this.src='{{ url_for('static', filename='img/AbbyBot_Art/default.png') }}';">
+            </div>
+            <p class="text-muted news-date additional-info">{{ news.created_at.strftime('%B %d, %Y') }}</p>
+            <div class="news-content additional-info">
+                {{ news.content | safe }}
+            </div>
+        </div>
+        <div class="col-lg-4 sidebar">
+            <h4>{{ news.category}}</h4>
+        </div>
+    </div>
+    <div class="row mt-5 mb-5">
+        <div class="col-12 text-center">
+            <a href="{{ url_for('main.news_list') }}" class="btn btn-secondary btn-lg" role="button">Back to News</a>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
