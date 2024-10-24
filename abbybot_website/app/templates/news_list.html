@@ -24,19 +24,20 @@
     <div class="row">
         {% if news %}
             {% for item in news %}
-                <div class="col-md-4 mb-4" data-aos="fade-up">
-                    <div class="card h-100">
-                        <div class="news-badge">{{ item.category }}</div> 
-                        <img src="{{ item.image_url or url_for('static', filename='img/AbbyBot_Art/default.png') }}" 
-                             class="card-img-top" 
-                             alt="{{ item.title }}"onerror="this.onerror=null; this.src='{{ url_for('static', filename='img/AbbyBot_Art/default.png') }}';">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ item.title }}</h5>
-                            <p class="card-text">{{ item.description[:150] }}...</p>
-                            <a href="{{ url_for('main.news_detail', news_id=item.id) }}" class="btn btn-primary">Read More</a>
-                        </div>
+            <div class="col-md-4 mb-4" data-aos="fade-up">
+                <div class="card h-100">
+                    <div class="news-badge">{{ item.category }}</div> 
+                    <img src="{{ item.image_url or url_for('static', filename='img/AbbyBot_Art/default.png') }}" 
+                         class="card-img-top news-list-image" 
+                         alt="{{ item.title }}"onerror="this.onerror=null; this.src='{{ url_for('static', filename='img/AbbyBot_Art/default.png') }}';">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ item.title }}</h5>
+                        <p class="card-text">{{ item.description[:150] }}...</p>
+                        <a href="{{ url_for('main.news_detail', news_id=item.id) }}" class="btn btn-primary">Read More</a>
                     </div>
                 </div>
+            </div>
+            
             {% endfor %}
         {% else %}
             <div class="col-12 text-center mt-5 no-news-container">
