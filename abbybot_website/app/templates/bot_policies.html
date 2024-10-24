@@ -1,0 +1,112 @@
+{% extends "base/base.html" %}
+
+{% block title %}Bot Policies - AbbyBot{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/policies.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="hero-section d-flex align-items-center justify-content-center text-light">
+    <div class="container-fluid text-center d-flex flex-column align-items-center">
+        <div class="text-content" data-aos="fade-right">
+            <h1>Bot Policies <i class="fa-solid fa-scale-balanced"></i></h1>
+        </div>
+
+        <div class="text-content mb-4" data-aos="fade-up" data-aos-delay="300">
+            <p class="lead">Review our policies to understand how AbbyBot operates and what to expect as a user.</p>
+        </div>
+    </div>
+</section>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="policy-content" data-aos="fade-up">
+                <h2>AbbyBot Name and Identity</h2>
+                <ul class="policy-list">
+                    <li>The name should be written as 'AbbyBot'. Variants such as 'abbybot', 'Abby bot', or others are not accepted.</li>
+                    <li>As of August 2024, AbbyBot's Discord username is 'AbbyBot#1727'.</li>
+                    <li>Any project with a similar name, as long as it does not use the exact name or username, is not considered plagiarism or imitation.</li>
+                    <li>AbbyBot is an original project inspired by other Discord bots but does not plagiarize content from other authors.</li>
+                </ul>
+
+                <h2>Image and Colors</h2>
+                <ul class="policy-list">
+                    <li>The image and colors associated with AbbyBot cannot be used to promote illegal or immoral activities or that violate the rights of third parties.</li>
+                    <li>The owner of AbbyBot holds the rights to its image, colors, and any visual material used in the bot (except for contributions).</li>
+                </ul>
+
+                <h2>Privacy and Data Usage</h2>
+                <ul class="policy-list">
+                    <li>AbbyBot collects and processes user data strictly for functionality and enhancement of user experience.</li>
+                    <li>By using AbbyBot, you agree to our data usage policies.</li>
+                    <li>Personal data collection is voluntary and used productively for AbbyBot purposes.</li>
+                </ul>
+
+                <h2>Limitation of Liability</h2>
+                <ul class="policy-list">
+                    <li>AbbyBot is provided "as is" without warranties of any kind.</li>
+                    <li>The owner will not be liable for direct, indirect, incidental, or consequential damages arising from the use or inability to use AbbyBot.</li>
+                    <li>Uninterrupted availability of AbbyBot is not guaranteed.</li>
+                </ul>
+
+                <h2>Modification of Terms</h2>
+                <ul class="policy-list">
+                    <li>The owner of AbbyBot reserves the right to modify these terms and conditions at any time.</li>
+                    <li>Updates will be notified to users through an announcement or notice within the bot.</li>
+                </ul>
+
+                <h2>Intellectual Property</h2>
+                <ul class="policy-list">
+                    <li>All rights to AbbyBot, including but not limited to source code, content, image, and other visual elements, are the sole property of the developer.</li>
+                    <li>The user receives a limited, non-exclusive, and non-transferable license to use AbbyBot on Discord servers.</li>
+                </ul>
+
+                <h2>Character Representation</h2>
+                <ul class="policy-list">
+                    <li>The AbbyBot image represents an underage fictional character. The use of this image in inappropriate contexts is prohibited.</li>
+                    <li>The owner reserves the right to take legal action if these rules are violated.</li>
+                    <li>The character name is 'Abigail "Abby" Monroe'.</li>
+                </ul>
+
+                <h2>Voluntary Contributions</h2>
+                <ul class="policy-list">
+                    <li>Contributions, whether monetary or artistic, are considered voluntary.</li>
+                    <li>Monetary contributions are used exclusively to cover financial needs for AbbyBot's operation.</li>
+                    <li>Artistic contributions respect the author’s property, except for images created by <strong class="text-info">Soledad</strong>.</li>
+                </ul>
+
+                <h2>User Responsibility for Uploaded Content</h2>
+                <ul class="policy-list">
+                    <li>AbbyBot allows users to play or share MP3 music files and other multimedia content. However, it is the sole responsibility of the user to ensure they have the legal rights or necessary permissions to share or use such content.</li>
+                </ul>
+
+                <h2>Prohibited Content</h2>
+                <ul class="policy-list">
+                    <li>Users are prohibited from uploading or using copyrighted music or multimedia content without proper authorization from the copyright holder.</li>
+                </ul>
+
+                <h2>Disclaimer of Liability</h2>
+                <ul class="policy-list">
+                    <li>The owner of AbbyBot does not assume any responsibility for the unauthorized or illegal use of multimedia content by users. AbbyBot only acts as a tool to facilitate media playback, and the responsibility for compliance with copyright laws rests entirely with the user.</li>
+                </ul>
+
+                <h2>Reporting Violations</h2>
+                <ul class="policy-list">
+                    <li>If unauthorized or illegal content is reported or detected, the owner of AbbyBot reserves the right to take immediate action, which may include the removal of the content, restricting user access, or notifying the relevant authorities.</li>
+                </ul>
+
+                <strong class="text-success">Thank you for reading our bot policies, use AbbyBot wisely and everything will be fine.</strong>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="row mt-5 mb-5" data-aos="fade-up" data-aos-delay="400">
+        <div class="col-12 text-center">
+            <a href="{{ url_for('main.index') }}" class="btn btn-secondary btn-lg" role="button">Return to Home</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

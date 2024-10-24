@@ -3,8 +3,8 @@ body {
 }
 
 .input-error {
-    border: 2px solid #ff5c5c; /* Un rojo más claro para mejor contraste */
-    box-shadow: 0 0 5px #ff5c5c; /* Agregamos un pequeño brillo para más visibilidad */
+    border: 2px solid #ff5c5c; 
+    box-shadow: 0 0 5px #ff5c5c; 
 }
 
 .error-message {

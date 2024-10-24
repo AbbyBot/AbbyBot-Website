@@ -179,6 +179,14 @@ def wip():
 def socials():
  return render_template('socials.html')
 
+@main_bp.route('/user-responsibilities')
+def user_responsibilities():
+ return render_template('user_responsibilities.html')
+
+@main_bp.route('/bot-policies')
+def bot_policies():
+ return render_template('bot_policies.html')
+
 # Error handlers
 
 @main_bp.app_errorhandler(404)

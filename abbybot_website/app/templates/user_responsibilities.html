@@ -1,0 +1,84 @@
+{% extends "base/base.html" %}
+
+{% block title %}User Responsibilities - AbbyBot{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/policies.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="hero-section d-flex align-items-center justify-content-center text-light">
+    <div class="container-fluid text-center d-flex flex-column align-items-center">
+        <div class="text-content" data-aos="fade-right">
+            <h1>User Responsibilities <i class="fa-regular fa-handshake"></i></h1>
+        </div>
+
+        <div class="text-content mb-4" data-aos="fade-up" data-aos-delay="300">
+            <p class="lead">Understand your responsibilities as a user of AbbyBot to maintain a safe and enjoyable community.</p>
+        </div>
+    </div>
+</section>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="responsibility-content" data-aos="fade-up">
+                <h2>Community Guidelines</h2>
+                <p>As a user of AbbyBot, you are expected to follow these community guidelines to ensure a positive experience for everyone:</p>
+                <ul class="responsibility-list">
+                    <li>Be respectful to other users and avoid any form of harassment or discrimination.</li>
+                    <li>Do not share or distribute offensive or inappropriate content.</li>
+                    <li>Adhere to server-specific rules and follow moderator instructions.</li>
+                    <li>Avoid spamming, trolling, or engaging in disruptive behavior.</li>
+                </ul>
+
+                <h2>Data and Privacy</h2>
+                <p>We respect your privacy. Please be aware of the following:</p>
+                <ul class="responsibility-list">
+                    <li>Do not share sensitive or personal information through public channels.</li>
+                    <li>AbbyBot does not store unnecessary private information without consent.</li>
+                    <li>You have the right to request data removal or updates as per our privacy policies.</li>
+                </ul>
+
+                <h2>Prohibition of Abuse</h2>
+                <p>AbbyBot is an app created to help, not to abuse, for this reason:</p>
+                <ul class="responsibility-list">
+                    <li>The use of AbbyBot to harass, intimidate, or take actions that negatively affect other users or communities is prohibited.</li>
+                    <li>The owner of AbbyBot reserves the right to disable access to the bot in case of abuse or non-compliance with the terms and conditions.</li>
+                </ul>
+
+                <h2>Community Rules</h2>
+                <p>AbbyBot is governed by the rules established by Discord, however it is worth noting:</p>
+                <ul class="responsibility-list">
+                    <li>Use of AbbyBot must adhere to the community standards of the Discord server it is installed on, as well as Discord policies.</li>
+                    <li>The AbbyBot owner reserves the right to report violations of Discord policies to server administrators or to Discord itself.</li>
+                    <li>If a user detects misuse of AbbyBot or defects in its optimal functioning, they are invited to report it at <a class="text-info" href="https://abbybotproject.com/report">https://abbybotproject.com/report</a>.</li>
+                </ul>
+
+
+                <h2>User Responsibility for Media Compliance</h2>
+                <p>AbbyBot strives to do the impossible: play music for you, for this reason it is important to know:</p>
+                <ul class="responsibility-list">
+                    <li><strong>Adherence to Copyright Laws</strong>: Users must comply with all applicable copyright and intellectual property laws when uploading or sharing multimedia content through AbbyBot.</li>
+                    <li><strong>Consequences of Violations</strong>: Users who violate copyright laws or share unauthorized content through AbbyBot will be subject to penalties, including possible legal action and exclusion from AbbyBot services.</li>
+                    <strong class="text-danger">If these rules are violated by users or third parties, we will be forced to permanently remove the feature. Be quiet.</strong>
+                </ul>    
+
+
+                <h2>Final User Responsibility</h2>
+                <p>And last but not least:</p>
+                <ul class="responsibility-list">
+                    <li>The end user, or group of users using 'AbbyBot', is responsible for any action they take. If any violation is committed, the user will be responsible for the consequences resulting from it.</li>
+                    <li>If the user does not agree with the terms of use of AbbyBot, he/she is voluntarily invited not to use our application.</li>
+                </ul>
+                <strong class="text-success">Thank you for reading our user responsibilities, use AbbyBot wisely and everything will be fine.</strong>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-5 mb-5" data-aos="fade-up" data-aos-delay="400">
+        <div class="col-12 text-center">
+            <a href="/" class="btn btn-secondary btn-lg" role="button">Return to Home</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
