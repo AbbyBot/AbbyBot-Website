@@ -171,8 +171,9 @@ def news_detail(news_id):
         abort(404)  # If no new, return 404
     return render_template('news_detail.html', news=news_item)
 
-
-
+@main_bp.route('/wip')
+def wip():
+ return render_template('wip.html')
 
 # Error handlers
 

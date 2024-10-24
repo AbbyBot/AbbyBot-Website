@@ -1,0 +1,20 @@
+{% extends "base/base.html" %}
+
+{% block title %}Work In Progress - AbbyBot{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/news.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="hero-section d-flex align-items-center justify-content-center text-light">
+    <div class="container-fluid text-center d-flex flex-column align-items-center">
+        <div class="text-content" data-aos="fade-right">
+            <h1>🚧 Work In Progress 🚧</h1>
+        </div>
+        <div class="text-content mb-4" data-aos="fade-up" data-aos-delay="300">
+            <p class="lead">This section is currently under development. We are working hard to bring you new and exciting content soon. Stay tuned!</p>
+        </div>
+    </div>
+</section>
+{% endblock %}
