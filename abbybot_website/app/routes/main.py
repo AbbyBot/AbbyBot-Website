@@ -187,6 +187,66 @@ def user_responsibilities():
 def bot_policies():
  return render_template('bot_policies.html')
 
+# commands endpoint
+
+@main_bp.route('/commands')
+def commands_site():
+
+    # SQL queries by category
+    control_commands_query = """
+        SELECT `command_code`, `command_description`, `usage` 
+        FROM `help` 
+        WHERE `category_id` = (SELECT `id` FROM `help_categories` WHERE `category_name` = '/control') 
+          AND `language_id` = 1
+    """
+
+    minigames_commands_query = """
+        SELECT `command_code`, `command_description`, `usage` 
+        FROM `help` 
+        WHERE `category_id` = (SELECT `id` FROM `help_categories` WHERE `category_name` = '/minigames') 
+          AND `language_id` = 1
+    """
+
+    music_commands_query = """
+        SELECT `command_code`, `command_description`, `usage` 
+        FROM `help` 
+        WHERE `category_id` = (SELECT `id` FROM `help_categories` WHERE `category_name` = '/music') 
+          AND `language_id` = 1
+    """
+
+    utility_commands_query = """
+        SELECT `command_code`, `command_description`, `usage` 
+        FROM `help` 
+        WHERE `category_id` = (SELECT `id` FROM `help_categories` WHERE `category_name` = '/utility') 
+          AND `language_id` = 1
+    """
+
+    user_commands_query = """
+        SELECT `command_code`, `command_description`, `usage` 
+        FROM `help` 
+        WHERE `category_id` = (SELECT `id` FROM `help_categories` WHERE `category_name` = '/user') 
+          AND `language_id` = 1
+    """
+
+    image_commands_query = """
+        SELECT `command_code`, `command_description`, `usage` 
+        FROM `help` 
+        WHERE `category_id` = (SELECT `id` FROM `help_categories` WHERE `category_name` = '/image') 
+          AND `language_id` = 1
+    """
+
+    # Execute the queries
+    control_commands = execute_query("rei", control_commands_query)
+    minigames_commands = execute_query("rei", minigames_commands_query)
+    music_commands = execute_query("rei", music_commands_query)
+    utility_commands = execute_query("rei", utility_commands_query)
+    user_commands = execute_query("rei", user_commands_query)
+    image_commands = execute_query("rei", image_commands_query)
+
+    # Render the template and pass the results
+    return render_template(
+        'commands.html',control_commands=control_commands,minigames_commands=minigames_commands,music_commands=music_commands,utility_commands=utility_commands,user_commands=user_commands,image_commands=image_commands
+    )
 # Error handlers
 
 @main_bp.app_errorhandler(404)

@@ -1,0 +1,52 @@
+{% extends "base/base.html" %}
+
+{% block title %}Commands - AbbyBot{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/commands.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="hero-section commands-hero d-flex align-items-center justify-content-center text-light">
+    <div class="container-fluid text-center d-flex flex-column align-items-center">
+        <div class="text-content">
+            <h1 data-aos="fade-right">AbbyBot Commands <i class="fa-solid fa-terminal me-2"></i></h1>
+        </div>
+        <div class="text-content mb-4">
+            <p class="lead" data-aos="fade-left"> Discover all the powerful commands AbbyBot has to offer. Explore below! </p>
+        </div>
+    </div>
+</section>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12 command-list">
+            <h2 class="command-title">All Commands</h2>
+            <ul class="command-list">
+                {% for category, commands in [
+                    ('Control Commands', control_commands),
+                    ('Minigames Commands', minigames_commands),
+                    ('Music Commands', music_commands),
+                    ('Utility Commands', utility_commands),
+                    ('User Commands', user_commands),
+                    ('Image Commands', image_commands)
+                ] %}
+                    <h3 class="command-category-title">{{ category }}</h3>
+                    {% for command in commands %}
+                        <li class="command-item" data-aos="fade-right">
+                            <div class="command-header">
+                                <strong class="command-code">{{ command.command_code }}</strong> 
+                                <span class="command-usage">{{ command.usage }}</span>
+                            </div>
+                            <div class="command-description">{{ command.command_description }}</div>
+                        </li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
