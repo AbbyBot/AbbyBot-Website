@@ -12,15 +12,10 @@ a {
     color: inherit; 
   }  
 
-.hero-section {
-    background: linear-gradient(180deg, #b45428 0%, #9d5432 40%, #b65930 100%);
-    min-height: 60vh;
-    padding: 3rem 1rem; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+  .hero-section {
+    min-height: 45vh;
 }
+
 
 .hero-section .text-content h1 {
     font-family: 'Inter', sans-serif;
@@ -38,6 +33,7 @@ a {
     position: relative;
     overflow: hidden;
     border: none;
+    border-radius: 10px;
 }
 
 .news-badge {
@@ -67,7 +63,6 @@ a {
     left: 0;
     width: 100%;
     padding: 20px;
-    color: white;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
     background: rgba(0, 0, 0, 0.5);
 }
@@ -127,3 +122,76 @@ a {
     overflow: hidden; 
 }
 
+
+@media (min-width: 992px) {
+    .col-lg-4 {
+        flex: 0 0 33.3333%;
+        max-width: 33.3333%; 
+    }
+
+    .card {
+        max-width: 350px; 
+        margin: 0 auto; 
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .col-md-6 {
+        flex: 0 0 50%;
+        max-width: 50%; 
+    }
+
+    .card {
+        max-width: 400px; 
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 767px) {
+    .col-md-6 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    .card {
+        width: 100%;
+        min-height: 450px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 576px) {
+    .col-sm-12 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    .card {
+        width: 100%;
+        min-height: 500px;
+        margin: 0 auto;
+    }
+}
+
+
+.news-info-section {
+    background-color: #1f2227;
+    padding: 40px 20px;
+    border-top: 1px solid white; 
+}
+
+.news-info-title {
+    font-size: 2rem;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.news-info-text {
+    font-size: 1.1rem;
+    color: #f1f1f1;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+}
