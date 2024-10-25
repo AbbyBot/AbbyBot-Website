@@ -72,13 +72,10 @@ async function updateBotStatus() {
             document.getElementById('server-count').innerText = data.server_count;
             document.getElementById('last-updated').innerText = data.last_updated;
 
-            // Update heart and indicator status
-            document.getElementById('heart-icon').classList.toggle('text-danger', data.status !== "online");
-            document.getElementById('heart-icon').classList.toggle('text-success', data.status === "online");
-            
+            // Update indicator status directly
             const statusIndicator = document.getElementById('status-indicator');
-            statusIndicator.classList.toggle('text-success', data.status === "online");
-            statusIndicator.classList.toggle('text-danger', data.status !== "online");
+            statusIndicator.classList.remove('text-success', 'text-danger'); 
+            statusIndicator.classList.add(data.status === "online" ? 'text-success' : 'text-danger');
         } else {
             console.error("Error fetching bot status data");
         }
@@ -87,7 +84,7 @@ async function updateBotStatus() {
     }
 }
 
-// Call the function on page load and every 5 seconds
+
 updateBotStatus();
 setInterval(updateBotStatus, 5000);
 
