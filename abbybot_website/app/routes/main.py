@@ -144,10 +144,11 @@ def wishlist():
 
 # News views
 
+# News list
 @main_bp.route('/abbybot-news')
 def news_list():
     query = """
-    SELECT news.id, news.title, news.description, news.content, news.image_url, categories.name AS category, news.created_at
+    SELECT news.id, news.title, news.description, news.content, news.image_url, categories.name AS category, news.created_at, news.slug
     FROM news
     LEFT JOIN categories ON news.category_id = categories.id
     ORDER BY news.created_at DESC
@@ -155,20 +156,20 @@ def news_list():
     news_items = execute_query("asuka", query)
     return render_template('news_list.html', news=news_items)
 
-# News detail
-@main_bp.route('/abbybot-news/<int:news_id>')
-def news_detail(news_id):
-    
+
+# News detail 
+@main_bp.route('/abbybot-news/<string:slug>')
+def news_detail(slug):
     query = """
-    SELECT news.id, news.title, news.content, news.image_url, categories.name AS category, news.created_at
+    SELECT news.id, news.title, news.description, news.content, news.image_url, categories.name AS category, news.created_at
     FROM news
     LEFT JOIN categories ON news.category_id = categories.id
-    WHERE news.id = %s
+    WHERE news.slug = %s
     """
-    news_item = execute_query("asuka", query, (news_id,), fetchall=False)
+    news_item = execute_query("asuka", query, (slug,), fetchall=False)
     
     if not news_item:
-        abort(404)  # If no new, return 404
+        abort(404)  # If no news found, return 404
     return render_template('news_detail.html', news=news_item)
 
 @main_bp.route('/wip')

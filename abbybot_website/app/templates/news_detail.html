@@ -6,6 +6,29 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/news.css') }}">
 {% endblock %}
 
+
+{% block meta %}
+<!-- Default Meta Tags -->
+<meta name="description" content="{{ news.description[:160] }}">
+<meta name="keywords" content="AbbyBot, Discord, Bot, Commands, Privileges, Dashboard, Status, News, Socials">
+<meta name="author" content="ReyesAndFriends.cl Team">
+
+<!-- Open Graph Meta Tags -->
+<meta property="og:title" content="AbbyBot - {{ news.title }}">
+<meta property="og:description" content="{{ news.description[:160] }}">
+<meta property="og:type" content="article">
+<meta property="og:url" content="{{ url_for('main.news_detail', slug=news.slug, _external=True) }}">
+<meta property="og:image" content="{{ news.image_url or url_for('static', filename='img/AbbyBot_Art/default.png', _external=True) }}">
+
+<!-- Twitter Meta Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AbbyBot - {{ news.title }}">
+<meta name="twitter:description" content="{{ news.description[:160] }}">
+<meta name="twitter:image" content="{{ news.image_url or url_for('static', filename='img/AbbyBot_Art/default.png', _external=True) }}">
+<meta name="twitter:site" content="@AbbyBotProject">
+{% endblock %}
+
+
 {% block content %}
 <div class="container mt-5 news-detail-container additional-info">
     <div class="row">
@@ -30,7 +53,7 @@
             <h4>{{ news.category }}</h4>
         </div>
     </div>
-    <div class="row mt-5 mb-5" data-aos="fade-up" data-aos-delay="300">
+    <div class="row mt-5 mb-5">
         <div class="col-12 text-center">
             <a href="{{ url_for('main.news_list') }}" class="btn btn-secondary btn-lg" role="button">Back to News</a>
         </div>
