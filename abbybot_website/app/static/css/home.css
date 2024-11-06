@@ -227,6 +227,8 @@
     font-size: 1.1rem;
     transition: background-color 0.3s ease, transform 0.3s ease;
     color: black;
+    margin-top: 2rem; 
+    margin-bottom: 2rem; 
 }
 
 .cta-section .btn-primary:hover {
@@ -239,7 +241,15 @@
     color: #bbb; 
 }
 
-
+@media (max-width: 768px) {
+    #staff-section .card {
+        margin-bottom: 1.5rem;
+    }
+    .cta-section .btn-primary {
+        margin-top: 1.5rem; 
+        margin-bottom: 1.5rem; 
+    }
+}
 
 .btn-transition {
     opacity: 0; 
