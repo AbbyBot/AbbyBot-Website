@@ -7,14 +7,13 @@
 {% endblock %}
 
 {% block content %}
-<section class="hero-section commands-hero d-flex align-items-center justify-content-center text-light">
-    <div class="container-fluid text-center d-flex flex-column align-items-center">
-        <div class="text-content">
-            <h1 data-aos="fade-right">AbbyBot Commands <i class="fa-solid fa-terminal me-2"></i></h1>
+<section class="hero-section d-flex align-items-center justify-content-center text-light">
+    <div class="container text-center">
+        <div class="text-content" data-aos="fade-right">
+            <h1 class="display-4 abbybot-title">AbbyBot Commands</h1>
+            <img src="{{ url_for('static', filename='img/emotes/abbybot_tired.png') }}" alt="">
         </div>
-        <div class="text-content mb-4">
-            <p class="lead" data-aos="fade-left"> Discover all the powerful commands AbbyBot has to offer. Explore below! </p>
-        </div>
+        <p class="subtitles" data-aos="fade-up" data-aos-delay="200">Watch AbbyBot command full list!</p>
     </div>
 </section>
 

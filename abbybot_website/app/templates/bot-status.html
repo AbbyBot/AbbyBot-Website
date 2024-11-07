@@ -3,53 +3,67 @@
 {% block title %}Bot status - AbbyBot{% endblock %}
 
 {% block extra_css %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/bot-status.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/bot-status.css') }}">
 {% endblock %}
 
 {% block content %}
 <section class="hero-section d-flex align-items-center justify-content-center text-light">
-    <div class="container-fluid text-center d-flex flex-column align-items-center">
+    <div class="container text-center">
         <div class="text-content" data-aos="fade-right">
-            <h1 class="display-4">Status of AbbyBot <i class="fa-solid fa-power-off"></i></h1>
+            <h1 class="display-4 abbybot-title">AbbyBot Status</h1>
+            <img src="{{ url_for('static', filename='img/emotes/abbybot_laptop.png') }}" alt="">
         </div>
-
-        <div class="col-md-6 col-lg-4 mb-4 d-flex flex-column align-items-center" data-aos="zoom-in" data-aos-delay="300">
-            <div class="position-relative">
-                <img src="{{ url_for('static', filename='img/icon/abbybot_logo.png') }}" alt="AbbyBot" class="profile-image rounded-circle">
-                <div class="status-indicator text-danger" id="status-indicator"></div>
-            </div>
-        </div>
-
-        <div class="text-content mb-4" data-aos="fade-up" data-aos-delay="300">
-            <p class="lead"> Check the status of AbbyBot in real time! </p>
-        </div>
+        <p class="subtitles" data-aos="fade-up" data-aos-delay="200">Check the status of AbbyBot in real time!</p>
     </div>
 </section>
 
 <section class="status-section py-5">
     <div class="container">
-        <div class="row justify-content-center text-center">
-            <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up">
-                <div class="status-card p-4 bg-dark text-light rounded">
+        <div class="row">
+            <div class="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="status-card bg-dark text-light p-4 rounded">
                     <h3 class="mb-3">Bot Status</h3>
-                    <p class="mb-2">
-                        <i class="fa-solid fa-heart-pulse text-danger fa-2x" id="bot-status-icon"></i> 
-                        <span id="bot-status-text" class="ms-2">Loading...</span>
-                    </p>
-                    <small class="text-muted">Version: <span id="bot-version">Loading...</span></small>
-                    <p class="text-muted mt-2">Last Updated: <span id="last-updated">Loading...</span></p>                    
+                    <div class="d-flex align-items-center justify-content-center">
+                        <i id="bot-status-icon" class="fa-solid fa-heart-pulse fa-2x"></i>
+                        <span id="bot-status-text" class="ms-3">Loading...</span>
+                    </div>
+                    <p class="text-muted mt-3">Version: <span id="bot-version">Loading...</span></p>
+                    <p class="text-muted">Last Updated: <span id="last-updated">Loading...</span></p>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="200">
-                <div class="status-card p-4 bg-dark text-light rounded">
+
+            <div class="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="400">
+                <div class="status-card bg-dark text-light p-4 rounded">
                     <h3 class="mb-3">Servers Connected</h3>
-                    <p class="display-4 mb-0" id="server-count">Loading...</p>
-                    <small class="text-muted">Active Discord Servers</small>
+                    <p class="display-4" id="server-count">Loading...</p>
+                    <p class="text-muted">Active Discord Servers</p>
                 </div>
             </div>
-            <div class="aditional-text" data-aos="fade-up" data-aos-delay="300">
-                <p>Keeping AbbyBot running as fast as possible is our priority, and so is your satisfaction when using it!</p>
-            </div>
+        </div>
+
+        <div class="activity-log bg-dark text-light p-4 rounded" data-aos="fade-up" data-aos-delay="600">
+            <h3 class="mb-3">Recent Activity</h3>
+            <p class="text-light">As long as the bot remains in the development phase, no information will be shown here.</p>
+            <table class="table table-dark table-striped">
+            <thead>
+                <tr>
+                <th>Status</th>
+                <th>Started At</th>
+                <th>Error Details</th>
+                </tr>
+            </thead>
+            <tbody id="activity-log">
+                <tr>
+                <td>Loading...</td>
+                <td>Loading...</td>
+                <td>Loading...</td>
+                </tr>
+            </tbody>
+            </table>
+        </div>
+
+        <div class="text-center mt-4 text-light" data-aos="fade-up" data-aos-delay="800">
+            <p>Keeping AbbyBot running as fast as possible is our priority, and so is your satisfaction when using it!</p>
         </div>
     </div>
 </section>
@@ -57,25 +71,32 @@
 
 {% block extra_js %}
 <script>
-
 async function updateBotStatus() {
     try {
         const response = await fetch("{{ url_for('main.status_data') }}");
         if (response.ok) {
             const data = await response.json();
             
-            // Update the bot's status on the page
+            // Update bot status
             document.getElementById('bot-status-text').innerText = data.status === "online" ? "Online" : "Offline";
             document.getElementById('bot-status-icon').classList.toggle('text-success', data.status === "online");
             document.getElementById('bot-status-icon').classList.toggle('text-danger', data.status !== "online");
             document.getElementById('bot-version').innerText = `${data.version} "${data.version_code}"`;
-            document.getElementById('server-count').innerText = data.server_count;
             document.getElementById('last-updated').innerText = data.last_updated;
+            document.getElementById('server-count').innerText = data.server_count;
 
-            // Update indicator status directly
-            const statusIndicator = document.getElementById('status-indicator');
-            statusIndicator.classList.remove('text-success', 'text-danger'); 
-            statusIndicator.classList.add(data.status === "online" ? 'text-success' : 'text-danger');
+            // Populate Activity Log
+            const activityLog = document.getElementById('activity-log');
+            activityLog.innerHTML = ""; // Clear current entries
+            data.activity.forEach(activity => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${activity.status}</td>
+                    <td>${activity.started_at}</td>
+                    <td>${activity.error_details || "-"}</td>
+                `;
+                activityLog.appendChild(row);
+            });
         } else {
             console.error("Error fetching bot status data");
         }
@@ -84,9 +105,7 @@ async function updateBotStatus() {
     }
 }
 
-
 updateBotStatus();
 setInterval(updateBotStatus, 5000);
-
 </script>
 {% endblock %}

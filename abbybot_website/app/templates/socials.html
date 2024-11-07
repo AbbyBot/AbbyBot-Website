@@ -7,17 +7,16 @@
 {% endblock %}
 
 {% block content %}
-<section class="hero-section hero-socials d-flex align-items-center justify-content-center text-light">
+<section class="hero-section d-flex align-items-center justify-content-center text-light">
     <div class="container text-center">
         <div class="text-content" data-aos="fade-right">
-            <h1>Connect with AbbyBot <i class="fa-solid fa-comments"></i></h1>
+            <h1 class="display-4 abbybot-title">Connect with AbbyBot</h1>
+            <img src="{{ url_for('static', filename='img/emotes/abbybot_heart.png') }}" alt="abbybot_heart">
         </div>
-
-        <div class="text-content mb-4" data-aos="fade-up" data-aos-delay="300">
-            <p class="lead">Stay updated with the latest news, projects, and announcements. Follow us on our social media channels!</p>
-        </div>
+        <p class="subtitles" data-aos="fade-up" data-aos-delay="200">You can see our social and related networks below! good luck.</p>
     </div>
 </section>
+
 
 <div class="container mt-5">
     <div class="row justify-content-center">
@@ -56,7 +55,4 @@
     </div>
 </div>
 
-<div class="container mt-5 mb-5 text-center" data-aos="fade-up" data-aos-delay="400">
-    <a href="{{ url_for('main.index') }}" class="btn btn-secondary btn-lg" role="button">Return to Home</a>
-</div>
 {% endblock %}

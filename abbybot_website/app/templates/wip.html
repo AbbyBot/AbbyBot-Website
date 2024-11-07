@@ -8,22 +8,12 @@
 
 {% block content %}
 <section class="hero-section d-flex align-items-center justify-content-center text-light">
-    <div class="container-fluid text-center d-flex flex-column align-items-center">
+    <div class="container text-center">
         <div class="text-content" data-aos="fade-right">
-            <h1 class="title"> Work In Progress</h1>
+            <h1 class="display-4 abbybot-title">Work In Progress</h1>
+            <img src="{{ url_for('static', filename='img/emotes/abbybot_think.png') }}" alt="abbybot_think">
         </div>
-        <div data-aos="fade-right">
-            <img src="{{ url_for('static', filename='img/emotes/abbybot_laptop.png') }}" alt="" class="emote-image">
-        </div>
-        <div class="text-content mb-4" data-aos="fade-up" data-aos-delay="300">
-            <p class="lead">This section is currently under development. We are working hard to bring you new and exciting content soon. Stay tuned!</p>
-        </div>
-
-        <div data-aos="fade-up" data-aos-delay="600">
-            <a href="/" class="btn btn-premium me-2"><i class="fa-solid fa-house me-2"></i> Go Home</a>
-        </div>
-        
-
+        <p class="subtitles" data-aos="fade-up" data-aos-delay="200">We are working on that section, come back soon!</p>
     </div>
 </section>
 {% endblock %}

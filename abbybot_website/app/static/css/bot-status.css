@@ -1,31 +1,12 @@
-/* General style for profile image */
-.profile-image {
-    width: 220px;
-    height: 220px;
-    object-fit: cover;
-    border-radius: 50%; 
-    position: relative;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5), 0 0 10px rgba(0, 0, 0, 0.2);
+/* General style for hero section */
+.hero-section {
+    background-color: #f56b2a; /* Adjust color to match your theme */
+    padding: 3rem 1rem;
+    text-align: center;
 }
 
-/* Status indicator with shadow */
-.status-indicator {
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    position: absolute;
-    bottom: 5px;
-    right: 10px;
-    transition: background-color 0.3s ease;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5), 0 0 10px rgba(0, 0, 0, 0.2);
-}
-
-.status-indicator.text-success {
-    background-color: #28a745; 
-}
-
-.status-indicator.text-danger {
-    background-color: #dc3545; 
+.status-section {
+    background-color: #333;
 }
 
 /* Style for cards */
@@ -38,59 +19,33 @@
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
 
-.status-card h3 {
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    color: #fff;
-}
-
-.aditional-text{
-    color: white;
-}
-
-.status-card p {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #ddd;
-}
-
-.status-card small {
-    font-size: 0.9rem;
-    color: #aaa;
-}
-
-/* Bot status icons */
-#bot-status-icon,
-#heart-icon {
+/* Bot status icon */
+#bot-status-icon {
+    color: #dc3545; /* Default to offline (red) */
     transition: color 0.3s ease;
 }
 
-/* Responsive styling for smaller screens */
+/* Activity Log */
+.activity-log {
+    margin-top: 2rem;
+}
+
+.activity-log table {
+    margin-top: 1rem;
+}
+
+/* Online/Offline Indicator */
+.text-success {
+    color: #28a745 !important;
+}
+
+.text-danger {
+    color: #dc3545 !important;
+}
+
+/* Responsive adjustments */
 @media (max-width: 768px) {
-    .hero-section {
-        flex-direction: column;
-        text-align: center;
-        padding: 3rem 1rem; 
-        min-height: 55vh; 
-    }
-
-    .profile-image {
-        width: 140px; 
-        height: 140px;
-    }
-
-    .hero-section .text-content h1 {
-        font-size: 2.4rem; 
-        line-height: 1.2; 
-        margin-bottom: 0.5rem; 
-    }
-
-    .hero-section .text-content p {
-        font-size: 1.1rem; 
-        margin-top: 0.5rem; 
-    }
-
-    .hero-section .text-content {
-        margin-top: 1rem; 
+    .hero-section h1 {
+        font-size: 2rem;
     }
 }

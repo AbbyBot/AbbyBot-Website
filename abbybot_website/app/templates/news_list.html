@@ -8,13 +8,12 @@
 
 {% block content %}
 <section class="hero-section d-flex align-items-center justify-content-center text-light">
-    <div class="container-fluid text-center d-flex flex-column align-items-center">
+    <div class="container text-center">
         <div class="text-content" data-aos="fade-right">
-            <h1>AbbyBot News <i class="fa-regular fa-newspaper me-2"></i></h1>
+            <h1 class="display-4 abbybot-title">AbbyBot News</h1>
+            <img src="{{ url_for('static', filename='img/emotes/abbybot_angry.png') }}" alt="abbybot_angry">
         </div>
-        <div class="text-content mb-4" data-aos="fade-up" data-aos-delay="300">
-            <p class="lead"> Discover the latest updates and key developments on AbbyBot! Stay informed about all the exciting news surrounding the project below. </p>
-        </div>
+        <p class="subtitles" data-aos="fade-up" data-aos-delay="200">Read our latest progress and news about the project!</p>
     </div>
 </section>
 

@@ -10,26 +10,26 @@
 <section class="hero-section d-flex align-items-center justify-content-center text-light">
     <div class="container-fluid text-center d-flex flex-column align-items-center">
         <div class="text-content" data-aos="fade-right">
-            <h1 class="display-4">Welcome to AbbyBot ✨</h1>
+            <h1 class="display-4 abbybot-title">Welcome to AbbyBot✨</h1>
         </div>
         <div class="image-content mb-4" data-aos="zoom-in" data-aos-delay="300">
             <img src="{{ url_for('static', filename='img/icon/abbybot_logo.png') }}" alt="AbbyBot" class="profile-image rounded-circle">
         </div>
         <div class="text-content mb-4" data-aos="fade-up" data-aos-delay="600">
-            <p class="lead"><i class="fab fa-discord nav-icon me-2"></i> 
-            {% set abbybot_titles = [
-                "Your Discord Ally!",
-                "The blonde girl who will take care of your Discord Server!",
-                "The Bot that no one expected but everyone needed!",
-                "The Bot that will make your server a better place!",
-                "Your Server Guardian!",
-                "The Guardian of Guilds!",
-                "Your best friend in Discord!",
-                "The endless seeker of knowledge!",
-                "The final piece of your server!",
-                "The light in the darkness of your server!",
+            <p class="subtitles">
+            {% set abbybot_subtitles = [
+                "\"Your Discord Ally\"",
+                "\"The blonde girl who will take care of your Discord Server\"",
+                "\"The Bot that no one expected but everyone needed\"",
+                "\"The Bot that will make your server a better place\"",
+                "\"Your Server Guardian\"",
+                "\"The Guardian of Guilds\"",
+                "\"Your best friend in Discord\"",
+                "\"The endless seeker of knowledge\"",
+                "\"The final piece of your server\"",
+                "\"The light in the darkness of your server\"",
             ] %}
-            {{ abbybot_titles|random }}</p>
+            {{ abbybot_subtitles|random|safe }}</p>
         </div>
     </div>
 </section>
@@ -359,14 +359,15 @@
 
 <!-- Modal -->
 <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="successModalLabel">Success!</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
-          Your wishlist submission has been received successfully! Thank you for your interest in AbbyBot.
+        <div class="modal-body text-center">
+            <img src="{{ url_for('static', filename='img/emotes/abbybot_party.png') }}" alt="AbbyBot" class="img-fluid mb-3 modal-image">
+            <p class="lead">You have successfully added AbbyBot to your wishlist! see you very soon!</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-success" data-bs-dismiss="modal">Close</button>

@@ -34,6 +34,7 @@
     <div class="row">
         <div class="col-12" data-aos="fade-down">
             <h1 class="mb-4 news-title additional-info">{{ news.title }}</h1>
+            <h4>{{ news.category }}</h4>
         </div>
     </div>
     <div class="row">
@@ -48,9 +49,6 @@
             <div class="news-content additional-info">
                 {{ news.content | safe }}
             </div>
-        </div>
-        <div class="col-lg-4 sidebar" data-aos="fade-left" data-aos-delay="200">
-            <h4>{{ news.category }}</h4>
         </div>
     </div>
     <div class="row mt-5 mb-5">

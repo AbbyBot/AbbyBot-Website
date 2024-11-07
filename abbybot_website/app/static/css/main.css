@@ -13,7 +13,7 @@ a {
   }  
 
 .hero-section {
-    background: linear-gradient(180deg, #b45428 0%, #a85733 25%, #9e5a37 60%, #b65930 100%);
+    background: linear-gradient(180deg, #c1683a 0%, #b2613d 35%, #a6593f 70%, #8e4f3b 100%);
     min-height: 60vh;
     padding: 3rem 1rem; 
     display: flex;
@@ -53,8 +53,18 @@ a {
     color: black;
 }
 
+.btn-premium:hover {
+    background-color: #e6c84f;
+    color: black;
+}
+
 .btn-add {
     background-color: #4584b6;
+    color: black;
+}
+
+.btn-add:hover {
+    background-color: #3d76a3;
     color: black;
 }
 
@@ -119,6 +129,14 @@ a {
     color: white;
 }
 
+.abbybot-title {
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+.subtitles {
+    font-family: "Jersey 25", sans-serif !important;
+    font-size: 1.5rem !important;
+}
 
 @media (max-width: 768px) {
     .navbar-brand {
