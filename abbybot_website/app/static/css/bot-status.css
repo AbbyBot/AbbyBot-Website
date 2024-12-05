@@ -1,0 +1,51 @@
+/* General style for hero section */
+.hero-section {
+    background-color: #f56b2a; /* Adjust color to match your theme */
+    padding: 3rem 1rem;
+    text-align: center;
+}
+
+.status-section {
+    background-color: #333;
+}
+
+/* Style for cards */
+.status-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.status-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Bot status icon */
+#bot-status-icon {
+    color: #dc3545; /* Default to offline (red) */
+    transition: color 0.3s ease;
+}
+
+/* Activity Log */
+.activity-log {
+    margin-top: 2rem;
+}
+
+.activity-log table {
+    margin-top: 1rem;
+}
+
+/* Online/Offline Indicator */
+.text-success {
+    color: #28a745 !important;
+}
+
+.text-danger {
+    color: #dc3545 !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+}

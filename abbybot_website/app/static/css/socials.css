@@ -1,0 +1,76 @@
+.hero-socials h1 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 2.5rem;
+}
+
+.hero-socials p {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 1.2rem;
+}
+
+.social-card {
+    border: none;
+    border-radius: 12px;
+    background-color: #2c2f33;
+    color: white;
+    transition: transform 0.3s ease-in-out;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.social-card:hover {
+    transform: translateY(-10px);
+}
+
+.social-card .social-icon {
+    font-size: 3rem;
+    color: white;
+}
+
+.instagram-card .social-icon {
+    color: #e1306c;
+}
+
+.github-card .social-icon {
+    color: #ffffff; 
+}
+
+.btn-github {
+    background-color: #ffffff; 
+    border: none;
+    color: white;
+}
+
+.btn-github:hover {
+    background-color: #a5a5a5; 
+}
+
+.website-card .social-icon {
+    color: #4d4dff;
+}
+
+.social-card .btn {
+    border-radius: 25px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.btn-instagram {
+    background-color: #e1306c;
+    border: none;
+    color: white;
+}
+
+.btn-github {
+    background-color: #333;
+    border: none;
+    color: white;
+}
+
+.btn-website {
+    background-color: #4d4dff;
+    border: none;
+    color: white;
+}

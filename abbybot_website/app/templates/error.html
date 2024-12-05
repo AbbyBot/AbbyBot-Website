@@ -1,0 +1,20 @@
+{% extends "base/base.html" %}
+
+{% block title %}Error - AbbyBot{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/error.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="error-section">
+    <div class="error-card" data-aos="fade-up" data-aos-delay="100">
+        <h1 data-aos="zoom-in" data-aos-delay="200" class="abbybot-title">
+            <i class="fa-solid fa-exclamation-circle"></i> Error {{ error_code }}
+        </h1>
+        <img src="{{ url_for('static', filename='img/emotes/abbybot_tired.png') }}" alt="Error" class="error-image" data-aos="zoom-in" data-aos-delay="300">
+        <p data-aos="fade-up" data-aos-delay="300" class="subtitles">{{ message }}</p>
+        <a href="/" class="btn btn-add" data-aos="fade-up" data-aos-delay="400"><i class="fa-solid fa-house me-2"></i> Go back to home</a>
+    </div>
+</section>
+{% endblock %}

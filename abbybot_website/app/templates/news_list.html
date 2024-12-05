@@ -1,0 +1,49 @@
+{% extends "base/base.html" %}
+
+{% block title %}News List - AbbyBot{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/news.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="hero-section d-flex align-items-center justify-content-center text-light">
+    <div class="container text-center">
+        <div class="text-content" data-aos="fade-right">
+            <h1 class="display-4 abbybot-title">AbbyBot News</h1>
+            <img src="{{ url_for('static', filename='img/emotes/abbybot_angry.png') }}" alt="abbybot_angry">
+        </div>
+        <p class="subtitles" data-aos="fade-up" data-aos-delay="200">Read our latest progress and news about the project!</p>
+    </div>
+</section>
+
+<!-- Main News List -->
+<div class="container-fluid mt-5">
+    <h1 class="mb-4 additional-info text-center">Latest News</h1>
+    <div class="news-list row">
+        {% if news %}
+            {% for item in news %}
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4" data-aos="fade-up">
+                <div class="card h-100">
+                    <div class="news-badge">{{ item.category }}</div> 
+                    <img src="{{ item.image_url or url_for('static', filename='img/AbbyBot_Art/default.png') }}" 
+                         class="card-img-top news-list-image" 
+                         alt="{{ item.title }}"onerror="this.onerror=null; this.src='{{ url_for('static', filename='img/AbbyBot_Art/default.png') }}';">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ item.title }}</h5>
+                        <p class="card-text">{{ item.description[:150] }}...</p>
+                        <a href="{{ url_for('main.news_detail', slug=item.slug) }}" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="col-12 text-center mt-5 no-news-container">
+                <h3 class="no-news-title">No news available at the moment. Check back later!</h3>
+                <p class="lead no-news-subtitle">Stay tuned for updates and announcements about AbbyBot.</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

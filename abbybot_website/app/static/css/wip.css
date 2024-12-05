@@ -1,0 +1,18 @@
+.hero-section {
+    padding: 50px 0;
+}
+
+.image-content {
+    margin: 20px 0;
+}
+
+.emote-image {
+    max-width: 100%;
+    height: auto;
+}
+
+.lead {
+    font-size: 1.25rem;
+    margin-top: 20px;
+}
+

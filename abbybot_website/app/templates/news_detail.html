@@ -1,0 +1,60 @@
+{% extends "base/base.html" %}
+
+{% block title %}{{ news.title }} - AbbyBot{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/news.css') }}">
+{% endblock %}
+
+
+{% block meta %}
+<!-- Default Meta Tags -->
+<meta name="description" content="{{ news.description[:160] }}">
+<meta name="keywords" content="AbbyBot, Discord, Bot, Commands, Privileges, Dashboard, Status, News, Socials">
+<meta name="author" content="ReyesAndFriends.cl Team">
+
+<!-- Open Graph Meta Tags -->
+<meta property="og:title" content="AbbyBot - {{ news.title }}">
+<meta property="og:description" content="{{ news.description[:160] }}">
+<meta property="og:type" content="article">
+<meta property="og:url" content="{{ url_for('main.news_detail', slug=news.slug, _external=True) }}">
+<meta property="og:image" content="{{ news.image_url or url_for('static', filename='img/AbbyBot_Art/default.png', _external=True) }}">
+
+<!-- Twitter Meta Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AbbyBot - {{ news.title }}">
+<meta name="twitter:description" content="{{ news.description[:160] }}">
+<meta name="twitter:image" content="{{ news.image_url or url_for('static', filename='img/AbbyBot_Art/default.png', _external=True) }}">
+<meta name="twitter:site" content="@AbbyBotProject">
+{% endblock %}
+
+
+{% block content %}
+<div class="container mt-5 news-detail-container additional-info">
+    <div class="row">
+        <div class="col-12" data-aos="fade-down">
+            <h1 class="mb-4 news-title additional-info">{{ news.title }}</h1>
+            <h4>{{ news.category }}</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8" data-aos="fade-up" data-aos-delay="100">
+            <div class="text-center mb-4">
+                <img src="{{ news.image_url or url_for('static', filename='img/AbbyBot_Art/default.png') }}" 
+                     class="img-fluid news-image additional-info" 
+                     alt="{{ news.title }}"
+                     style="max-width: 75%; height: auto;"onerror="this.onerror=null; this.src='{{ url_for('static', filename='img/AbbyBot_Art/default.png') }}';">
+            </div>
+            <p class="text-muted news-date additional-info">{{ news.created_at.strftime('%B %d, %Y') }}</p>
+            <div class="news-content additional-info">
+                {{ news.content | safe }}
+            </div>
+        </div>
+    </div>
+    <div class="row mt-5 mb-5">
+        <div class="col-12 text-center">
+            <a href="{{ url_for('main.news_list') }}" class="btn btn-secondary btn-lg" role="button">Back to News</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

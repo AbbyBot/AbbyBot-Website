@@ -1,0 +1,40 @@
+{% extends "base/base.html" %}
+
+{% block title %}Privileges - AbbyBot{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/abbybot-privileges.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="hero-section d-flex align-items-center justify-content-center text-light">
+    <div class="container-fluid text-center d-flex flex-column align-items-center">
+        <div class="text-content" data-aos="fade-right">
+            <h1 class="display-4">AbbyBot Privileges <i class="fa-solid fa-face-grin-stars"></i></h1>
+        </div>
+        <div class="text-content mb-4" data-aos="fade-up" data-aos-delay="300">
+            <p class="lead">Discover the different privilege levels and their exclusive benefits!</p>
+        </div>
+    </div>
+</section>
+
+<section class="privileges-section">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            {% for privilege in privileges %}
+            <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up">
+                <div class="privilege-card">
+                    <h3>{{ privilege.privilege_name }}</h3>
+                    <p> {{ privilege.rol_meaning }}</p>
+                    <p><strong>How to Get:</strong> {{ privilege.how_to_get }}</p>
+                    <p><strong>XP Multiplier:</strong> {{ privilege.xp_multiplier }}</p>
+                    <p><strong>Exclusive Access:</strong> {{ privilege.exclusive_access }}</p>
+                    <small>Privilege level: {{ privilege.value }}</small>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}
