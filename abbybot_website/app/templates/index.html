@@ -9,27 +9,29 @@
 {% block content %}
 <section class="hero-section d-flex align-items-center justify-content-center text-light">
     <div class="container-fluid text-center d-flex flex-column align-items-center">
-        <div class="text-content" data-aos="fade-right">
-            <h1 class="display-4 abbybot-title">Welcome to AbbyBot✨</h1>
-        </div>
-        <div class="image-content mb-4" data-aos="zoom-in" data-aos-delay="300">
-            <img src="{{ url_for('static', filename='img/icon/abbybot_logo.png') }}" alt="AbbyBot" class="profile-image rounded-circle">
-        </div>
-        <div class="text-content mb-4" data-aos="fade-up" data-aos-delay="600">
-            <p class="subtitles">
-            {% set abbybot_subtitles = [
-                "\"Your Discord Ally\"",
-                "\"The blonde girl who will take care of your Discord Server\"",
-                "\"The Bot that no one expected but everyone needed\"",
-                "\"The Bot that will make your server a better place\"",
-                "\"Your Server Guardian\"",
-                "\"The Guardian of Guilds\"",
-                "\"Your best friend in Discord\"",
-                "\"The endless seeker of knowledge\"",
-                "\"The final piece of your server\"",
-                "\"The light in the darkness of your server\"",
-            ] %}
-            {{ abbybot_subtitles|random|safe }}</p>
+        <div class="row align-items-center">
+            <div class="col-md-6 text-content" data-aos="fade-right">
+                <h1 class="display-4 abbybot-title">Welcome to AbbyBot✨</h1>
+                <div class="text-content mb-4" data-aos="fade-up" data-aos-delay="600">
+                    <p class="subtitles">
+                    {% set abbybot_subtitles = [
+                        "\"Your Discord Ally\"",
+                        "\"The blonde girl who will take care of your Discord Server\"",
+                        "\"The Bot that no one expected but everyone needed\"",
+                        "\"The Bot that will make your server a better place\"",
+                        "\"Your Server Guardian\"",
+                        "\"The Guardian of Guilds\"",
+                        "\"Your best friend in Discord\"",
+                        "\"The endless seeker of knowledge\"",
+                        "\"The final piece of your server\"",
+                        "\"The light in the darkness of your server\"",
+                    ] %}
+                    {{ abbybot_subtitles|random|safe }}</p>
+                </div>
+            </div>
+            <div class="col-md-6 image-content mb-4" data-aos="zoom-in" data-aos-delay="300">
+                <img src="{{ url_for('static', filename='img/icon/abbybot_logo.png') }}" alt="AbbyBot" class="profile-image rounded-circle" style="width: 300px; height: 300px;">
+            </div>
         </div>
     </div>
 </section>
