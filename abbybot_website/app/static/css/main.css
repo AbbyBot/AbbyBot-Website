@@ -133,10 +133,6 @@ a {
     font-family: 'Montserrat', sans-serif !important;
 }
 
-.subtitles {
-    font-family: "Jersey 25", sans-serif !important;
-    font-size: 1.5rem !important;
-}
 
 @media (max-width: 768px) {
     .navbar-brand {

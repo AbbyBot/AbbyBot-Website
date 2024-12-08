@@ -11,26 +11,34 @@
     <div class="container-fluid text-center d-flex flex-column align-items-center">
         <div class="row align-items-center">
             <div class="col-md-6 text-content" data-aos="fade-right">
-                <h1 class="display-4 abbybot-title">Welcome to AbbyBot✨</h1>
+                <h1 class="display-5 abbybot-title">Your best ally and friend on your Discord Server✨</h1>
                 <div class="text-content mb-4" data-aos="fade-up" data-aos-delay="600">
                     <p class="subtitles">
                     {% set abbybot_subtitles = [
-                        "\"Your Discord Ally\"",
-                        "\"The blonde girl who will take care of your Discord Server\"",
-                        "\"The Bot that no one expected but everyone needed\"",
-                        "\"The Bot that will make your server a better place\"",
-                        "\"Your Server Guardian\"",
-                        "\"The Guardian of Guilds\"",
-                        "\"Your best friend in Discord\"",
-                        "\"The endless seeker of knowledge\"",
-                        "\"The final piece of your server\"",
-                        "\"The light in the darkness of your server\"",
+                        "\"Admin tools, XP leveling, minigames, and more!\"",
+                        "\"Automated moderation, multi-language support, and fun features!\"",
+                        "\"Experience seamless server management and entertainment!\"",
+                        "\"Your ultimate Discord companion with endless possibilities!\"",
+                        "\"Enhance engagement with dynamic leveling and rewards!\"",
+                        "\"Join the future of Discord bots with AbbyBot!\"",
+                        "\"Empower your server with advanced features and tools!\"",
+                        "\"The all-in-one solution for your Discord needs!\"",
+                        "\"Discover the magic of AbbyBot and transform your server!\"",
+                        "\"Unleash the full potential of your Discord community!\"",
                     ] %}
                     {{ abbybot_subtitles|random|safe }}</p>
                 </div>
+                <div class="button-group mt-4" data-aos="fade-up" data-aos-delay="800">
+                    <a href="/wishlist" class="btn btn-success btn-lg me-3">
+                        <i class="fa-solid fa-address-book me-2"></i> Add to Wishlist
+                    </a>
+                    <a href="#overview-section" class="btn btn-outline-light btn-lg">
+                        <i class="fa-solid fa-search me-2"></i> Discover AbbyBot
+                    </a>
+                </div>
             </div>
             <div class="col-md-6 image-content mb-4" data-aos="zoom-in" data-aos-delay="300">
-                <img src="{{ url_for('static', filename='img/icon/abbybot_logo.png') }}" alt="AbbyBot" class="profile-image rounded-circle" style="width: 300px; height: 300px;">
+                <img src="{{ url_for('static', filename='img/icon/abbybot_logo.png') }}" alt="AbbyBot" class="profile-image rounded-circle" style="width: 300px; height: 300px;" data-bs-toggle="tooltip" data-bs-placement="top" title="Hello world!">
             </div>
         </div>
     </div>
@@ -101,7 +109,7 @@
             </div>
 
             <div class="col-md-6" data-aos="fade-right">
-                <img style="width: 256px;" src="{{ url_for('static', filename='img/overview/abbybot_overview.png') }}" alt="Overview Image" class="img-fluid rounded">
+                <img style="width: 256px;" src="{{ url_for('static', filename='img/overview/abbybot_overview.png') }}" alt="Overview Image" class="img-fluid rounded" data-bs-toggle="tooltip" data-bs-placement="right" title="Would you like to be able to manage your Discord Server better? would you like to encourage your members? If you give me the chance I will help you <3">
             </div>
             
         </div>
@@ -387,5 +395,11 @@
         var myModal = new bootstrap.Modal(document.getElementById('successModal'));
         myModal.show();
     }
+
+    // Initialize Bootstrap tooltips
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
 </script>
 {% endblock %}
