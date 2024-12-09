@@ -67,7 +67,15 @@ def status_data():
 
 @main_bp.route('/status')
 def bot_status():
-    return render_template('bot-status.html')
+    try:
+        response = execute_query("asuka", "SELECT 1")
+        if response:
+            return render_template('bot-status.html')
+        else:
+            raise mysql.connector.Error("Failed to ping database")
+    except mysql.connector.Error as err:
+        error_message = f"At this time we are unable to verify the current status of AbbyBot. Please come back later."
+        return render_template('bot-status.html', error_message=error_message)
 
 @main_bp.route('/abbybot-privileges')
 def abbybot_privileges():

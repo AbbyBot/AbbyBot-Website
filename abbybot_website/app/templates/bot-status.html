@@ -17,6 +17,13 @@
     </div>
 </section>
 
+{% if error_message %}
+<div class="alert bg-danger text-center mx-auto mt-4" role="alert" style="width: 90%;">
+    <h2 class="text-light">Error checking AbbyBot Status</h2>
+    <img src="{{ url_for('static', filename='img/emotes/abbybot_tired.png') }}" alt="AbbyBot Sad" class="mb-2">
+    <p class="text-light mt-2">{{ error_message }}</p>
+</div>
+{% else %}
 <section class="status-section py-5">
     <div class="container">
         <div class="row">
@@ -67,6 +74,7 @@
         </div>
     </div>
 </section>
+{% endif %}
 {% endblock %}
 
 {% block extra_js %}
@@ -98,14 +106,15 @@ async function updateBotStatus() {
                 activityLog.appendChild(row);
             });
         } else {
-            console.error("Error fetching bot status data");
+            throw new Error("Failed to fetch status data");
         }
     } catch (error) {
         console.error("Error:", error);
+        document.getElementById('error-message').innerText = "Failed to load AbbyBot status. Please try again later.";
+        document.getElementById('error-alert').style.display = 'block';
     }
 }
 
 updateBotStatus();
-setInterval(updateBotStatus, 5000);
 </script>
 {% endblock %}
