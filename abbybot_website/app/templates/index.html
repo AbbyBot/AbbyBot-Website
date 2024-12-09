@@ -173,34 +173,17 @@
     </div>
 </section>
 
-<section class="additional-info py-5">
-    <div class="container text-center">
-        <h2>Join the AbbyBot Community</h2>
-        <p>Be a part of the AbbyBot community to receive updates, share ideas, and get involved in the development. Together, we can make AbbyBot better every day!</p>
-        
-        <div class="row justify-content-center mt-4">
-            <div class="col-md-4 mb-3">
-                <h4><i class="fa-solid fa-bullhorn me-2"></i> Community Updates</h4>
-                <p>Stay updated with the latest features, bug fixes, and announcements.</p>
-            </div>
-            <div class="col-md-4 mb-3">
-                <h4><i class="fa-solid fa-question-circle me-2"></i> Support & FAQ</h4>
-                <p>Get help from our support team or check the FAQ section for common questions.</p>
-            </div>
-            <div class="col-md-4 mb-3">
-                <h4><i class="fa-solid fa-hands-helping me-2"></i> Contribute</h4>
-                <p>Contribute to AbbyBot's development or donate to support our work!</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-
 <section id="stats-section" class="additional-info py-5">
     <div class="container text-center">
         <h2 class="mb-4" data-aos="fade-down">AbbyBot Usage Statistics</h2>
         <p class="lead mb-5" data-aos="fade-down" data-aos-delay="200">Discover the reach of AbbyBot across Discord servers and users.</p>
         
+        {% if error_message %}
+        <div class="alert bg-danger" role="alert">
+            <img src="{{ url_for('static', filename='img/emotes/abbybot_tired.png') }}" alt="Sad AbbyBot" data-bs-toggle="tooltip" data-bs-placement="right" title="an unexpected problem this section has been able to load correctly, we are sorry for the incident, we apologize.">
+            <h4 class="mt-3">{{ error_message }}</h4>
+        </div>
+        {% else %}
         <div class="row">
             <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="400">
                 <div class="stat-card bg-dark text-light p-4 rounded">
@@ -227,8 +210,32 @@
             </div>
                         
         </div>
+        {% endif %}
     </div>
 </section>
+
+<section class="additional-info py-5">
+    <div class="container text-center">
+        <h2>Join the AbbyBot Community</h2>
+        <p>Be a part of the AbbyBot community to receive updates, share ideas, and get involved in the development. Together, we can make AbbyBot better every day!</p>
+        
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-4 mb-3">
+                <h4><i class="fa-solid fa-bullhorn me-2"></i> Community Updates</h4>
+                <p>Stay updated with the latest features, bug fixes, and announcements.</p>
+            </div>
+            <div class="col-md-4 mb-3">
+                <h4><i class="fa-solid fa-question-circle me-2"></i> Support & FAQ</h4>
+                <p>Get help from our support team or check the FAQ section for common questions.</p>
+            </div>
+            <div class="col-md-4 mb-3">
+                <h4><i class="fa-solid fa-hands-helping me-2"></i> Contribute</h4>
+                <p>Contribute to AbbyBot's development or donate to support our work!</p>
+            </div>
+        </div>
+    </div>
+</section>
+
 
 <section class="privacy-section py-5">
     <div class="container text-center">

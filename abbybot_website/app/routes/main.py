@@ -28,11 +28,12 @@ def index():
         total_members = server_list[0]['full_members'] if server_list and server_list[0]['full_members'] is not None else "no data available"
         total_xp = server_list[0]['total_xp'] if server_list and server_list[0]['total_xp'] is not None else "no data available"
 
+        return render_template('index.html', server_count=server_count, total_members=total_members, total_xp=total_xp)
+
     except mysql.connector.Error as err:
         print(f"Error: {err}")
-        return render_template('error.html', message="Database connection failed.")
-
-    return render_template('index.html', server_count=server_count, total_members=total_members, total_xp=total_xp)
+        error_message = "We are currently unable to load the AbbyBot data. Please try again later."
+        return render_template('index.html', error_message=error_message)
 
 
 @main_bp.route('/status_data')
