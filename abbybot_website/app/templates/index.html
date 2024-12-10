@@ -1,6 +1,6 @@
 {% extends "base/base.html" %}
 
-{% block title %}Home - AbbyBot{% endblock %}
+{% block title %}AbbyBot - Your best ally and friend on your Discord Server ✨{% endblock %}
 
 {% block extra_css %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
@@ -366,7 +366,8 @@
             </div>
             
             <div class="col-md-4 text-center">
-                <img src="{{ url_for('static', filename='img/emotes/abbybot_heart.png') }}" alt="AbbyBot Emote">
+                <img src="{{ url_for('static', filename='img/emotes/abbybot_heart.png') }}" alt="AbbyBot Emote" data-bs-toggle="tooltip" data-bs-placement="right" title="
+                The Best Is Yet to Come!">
             </div>
         </div>
         
