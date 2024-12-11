@@ -3,49 +3,77 @@
 {% block title %}Commands - AbbyBot{% endblock %}
 
 {% block extra_css %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/commands.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/commands.css') }}">
 {% endblock %}
 
 {% block content %}
+
+{% set messages = [
+    "Discover all the amazing commands AbbyBot offers!",
+    "Check out the full list of AbbyBot commands!",
+    "Explore the commands and make the most out of AbbyBot!",
+    "Find the perfect command for your needs with AbbyBot!",
+    "Unlock the full potential of AbbyBot with these commands!"
+] %}
+
+{% set random_message = messages | random %}
+
 <section class="hero-section d-flex align-items-center justify-content-center text-light">
-    <div class="container text-center">
-        <div class="text-content" data-aos="fade-right">
-            <h1 class="display-4 abbybot-title">AbbyBot Commands</h1>
-            <img src="{{ url_for('static', filename='img/emotes/abbybot_tired.png') }}" alt="">
+    <div class="container-fluid text-center d-flex flex-column align-items-center">
+        <div class="row align-items-center">
+            <div class="col-md-6 text-content" data-aos="fade-right" data-aos-delay="300">
+                <h1 class="display-4 abbybot-title">Unleash the Power of AbbyBot Commands!</h1>
+                <p class="subtitles" data-aos="fade-up" data-aos-delay="400">{{ random_message }}</p>
+            </div>
+            <div class="col-md-6 d-flex align-items-center justify-content-center">
+                <img src="{{ url_for('static', filename='img/emotes/abbybot_party.png') }}" alt="" class="img-fluid" data-aos="zoom-in" data-aos-delay="600">
+            </div>
         </div>
-        <p class="subtitles" data-aos="fade-up" data-aos-delay="200">Watch AbbyBot command full list!</p>
     </div>
 </section>
 
 <div class="container mt-5">
     <div class="row">
-        <div class="col-12 command-list">
-            <h2 class="command-title">All Commands</h2>
-            <ul class="command-list">
-                {% for category, commands in [
-                    ('Control Commands', control_commands),
-                    ('Minigames Commands', minigames_commands),
-                    ('Music Commands', music_commands),
-                    ('Utility Commands', utility_commands),
-                    ('User Commands', user_commands),
-                    ('Image Commands', image_commands)
-                ] %}
-                    <h3 class="command-category-title">{{ category }}</h3>
-                    {% for command in commands %}
-                        <li class="command-item" data-aos="fade-right">
-                            <div class="command-header">
-                                <strong class="command-code">{{ command.command_code }}</strong> 
-                                <span class="command-usage">{{ command.usage }}</span>
-                            </div>
-                            <div class="command-description">{{ command.command_description }}</div>
-                        </li>
-                    {% endfor %}
+        {% if error_message %}
+        <div class="alert bg-danger d-flex align-items-center justify-content-center mb-5" role="alert" data-aos="fade-right">
+            <div class="me-3">
+                <h1 class="text-light">Error loading AbbyBot Commands</h1>
+                <h5 class="mt-3 text-light">{{ error_message }}</h5>
+            </div>
+            <img src="{{ url_for('static', filename='img/emotes/abbybot_think.png') }}" alt="Sad AbbyBot"
+                data-bs-toggle="tooltip" data-bs-placement="right"
+                title="An unexpected problem occurred, we are sorry for the incident.">
+        </div>
+        {% else %}
+        <div class="col-12 command-list mb-5">
+            <h2 class="command-title">AbbyBot command list!</h2>
+            <ul class="command-list mt-5">
+                {% for category in command_categories %}
+                <h3 class="command-category-title">{{ category.category_name }}</h3>
+                {% for command in category.commands %}
+                <li class="command-item" data-aos="fade-right">
+                    <div class="command-header">
+                        <strong class="command-code">{{ command.command_code }}</strong>
+                        <span class="command-usage">{{ command.usage }}</span>
+                    </div>
+                    <div class="command-description">{{ command.command_description }}</div>
+                </li>
+                {% endfor %}
                 {% endfor %}
             </ul>
         </div>
+        {% endif %}
     </div>
 </div>
 
-
 {% endblock %}
 
+{% block extra_js %}
+<script>
+    // Initialize Bootstrap tooltips
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+</script>
+{% endblock %}
