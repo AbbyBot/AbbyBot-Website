@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  web:
+    build: ./abbybot_website
+    command: gunicorn --bind 0.0.0.0:5000 wsgi:app
+    volumes:
+      - ./abbybot_website:/app
+    ports:
+      - "5000:5000"
+    env_file:
+      - ./abbybot_website/.env
+
+volumes:
+  db_data:
