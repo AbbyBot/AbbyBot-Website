@@ -255,6 +255,9 @@ def handle_generic_error(error):
     # Display the error message if available, or a generic message
     return render_template('error.html', message=str(error) if error else "An unexpected error occurred.", error_code=500), 500
 
+@main_bp.route('/dashboard')
+def dashboard():
+    return redirect(url_for('main.wip'))
 
 app.register_blueprint(main_bp)
 
