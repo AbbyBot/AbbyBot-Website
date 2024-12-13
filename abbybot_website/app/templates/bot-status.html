@@ -11,7 +11,7 @@
     <div class="container text-center">
         <div class="text-content" data-aos="fade-right">
             <h1 class="display-4 abbybot-title">AbbyBot Status</h1>
-            <img src="{{ url_for('static', filename='img/emotes/abbybot_laptop.png') }}" alt="">
+            <img src="{{ url_for('static', filename='img/emotes/abbybot_laptop.png') }}" alt="" data-bs-toggle="tooltip" data-bs-placement="right" title="Status status status...">
         </div>
         <p class="subtitles" data-aos="fade-up" data-aos-delay="200">Check the status of AbbyBot in real time!</p>
     </div>
@@ -120,6 +120,12 @@ async function updateBotStatus() {
         console.error("Error:", error);
     }
 }
+
+    // Initialize Bootstrap tooltips
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
 
 updateBotStatus();
 setInterval(updateBotStatus, 5000);
