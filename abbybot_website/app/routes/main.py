@@ -28,11 +28,12 @@ def index():
         total_members = server_list[0]['full_members'] if server_list and server_list[0]['full_members'] is not None else "no data available"
         total_xp = server_list[0]['total_xp'] if server_list and server_list[0]['total_xp'] is not None else "no data available"
 
+        return render_template('index.html', server_count=server_count, total_members=total_members, total_xp=total_xp)
+
     except mysql.connector.Error as err:
         print(f"Error: {err}")
-        return render_template('error.html', message="Database connection failed.")
-
-    return render_template('index.html', server_count=server_count, total_members=total_members, total_xp=total_xp)
+        error_message = "We are currently unable to load the AbbyBot data. Please try again later."
+        return render_template('index.html', error_message=error_message)
 
 
 @main_bp.route('/status_data')
@@ -66,7 +67,15 @@ def status_data():
 
 @main_bp.route('/status')
 def bot_status():
-    return render_template('bot-status.html')
+    try:
+        response = execute_query("asuka", "SELECT 1")
+        if response:
+            return render_template('bot-status.html')
+        else:
+            raise mysql.connector.Error("Failed to ping database")
+    except mysql.connector.Error as err:
+        error_message = f"At this time we are unable to verify the current status of AbbyBot. Please come back later."
+        return render_template('bot-status.html', error_message=error_message)
 
 @main_bp.route('/abbybot-privileges')
 def abbybot_privileges():
@@ -192,62 +201,45 @@ def bot_policies():
 
 @main_bp.route('/commands')
 def commands_site():
+    try:
+        # Fetch all categories and commands
+        categories_query = """
+            SELECT hc.id AS category_id, hc.category_name, h.command_code, h.command_description, h.usage
+            FROM help_categories hc
+            LEFT JOIN help h ON hc.id = h.category_id
+            WHERE h.language_id = 1
+            ORDER BY hc.id, h.command_code
+        """
+        results = execute_query("rei", categories_query)
 
-    # SQL queries by category
-    control_commands_query = """
-        SELECT `command_code`, `command_description`, `usage` 
-        FROM `help` 
-        WHERE `category_id` = (SELECT `id` FROM `help_categories` WHERE `category_name` = '/control') 
-          AND `language_id` = 1
-    """
+        if not results:
+            raise ValueError("No command data available")
 
-    minigames_commands_query = """
-        SELECT `command_code`, `command_description`, `usage` 
-        FROM `help` 
-        WHERE `category_id` = (SELECT `id` FROM `help_categories` WHERE `category_name` = '/minigames') 
-          AND `language_id` = 1
-    """
+        # Organize commands by category
+        command_categories = {}
+        for row in results:
+            category_id = row['category_id']
+            if category_id not in command_categories:
+                command_categories[category_id] = {
+                    'category_name': row['category_name'],
+                    'commands': []
+                }
+            command_categories[category_id]['commands'].append({
+                'command_code': row['command_code'],
+                'command_description': row['command_description'],
+                'usage': row['usage']
+            })
 
-    music_commands_query = """
-        SELECT `command_code`, `command_description`, `usage` 
-        FROM `help` 
-        WHERE `category_id` = (SELECT `id` FROM `help_categories` WHERE `category_name` = '/music') 
-          AND `language_id` = 1
-    """
+        # Convert to list for easier template rendering
+        command_categories = list(command_categories.values())
 
-    utility_commands_query = """
-        SELECT `command_code`, `command_description`, `usage` 
-        FROM `help` 
-        WHERE `category_id` = (SELECT `id` FROM `help_categories` WHERE `category_name` = '/utility') 
-          AND `language_id` = 1
-    """
+        return render_template('commands.html', command_categories=command_categories)
 
-    user_commands_query = """
-        SELECT `command_code`, `command_description`, `usage` 
-        FROM `help` 
-        WHERE `category_id` = (SELECT `id` FROM `help_categories` WHERE `category_name` = '/user') 
-          AND `language_id` = 1
-    """
+    except (mysql.connector.Error, ValueError) as err:
+        print(f"Error: {err}")
+        error_message = "We are currently unable to load the AbbyBot commands. Please try again later."
+        return render_template('commands.html', error_message=error_message)
 
-    image_commands_query = """
-        SELECT `command_code`, `command_description`, `usage` 
-        FROM `help` 
-        WHERE `category_id` = (SELECT `id` FROM `help_categories` WHERE `category_name` = '/image') 
-          AND `language_id` = 1
-    """
-
-    # Execute the queries
-    control_commands = execute_query("rei", control_commands_query)
-    minigames_commands = execute_query("rei", minigames_commands_query)
-    music_commands = execute_query("rei", music_commands_query)
-    utility_commands = execute_query("rei", utility_commands_query)
-    user_commands = execute_query("rei", user_commands_query)
-    image_commands = execute_query("rei", image_commands_query)
-
-    # Render the template and pass the results
-    return render_template(
-        'commands.html',control_commands=control_commands,minigames_commands=minigames_commands,music_commands=music_commands,utility_commands=utility_commands,user_commands=user_commands,image_commands=image_commands
-    )
 # Error handlers
 
 @main_bp.app_errorhandler(404)
@@ -263,6 +255,9 @@ def handle_generic_error(error):
     # Display the error message if available, or a generic message
     return render_template('error.html', message=str(error) if error else "An unexpected error occurred.", error_code=500), 500
 
+@main_bp.route('/dashboard')
+def dashboard():
+    return redirect(url_for('main.wip'))
 
 app.register_blueprint(main_bp)
 

@@ -1,5 +1,5 @@
-# config.py
+import os
 
 class Config:
-    SECRET_KEY = 'a_secret_key'
+    SECRET_KEY = os.getenv('SECRET_KEY')
     DEBUG = True

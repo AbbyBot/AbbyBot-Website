@@ -6,20 +6,22 @@ import os
 load_dotenv()
 
 # Consolidated DB connection function
-def get_db_connection(db_type="rei"):
+def get_db_connection(db_type="rei", timeout=5):
     if db_type == "rei":
         return mysql.connector.connect(
             host=os.getenv("REI_DB_HOST"),
             user=os.getenv("REI_DB_USER"),
             password=os.getenv("REI_DB_PASSWORD"),
-            database=os.getenv("REI_DB_NAME")
+            database=os.getenv("REI_DB_NAME"),
+            connection_timeout=timeout
         )
     elif db_type == "asuka":
         return mysql.connector.connect(
             host=os.getenv("ASUKA_DB_HOST"),
             user=os.getenv("ASUKA_DB_USER"),
             password=os.getenv("ASUKA_DB_PASSWORD"),
-            database=os.getenv("ASUKA_DB_NAME")
+            database=os.getenv("ASUKA_DB_NAME"),
+            connection_timeout=timeout
         )
 
 @contextmanager

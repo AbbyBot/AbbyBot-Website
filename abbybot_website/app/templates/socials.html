@@ -3,20 +3,41 @@
 {% block title %}Connect with Us - AbbyBot{% endblock %}
 
 {% block extra_css %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/socials.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/socials.css') }}">
 {% endblock %}
 
 {% block content %}
+
 <section class="hero-section d-flex align-items-center justify-content-center text-light">
-    <div class="container text-center">
-        <div class="text-content" data-aos="fade-right">
-            <h1 class="display-4 abbybot-title">Connect with AbbyBot</h1>
-            <img src="{{ url_for('static', filename='img/emotes/abbybot_heart.png') }}" alt="abbybot_heart">
+    <div class="container-fluid text-center d-flex flex-column align-items-center">
+        <div class="row align-items-center">
+            <div class="col-md-6 text-content" data-aos="fade-right">
+                <h1 class="display-5 abbybot-title">Connect with Us on Social Media✨</h1>
+                <div class="text-content mb-4" data-aos="fade-up" data-aos-delay="600">
+                    <p class="subtitles">
+                        {% set social_subtitles = [
+                        "\"Follow us on Instagram for updates and behind-the-scenes!\"",
+                        "\"Join our GitHub community and contribute to our projects!\"",
+                        "\"Connect with us on Discord for support and fun!\"",
+                        "\"Stay updated with our latest news and features!\"",
+                        "\"Be a part of our growing community on social media!\"",
+                        "\"Discover exclusive content and updates on our platforms!\"",
+                        "\"Engage with us and other users on our social channels!\"",
+                        "\"Get the latest news and updates by following us!\"",
+                        "\"Join the conversation and connect with us online!\"",
+                        "\"Stay connected with AbbyBot on all our social platforms!\"",
+                        ] %}
+                        {{ social_subtitles|random|safe }}</p>
+                </div>
+            </div>
+            <div class="col-md-6 image-content mb-4" data-aos="zoom-in" data-aos-delay="300">
+                <img src="{{ url_for('static', filename='img/emotes/abbybot_heart.png') }}" alt="AbbyBot"
+                    class="profile-image" style="width: 300px; height: 300px;" data-bs-toggle="tooltip"
+                    data-bs-placement="top" title="Connect with us!">
+            </div>
         </div>
-        <p class="subtitles" data-aos="fade-up" data-aos-delay="200">You can see our social and related networks below! good luck.</p>
     </div>
 </section>
-
 
 <div class="container mt-5">
     <div class="row justify-content-center">
@@ -26,11 +47,12 @@
                     <i class="fa-brands fa-instagram social-icon"></i>
                     <h5 class="card-title mt-3">Instagram</h5>
                     <p class="card-text">Follow us for updates, artwork, and behind-the-scenes.</p>
-                    <a href="https://instagram.com/abbybotproject" class="btn btn-instagram mt-auto" target="_blank">Follow Us</a>
+                    <a href="https://instagram.com/abbybotproject" class="btn btn-instagram mt-auto"
+                        target="_blank">Follow Us</a>
                 </div>
             </div>
         </div>
-        
+
         <div class="col-md-4 mb-4" data-aos="flip-left" data-aos-delay="200">
             <div class="card h-100 social-card github-card">
                 <div class="card-body d-flex flex-column align-items-center justify-content-center">
@@ -48,11 +70,49 @@
                     <i class="fa-brands fa-discord social-icon"></i>
                     <h5 class="card-title mt-3">AbbyBot Stuff & Dev</h5>
                     <p class="card-text">Check out our official Discord Server!</p>
-                    <a href="https://discord.gg/E7JceWrzvW" class="btn btn-website mt-auto" target="_blank">Join our server</a>
+                    <a href="https://discord.gg/E7JceWrzvW" class="btn btn-website mt-auto" target="_blank">Join our
+                        server</a>
                 </div>
             </div>
         </div>
+
+        <div class="col-md-4 mb-4" data-aos="flip-left" data-aos-delay="500">
+            <div class="card h-100 social-card instagram-widget-card">
+                <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                    <h5 class="card-title mt-3">Instagram Feed</h5>
+                    <p class="card-text">Check out our latest posts and updates on Instagram!</p>
+                    <!-- Instagram Widget -->
+                    <div style="width: 300px; height: 400px; overflow: hidden; border-radius: 8px;">
+                        <div class="elfsight-app-b0ff5983-3a34-4518-9246-33dbb4ff2ad6" style="width: 100%; height: 100%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4 mb-4" data-aos="flip-left" data-aos-delay="400">
+            <div class="card h-100 social-card discord-widget-card">
+                <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                    <h5 class="card-title mt-3">Discord Community</h5>
+                    <p class="card-text">Chat with us live in our Discord server!</p>
+                    <iframe src="https://discord.com/widget?id=1176976421147648061&theme=dark" width="300" height="400" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+                </div>
+            </div>
+        </div>
+        
     </div>
 </div>
 
+{% endblock %}
+
+{% block extra_js %}
+
+<script src="https://static.elfsight.com/platform/platform.js" async></script>
+
+<script>
+    // Initialize Bootstrap tooltips
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+</script>
 {% endblock %}
