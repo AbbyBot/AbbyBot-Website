@@ -21,7 +21,7 @@ main_bp = Blueprint('main', __name__)
 def index():
     try:
         # Make Query
-        server_list = execute_query("rei", "SELECT FORMAT(counter, 0) AS counter, FORMAT(full_members, 0) AS full_members, FORMAT(total_xp, 0) AS total_xp FROM (SELECT COUNT(guild_id) AS counter, SUM(member_count) AS full_members FROM server_settings) AS ss, (SELECT SUM(xp_total) AS total_xp FROM user_profile) AS up;")
+        server_list = execute_query("discord", "SELECT FORMAT(counter, 0) AS counter, FORMAT(full_members, 0) AS full_members, FORMAT(total_xp, 0) AS total_xp FROM (SELECT COUNT(guild_id) AS counter, SUM(member_count) AS full_members FROM server_settings) AS ss, (SELECT SUM(xp_total) AS total_xp FROM user_profile) AS up;")
         
         # Get the data or assign 0 if there are no results
         server_count = server_list[0]['counter'] if server_list and server_list[0]['counter'] is not None else "no data available"
@@ -39,23 +39,21 @@ def index():
 @main_bp.route('/status_data')
 def status_data():
     try:
-        # Use 'Asuka' Database
-        bot_info_list = execute_query("asuka", "SELECT bot_name, version, version_code, status, last_updated FROM bot_info;")
+        # Use 'Wishlist' Database
+        bot_info_list = execute_query("api", "SELECT bot_name, version, status, last_updated FROM bot_info;")
         bot_name = bot_info_list[0]['bot_name'] if bot_info_list and bot_info_list[0]['bot_name'] is not None else "no data available"
         version = bot_info_list[0]['version'] if bot_info_list and bot_info_list[0]['version'] is not None else "no data available"
-        version_code = bot_info_list[0]['version_code'] if bot_info_list and bot_info_list[0]['version_code'] is not None else "no data available"
         status = bot_info_list[0]['status'] if bot_info_list and bot_info_list[0]['status'] is not None else "no data available"
         last_updated = bot_info_list[0]['last_updated'] if bot_info_list and bot_info_list[0]['last_updated'] is not None else "no data available"
 
         # Use 'Rei' Database
-        server_list = execute_query("rei", "SELECT COUNT(guild_id) AS counter FROM server_settings;")
+        server_list = execute_query("discord", "SELECT COUNT(guild_id) AS counter FROM server_settings;")
         server_count = server_list[0]['counter'] if server_list and server_list[0]['counter'] is not None else "no data available"
 
         # Return JSON
         return {
             "bot_name": bot_name,
             "version": version,
-            "version_code": version_code,
             "status": status,
             "last_updated": last_updated,
             "server_count": server_count
@@ -68,7 +66,7 @@ def status_data():
 @main_bp.route('/status')
 def bot_status():
     try:
-        response = execute_query("asuka", "SELECT 1")
+        response = execute_query("wishlist", "SELECT 1")
         if response:
             return render_template('bot-status.html')
         else:
@@ -81,7 +79,7 @@ def bot_status():
 def abbybot_privileges():
     try:
         # Make Query
-        server_list = execute_query("rei", "SELECT privilege_name, value, rol_meaning, how_to_get, xp_multiplier, exclusive_access FROM privileges;")
+        server_list = execute_query("discord", "SELECT privilege_name, value, rol_meaning, how_to_get, xp_multiplier, exclusive_access FROM privileges;")
 
     except mysql.connector.Error as err:
         print(f"Error: {err}")
@@ -132,7 +130,7 @@ def wishlist():
 
         try:
             # Insert the data into the wishlist database
-            execute_query("asuka", """
+            execute_query("wishlist", """
                 INSERT INTO wishlist (name, email, discord_username, reason, how_learned)
                 VALUES (%s, %s, %s, %s, %s)
             """, (name, email, discord_username, reason, how_learned), fetchall=False, commit=True)
@@ -162,7 +160,7 @@ def news_list():
     LEFT JOIN categories ON news.category_id = categories.id
     ORDER BY news.created_at DESC
     """
-    news_items = execute_query("asuka", query)
+    news_items = execute_query("api", query)
     return render_template('news_list.html', news=news_items)
 
 
@@ -175,7 +173,7 @@ def news_detail(slug):
     LEFT JOIN categories ON news.category_id = categories.id
     WHERE news.slug = %s
     """
-    news_item = execute_query("asuka", query, (slug,), fetchall=False)
+    news_item = execute_query("api", query, (slug,), fetchall=False)
     
     if not news_item:
         abort(404)  # If no news found, return 404
@@ -210,7 +208,7 @@ def commands_site():
             WHERE h.language_id = 1
             ORDER BY hc.id, h.command_code
         """
-        results = execute_query("rei", categories_query)
+        results = execute_query("discord", categories_query)
 
         if not results:
             raise ValueError("No command data available")
