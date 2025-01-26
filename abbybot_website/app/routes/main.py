@@ -40,10 +40,9 @@ def index():
 def status_data():
     try:
         # Use 'Wishlist' Database
-        bot_info_list = execute_query("wishlist", "SELECT bot_name, version, version_code, status, last_updated FROM bot_info;")
+        bot_info_list = execute_query("api", "SELECT bot_name, version, status, last_updated FROM bot_info;")
         bot_name = bot_info_list[0]['bot_name'] if bot_info_list and bot_info_list[0]['bot_name'] is not None else "no data available"
         version = bot_info_list[0]['version'] if bot_info_list and bot_info_list[0]['version'] is not None else "no data available"
-        version_code = bot_info_list[0]['version_code'] if bot_info_list and bot_info_list[0]['version_code'] is not None else "no data available"
         status = bot_info_list[0]['status'] if bot_info_list and bot_info_list[0]['status'] is not None else "no data available"
         last_updated = bot_info_list[0]['last_updated'] if bot_info_list and bot_info_list[0]['last_updated'] is not None else "no data available"
 
@@ -55,7 +54,6 @@ def status_data():
         return {
             "bot_name": bot_name,
             "version": version,
-            "version_code": version_code,
             "status": status,
             "last_updated": last_updated,
             "server_count": server_count
