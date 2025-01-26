@@ -6,8 +6,8 @@ import os
 load_dotenv()
 
 # Consolidated DB connection function
-def get_db_connection(db_type="rei", timeout=5):
-    if db_type == "rei":
+def get_db_connection(db_type="discord", timeout=5):
+    if db_type == "discord":
         return mysql.connector.connect(
             host=os.getenv("REI_DB_HOST"),
             user=os.getenv("REI_DB_USER"),
@@ -15,7 +15,7 @@ def get_db_connection(db_type="rei", timeout=5):
             database=os.getenv("REI_DB_NAME"),
             connection_timeout=timeout
         )
-    elif db_type == "asuka":
+    elif db_type == "wishlist":
         return mysql.connector.connect(
             host=os.getenv("ASUKA_DB_HOST"),
             user=os.getenv("ASUKA_DB_USER"),
@@ -23,9 +23,17 @@ def get_db_connection(db_type="rei", timeout=5):
             database=os.getenv("ASUKA_DB_NAME"),
             connection_timeout=timeout
         )
+    elif db_type == "api":
+        return mysql.connector.connect(
+            host=os.getenv("API_DB_HOST"),
+            user=os.getenv("API_DB_USER"),
+            password=os.getenv("API_DB_PASSWORD"),
+            database=os.getenv("API_DB_NAME"),
+            connection_timeout=timeout
+        )
 
 @contextmanager
-def db_connection(db_type="rei"):
+def db_connection(db_type="discord"):
     conn = None
     try:
         conn = get_db_connection(db_type)
