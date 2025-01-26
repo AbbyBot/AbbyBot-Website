@@ -9,18 +9,18 @@ load_dotenv()
 def get_db_connection(db_type="discord", timeout=5):
     if db_type == "discord":
         return mysql.connector.connect(
-            host=os.getenv("REI_DB_HOST"),
-            user=os.getenv("REI_DB_USER"),
-            password=os.getenv("REI_DB_PASSWORD"),
-            database=os.getenv("REI_DB_NAME"),
+            host=os.getenv("DISCORD_DB_HOST"),
+            user=os.getenv("DISCORD_DB_USER"),
+            password=os.getenv("DISCORD_DB_PASSWORD"),
+            database=os.getenv("DISCORD_DB_NAME"),
             connection_timeout=timeout
         )
     elif db_type == "wishlist":
         return mysql.connector.connect(
-            host=os.getenv("ASUKA_DB_HOST"),
-            user=os.getenv("ASUKA_DB_USER"),
-            password=os.getenv("ASUKA_DB_PASSWORD"),
-            database=os.getenv("ASUKA_DB_NAME"),
+            host=os.getenv("WISHLIST_DB_HOST"),
+            user=os.getenv("WISHLIST_DB_USER"),
+            password=os.getenv("WISHLIST_DB_PASSWORD"),
+            database=os.getenv("WISHLIST_DB_NAME"),
             connection_timeout=timeout
         )
     elif db_type == "api":
