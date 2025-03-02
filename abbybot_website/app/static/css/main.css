@@ -138,6 +138,15 @@ a {
 }
 
 
+.navbar-title {
+    font-family: 'Montserrat', sans-serif !important;
+    transition: color 0.3s ease;
+}
+
+.navbar-title:hover {
+    color: #ffde57;
+}
+
 @media (max-width: 768px) {
     .navbar-brand {
         font-size: 1.2rem;
