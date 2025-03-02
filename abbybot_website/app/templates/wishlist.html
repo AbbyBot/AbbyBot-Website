@@ -38,9 +38,9 @@
                 </div>
 
                 <div class="field">
-                    <label class="label">Discord Username (optional field)</label>
+                    <label class="label">Discord Username (required field)</label>
                     <div class="control">
-                        <input class="input {{ 'input-error' if errors.get('discord_username') }}" type="text" name="discord_username" placeholder="Your Discord Username" value="{{ discord_username or '' }}">
+                        <input class="input {{ 'input-error' if errors.get('discord_username') }}" type="text" name="discord_username" placeholder="Your Discord Username" value="{{ discord_username or '' }}" required>
                         {% if errors.get('discord_username') %}
                             <p class="error-message">{{ errors['discord_username'] }}</p>
                         {% endif %}
@@ -73,9 +73,18 @@
                     </div>
                 </div>
 
+                <div class="">
+                    <div class="">
+                        <div class="cf-turnstile" data-sitekey="{{ turnstile_site_key }}"></div>
+                        {% if errors.get('turnstile') %}
+                            <p class="error-message">{{ errors['turnstile'] }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+
                 <br><strong>We kindly ask you to fill out the form sincerely and double-check that your information is accurate to ensure you receive all benefits When AbbyBot is released. Thank you!</strong></br>
 
-                <div class="field">
+                <div class="field"></div>
                     <div class="control">
                         <button class="button is-link" type="submit">Add to wishlist!</button>
                     </div>
@@ -84,4 +93,8 @@
         </div>
     </div>
 </section>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 {% endblock %}

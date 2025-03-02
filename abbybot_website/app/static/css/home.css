@@ -263,6 +263,20 @@
     #staff-section .card {
         margin-bottom: 1.5rem;
     }
+    .alert .row {
+        flex-direction: column;
+        text-align: center;
+    }
+    .alert .col-md-8 {
+        margin-bottom: 1rem;
+    }
+    .alert .col-md-4 img {
+        width: 150px;
+        margin: auto;
+    }
+    .alert .text-center .btn {
+        margin-bottom: 1rem;
+    }
 }
 
 

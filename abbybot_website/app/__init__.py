@@ -1,13 +1,34 @@
 # app/__init__.py
 
 from flask import Flask
-from app.routes.main import main_bp
+from flask_mail import Mail
+from dotenv import load_dotenv
+import os
+
+# Load dotenv variables
+load_dotenv()
+
+# Flask-Mail instance
+mail = Mail()
 
 def create_app():
     app = Flask(__name__)
     app.config.from_object('config.Config')
     
+    # Flask-Mail configuration
+    app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER')
+    app.config['MAIL_PORT'] = os.getenv('MAIL_PORT')
+    app.config['MAIL_USE_TLS'] = os.getenv('MAIL_USE_TLS') == 'True'
+    app.config['MAIL_USE_SSL'] = os.getenv('MAIL_USE_SSL') == 'True'
+    app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
+    app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
+    app.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_DEFAULT_SENDER')
+
+    # Initialize Flask-Mail
+    mail.init_app(app)
+    
     # Register Blueprints
+    from app.routes.main import main_bp
     app.register_blueprint(main_bp)
     
     return app
