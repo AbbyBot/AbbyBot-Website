@@ -10,10 +10,12 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            height: auto;
+            min-height: 100vh;
             margin: 0;
             color: white;
             font-family: 'Inter', sans-serif;
+            padding: 20px;
         }
         .container {
             background-color: #2c2f33;
@@ -23,6 +25,7 @@
             max-width: 800px;
             width: 100%;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin: auto;
         }
         .container img {
             max-width: 100%;
@@ -32,7 +35,7 @@
             border-radius: 10px;
         }
         .button {
-            background-color: #7289da;
+            background-color: #4caf50;
             color: white;
             padding: 15px 25px;
             text-decoration: none;
@@ -54,12 +57,30 @@
             line-height: 1.5;
             margin: 10px 0;
         }
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 1.5em;
+            }
+            p {
+                font-size: 1em;
+            }
+            .button {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Hi {{ username }}, thanks for adding AbbyBot!</h1>
-        <img src="{{ url_for('static', filename='img/overview/abbybot_overview.png') }}" alt="AbbyBot - Wishlist Confirmation">
+        <img src="https://abbybotproject.com/static/img/overview/abbybot_overview.png" alt="AbbyBot - Wishlist Confirmation">
         <p>We are thrilled to have you on board. By adding AbbyBot to your wishlist, you will be among the first to know when AbbyBot officially launches.</p>
         <p>Stay tuned for more updates and exclusive benefits!</p>
         <p>As a token of our appreciation, you have obtained the rank <strong>Wishlist Users 📜</strong>. This rank will be assigned to you when the project enters the beta phase.</p>
