@@ -1,5 +1,5 @@
 body {
-    background: linear-gradient(180deg, #c1683a 0%, #b2613d 35%, #a6593f 70%, #8e4f3b 100%);
+    background: linear-gradient(180deg, #c1683a 0%, #b2613a 35%, #a6593f 70%, #8e4f3b 100%);
 }
 
 .input-error {
@@ -118,6 +118,10 @@ body {
 
 .wishlist-form-section .button:focus {
     outline: none;
+}
+
+.cf-turnstile {
+    margin-top: 1rem;
 }
 
 @media (max-width: 992px) {

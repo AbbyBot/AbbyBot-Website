@@ -4,7 +4,8 @@ from dotenv import load_dotenv
 from ..utilities.db_connections import execute_query
 from flask import Flask, flash, redirect, url_for, render_template, request, abort
 import re
-
+import requests  # Add this import for Turnstile verification
+import os
 
 
 # Load dotenv variables
@@ -94,6 +95,7 @@ DISCORD_REGEX = r'^[\w.]{2,32}$'  # New format without hashtags, allows letters,
 
 @main_bp.route('/wishlist', methods=['GET', 'POST'])
 def wishlist():
+    turnstile_site_key = os.getenv('TURNSTILE_SITE_KEY')
     if request.method == 'POST':
         # Get form data with .get() to avoid KeyErrors
         name = request.form.get('name', '').strip()
@@ -102,9 +104,21 @@ def wishlist():
         reason = request.form.get('reason', '').strip()
         how_learned = request.form.get('how_learned', '').strip()
         terms_accepted = request.form.get('terms', None)
+        turnstile_response = request.form.get('cf-turnstile-response')  # Get Turnstile response
 
         # Create an errors dictionary to pass to the template
         errors = {}
+
+        # Validate Turnstile response
+        turnstile_secret = os.getenv('TURNSTILE_SECRET_KEY')
+        turnstile_verify_url = 'https://challenges.cloudflare.com/turnstile/v0/siteverify'
+        turnstile_data = {
+            'secret': turnstile_secret,
+            'response': turnstile_response
+        }
+        turnstile_verification = requests.post(turnstile_verify_url, data=turnstile_data).json()
+        if not turnstile_verification.get('success'):
+            errors['turnstile'] = "Turnstile verification failed. Please try again."
 
         # Validate required fields
         if not name:
@@ -126,7 +140,7 @@ def wishlist():
         # Check if there are any errors
         if errors:
             flash("Please correct the errors in the form.", 'danger')
-            return render_template('wishlist.html', name=name, email=email, discord_username=discord_username, reason=reason, how_learned=how_learned, errors=errors, terms_accepted=terms_accepted)
+            return render_template('wishlist.html', name=name, email=email, discord_username=discord_username, reason=reason, how_learned=how_learned, errors=errors, terms_accepted=terms_accepted, turnstile_site_key=turnstile_site_key)
 
         try:
             # Insert the data into the wishlist database
@@ -146,7 +160,7 @@ def wishlist():
             flash(f"Unexpected Error: {e}", 'danger')
             print(f"Unexpected Error: {e}")
 
-    return render_template('wishlist.html', errors={}) 
+    return render_template('wishlist.html', errors={}, turnstile_site_key=turnstile_site_key) 
 
 
 # News views
