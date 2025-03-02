@@ -1,18 +1,30 @@
-from flask import Flask, Blueprint, render_template
+from flask import Flask, Blueprint, render_template, flash, redirect, url_for, request, abort
 import mysql.connector
 from dotenv import load_dotenv
 from ..utilities.db_connections import execute_query
-from flask import Flask, flash, redirect, url_for, render_template, request, abort
 import re
-import requests  # Add this import for Turnstile verification
+import requests
 import os
-
+from flask_mail import Message
+from app import Mail  # Import the mail instance
 
 # Load dotenv variables
 load_dotenv()
 
 # Flask instance
 app = Flask(__name__)
+
+# Flask-Mail configuration
+app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER')
+app.config['MAIL_PORT'] = os.getenv('MAIL_PORT')
+app.config['MAIL_USE_TLS'] = os.getenv('MAIL_USE_TLS') == 'True'
+app.config['MAIL_USE_SSL'] = os.getenv('MAIL_USE_SSL') == 'True'
+app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
+app.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_DEFAULT_SENDER')
+
+# Initialize Flask-Mail
+mail = Mail(app)
 
 # Main blueprint
 main_bp = Blueprint('main', __name__)
@@ -148,6 +160,14 @@ def wishlist():
                 INSERT INTO wishlist (name, email, discord_username, reason, how_learned)
                 VALUES (%s, %s, %s, %s, %s)
             """, (name, email, discord_username, reason, how_learned), fetchall=False, commit=True)
+            
+            # Send confirmation email
+            msg = Message(
+                subject="Thank you for adding AbbyBot to your wishlist!",
+                recipients=[email]
+            )
+            msg.html = render_template('emails/wishlist_added.html', username=discord_username)
+            mail.send(msg)
             
             flash("Your wishlist submission has been received successfully!", 'success')
             return redirect(url_for('main.index', modal='show'))
