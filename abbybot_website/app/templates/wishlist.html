@@ -38,9 +38,9 @@
                 </div>
 
                 <div class="field">
-                    <label class="label">Discord Username (optional field)</label>
+                    <label class="label">Discord Username (required field)</label>
                     <div class="control">
-                        <input class="input {{ 'input-error' if errors.get('discord_username') }}" type="text" name="discord_username" placeholder="Your Discord Username" value="{{ discord_username or '' }}">
+                        <input class="input {{ 'input-error' if errors.get('discord_username') }}" type="text" name="discord_username" placeholder="Your Discord Username" value="{{ discord_username or '' }}" required>
                         {% if errors.get('discord_username') %}
                             <p class="error-message">{{ errors['discord_username'] }}</p>
                         {% endif %}

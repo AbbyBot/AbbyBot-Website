@@ -141,8 +141,9 @@ def wishlist():
         elif not re.match(EMAIL_REGEX, email):
             errors['email'] = "Invalid email format."
 
-        # Validate Discord username if provided
-        if discord_username and not re.match(DISCORD_REGEX, discord_username):
+        if not discord_username:
+            errors['discord_username'] = "Discord Username is required."
+        elif not re.match(DISCORD_REGEX, discord_username):
             errors['discord_username'] = "Invalid Discord username format! Only letters, numbers, underscores, and periods are allowed."
 
         # Validate checkbox
