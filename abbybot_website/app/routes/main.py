@@ -156,6 +156,15 @@ def wishlist():
             return render_template('wishlist.html', name=name, email=email, discord_username=discord_username, reason=reason, how_learned=how_learned, errors=errors, terms_accepted=terms_accepted, turnstile_site_key=turnstile_site_key)
 
         try:
+            # Check if the user already exists in the wishlist database
+            existing_users = execute_query("wishlist", """
+                SELECT * FROM wishlist WHERE discord_username = %s
+            """, (discord_username,))
+
+            if existing_users:
+                flash("This user is already registered in the wishlist.", 'danger')
+                return render_template('wishlist.html', name=name, email=email, discord_username=discord_username, reason=reason, how_learned=how_learned, errors=errors, terms_accepted=terms_accepted, turnstile_site_key=turnstile_site_key)
+
             # Insert the data into the wishlist database
             execute_query("wishlist", """
                 INSERT INTO wishlist (name, email, discord_username, reason, how_learned)

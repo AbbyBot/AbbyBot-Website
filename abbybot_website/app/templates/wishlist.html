@@ -16,6 +16,18 @@
         <div class="wishlist-form-section">
             <h2>Add AbbyBot to Wishlist</h2>
             <p>Would you like to have AbbyBot on your Discord server? If you’re interested, fill out this form to be notified when AbbyBot officially launches!<br><br> By adding AbbyBot to your "Wishlist," you'll unlock exclusive benefits such as the <a href="/abbybot-privileges"><strong class="text-info">Wishlist Users 📜</strong></a> Privilege, which grants XP boosts and access to special features!</p>
+            
+            
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="flash-messages">
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            
             <form action="{{ url_for('main.wishlist') }}" method="POST">
                 <div class="field">
                     <label class="label">Name (required field)</label>
