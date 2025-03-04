@@ -59,7 +59,7 @@ a {
 
 .btn-premium:hover {
     background-color: #e6c84f;
-    color: black;
+    color: rgb(255, 255, 255);
 }
 
 .btn-add {
@@ -69,7 +69,7 @@ a {
 
 .btn-add:hover {
     background-color: #3d76a3;
-    color: black;
+    color: rgb(255, 255, 255);
 }
 
 .btn-login {
