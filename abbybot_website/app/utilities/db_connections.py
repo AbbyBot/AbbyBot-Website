@@ -1,4 +1,4 @@
-import mysql.connector
+import mysql.connector  # Ensure mysql.connector is imported
 from dotenv import load_dotenv
 from contextlib import contextmanager
 import os
