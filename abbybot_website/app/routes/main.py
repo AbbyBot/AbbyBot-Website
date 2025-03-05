@@ -1,39 +1,18 @@
-from flask import Flask, Blueprint, render_template, abort
+from flask import Blueprint, render_template
 import mysql.connector
-from dotenv import load_dotenv
 from ..utilities.db_connections import execute_query
 
-# Load dotenv variables
-load_dotenv()
-
-# Flask instance
-app = Flask(__name__)
-
-# Main blueprint
 main_bp = Blueprint('main', __name__)
 
-# Blueprint routes
 @main_bp.route('/')
 def index():
     try:
-        # Make Query
         server_list = execute_query("discord", "SELECT FORMAT(counter, 0) AS counter, FORMAT(full_members, 0) AS full_members, FORMAT(total_xp, 0) AS total_xp FROM (SELECT COUNT(guild_id) AS counter, SUM(member_count) AS full_members FROM server_settings) AS ss, (SELECT SUM(xp_total) AS total_xp FROM user_profile) AS up;")
-        
-        # Get the data or assign 0 if there are no results
         server_count = server_list[0]['counter'] if server_list and server_list[0]['counter'] is not None else "no data available"
         total_members = server_list[0]['full_members'] if server_list and server_list[0]['full_members'] is not None else "no data available"
         total_xp = server_list[0]['total_xp'] if server_list and server_list[0]['total_xp'] is not None else "no data available"
-
         return render_template('index.html', server_count=server_count, total_members=total_members, total_xp=total_xp)
 
     except mysql.connector.Error as err:
-        print(f"Error: {err}")
         error_message = "We are currently unable to load the AbbyBot data. Please try again later."
         return render_template('index.html', error_message=error_message)
-
-
-app.register_blueprint(main_bp)
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
