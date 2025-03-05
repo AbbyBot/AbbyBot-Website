@@ -173,24 +173,6 @@ def commands_site():
         error_message = "We are currently unable to load the AbbyBot commands. Please try again later."
         return render_template('commands.html', error_message=error_message)
 
-# Error handlers
-
-@main_bp.app_errorhandler(404)
-def page_not_found(error):
-    return render_template('error.html', message="Sorry, the page you are looking for does not exist.", error_code=404), 404
-
-@main_bp.app_errorhandler(500)
-def internal_server_error(error):
-    return render_template('error.html', message="An unexpected error occurred. Please try again later.", error_code=500), 500
-
-@main_bp.app_errorhandler(Exception)
-def handle_generic_error(error):
-    # Display the error message if available, or a generic message
-    return render_template('error.html', message=str(error) if error else "An unexpected error occurred.", error_code=500), 500
-
-@main_bp.route('/dashboard')
-def dashboard():
-    return redirect(url_for('wip.wip'))
 
 app.register_blueprint(main_bp)
 
