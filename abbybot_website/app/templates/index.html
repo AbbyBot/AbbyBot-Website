@@ -415,17 +415,28 @@
 {% block extra_js %}
 
 <script>
-    // Check if the URL has a modal query parameter to show the success modal
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.has('modal') && urlParams.get('modal') === 'show') {
-        var myModal = new bootstrap.Modal(document.getElementById('successModal'));
-        myModal.show();
-    }
+    // Show the success modal if there's a flash message
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                {% if category == 'success' %}
+                    var myModal = new bootstrap.Modal(document.getElementById('successModal'));
+                    myModal.show();
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
 
     // Initialize Bootstrap tooltips
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
     var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
         return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+
+    // Clear flash messages when the modal is closed
+    var successModal = document.getElementById('successModal');
+    successModal.addEventListener('hidden.bs.modal', function () {
+        fetch('/clear-flash-messages', { method: 'POST' });
     });
 </script>
 

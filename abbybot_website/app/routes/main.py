@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, session
 import mysql.connector
 from ..utilities.db_connections import execute_query
 
@@ -16,3 +16,8 @@ def index():
     except mysql.connector.Error as err:
         error_message = "We are currently unable to load the AbbyBot data. Please try again later."
         return render_template('index.html', error_message=error_message)
+
+@main_bp.route('/clear-flash-messages', methods=['POST'])
+def clear_flash_messages():
+    session.pop('_flashes', None)
+    return '', 204

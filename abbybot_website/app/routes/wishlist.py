@@ -88,7 +88,7 @@ def wishlist():
             mail.send(msg)
             
             flash("Your wishlist submission has been received successfully!", 'success')
-            return redirect(url_for('main.index', modal='show'))
+            return redirect(url_for('main.index'))
 
         except mysql.connector.Error as err:
             flash(f"Database Error: {err}", 'danger')
