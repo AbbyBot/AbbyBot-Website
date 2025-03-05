@@ -62,13 +62,6 @@ def news_detail(slug):
 
 
 
-
-@main_bp.route('/user-responsibilities')
-def user_responsibilities():
- return render_template('user_responsibilities.html')
-
-
-
 # commands endpoint
 
 @main_bp.route('/commands')
