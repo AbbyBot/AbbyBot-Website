@@ -89,7 +89,7 @@
 <script>
 async function updateBotStatus() {
     try {
-        const response = await fetch("{{ url_for('main.status_data') }}");
+        const response = await fetch("{{ url_for('status_data.status_data') }}");
         if (response.ok) {
             const data = await response.json();
             

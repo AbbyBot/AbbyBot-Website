@@ -34,6 +34,7 @@ def create_app():
     from app.routes.wip import wip_bp
     from app.routes.dashboard import dashboard_bp
     from app.routes.socials import socials_bp
+    from app.routes.status_data import status_data_bp
 
     from app.routes.handlers.error_handlers import error_handlers_bp
 
@@ -44,5 +45,6 @@ def create_app():
     app.register_blueprint(error_handlers_bp)
     app.register_blueprint(dashboard_bp)
     app.register_blueprint(socials_bp)
+    app.register_blueprint(status_data_bp)
     
     return app
