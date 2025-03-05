@@ -1,30 +1,14 @@
-from flask import Flask, Blueprint, render_template, flash, redirect, url_for, request, abort
-import mysql.connector  # Import mysql.connector to handle MySQL errors
+from flask import Flask, Blueprint, render_template, abort
+import mysql.connector
 from dotenv import load_dotenv
 from ..utilities.db_connections import execute_query
-import re
-import requests
-import os
-from flask_mail import Message
-from app import Mail  # Import the mail instance
+
 
 # Load dotenv variables
 load_dotenv()
 
 # Flask instance
 app = Flask(__name__)
-
-# Flask-Mail configuration
-app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER')
-app.config['MAIL_PORT'] = os.getenv('MAIL_PORT')
-app.config['MAIL_USE_TLS'] = os.getenv('MAIL_USE_TLS') == 'True'
-app.config['MAIL_USE_SSL'] = os.getenv('MAIL_USE_SSL') == 'True'
-app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
-app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
-app.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_DEFAULT_SENDER')
-
-# Initialize Flask-Mail
-mail = Mail(app)
 
 # Main blueprint
 main_bp = Blueprint('main', __name__)
