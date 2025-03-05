@@ -38,6 +38,9 @@ def db_connection(db_type="discord"):
     try:
         conn = get_db_connection(db_type)
         yield conn
+    except mysql.connector.Error as err:
+        print(f"Database connection failed: {err}")
+        raise
     finally:
         if conn is not None:
             conn.close()
