@@ -88,18 +88,6 @@ def bot_status():
         error_message = f"At this time we are unable to verify the current status of AbbyBot. Please come back later."
         return render_template('bot-status.html', error_message=error_message)
 
-@main_bp.route('/abbybot-privileges')
-def abbybot_privileges():
-    try:
-        # Make Query
-        server_list = execute_query("discord", "SELECT privilege_name, value, rol_meaning, how_to_get, xp_multiplier, exclusive_access FROM privileges;")
-
-    except mysql.connector.Error as err:
-        print(f"Error: {err}")
-        return render_template('error.html', message="Database connection failed.")
-
-    return render_template('abbybot-privileges.html', privileges=server_list)
-
 
 # Email regex pattern
 EMAIL_REGEX = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
