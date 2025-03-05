@@ -32,41 +32,6 @@ def index():
         return render_template('index.html', error_message=error_message)
 
 
-# News list
-@main_bp.route('/abbybot-news')
-def news_list():
-    query = """
-    SELECT news.id, news.title, news.description, news.content, news.image_url, categories.name AS category, news.created_at, news.slug
-    FROM news
-    LEFT JOIN categories ON news.category_id = categories.id
-    ORDER BY news.created_at DESC
-    """
-    news_items = execute_query("api", query)
-    return render_template('news_list.html', news=news_items)
-
-
-# News detail 
-@main_bp.route('/abbybot-news/<string:slug>')
-def news_detail(slug):
-    query = """
-    SELECT news.id, news.title, news.description, news.content, news.image_url, categories.name AS category, news.created_at
-    FROM news
-    LEFT JOIN categories ON news.category_id = categories.id
-    WHERE news.slug = %s
-    """
-    news_item = execute_query("api", query, (slug,), fetchall=False)
-    
-    if not news_item:
-        abort(404)  # If no news found, return 404
-    return render_template('news_detail.html', news=news_item)
-
-
-
-# commands endpoint
-
-
-
-
 app.register_blueprint(main_bp)
 
 
