@@ -22,6 +22,10 @@ a {
     text-align: center;
 }
 
+.btn-wishlist:hover{
+    color: black;
+}
+
 .hero-color{
     background: linear-gradient(180deg, #c1683a 0%, #b2613d 35%, #a6593f 70%, #8e4f3b 100%);
 }
