@@ -2,18 +2,19 @@ from flask import Flask
 from flask_mail import Mail
 from dotenv import load_dotenv
 import os
+from config import Config
 
-# Load dotenv variables
+
 load_dotenv()
 
-# Flask-Mail instance
+
 mail = Mail()
 
 def create_app():
     app = Flask(__name__)
-    app.config.from_object('config.Config')
+    app.config.from_object(Config) 
     
-    # Flask-Mail configuration
+
     app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER')
     app.config['MAIL_PORT'] = os.getenv('MAIL_PORT')
     app.config['MAIL_USE_TLS'] = os.getenv('MAIL_USE_TLS') == 'True'
@@ -22,10 +23,9 @@ def create_app():
     app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
     app.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_DEFAULT_SENDER')
 
-    # Initialize Flask-Mail
+
     mail.init_app(app)
     
-    # Register Blueprints
     from app.routes.main import main_bp
     from app.routes.abbybot_privileges import abbybot_privileges_bp
     from app.routes.wishlist import wishlist_bp
