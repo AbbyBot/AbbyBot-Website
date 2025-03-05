@@ -389,27 +389,31 @@
 
 </section>
 
-<!-- Modal -->
+
 <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="successModalLabel">Success!</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content dark-modal">
+            <div class="modal-header">
+                <h5 class="modal-title" id="successModalLabel">Success!</h5>
+                <button type="button" class="custom-close" data-bs-dismiss="modal" aria-label="Close">&times;</button>
+            </div>
+            <div class="modal-body d-flex align-items-center justify-content-between">
+                <div class="modal-text">
+                    <p class="lead">You have successfully added AbbyBot to your wishlist! See you very soon!</p>
+                </div>
+                <img src="{{ url_for('static', filename='img/emotes/abbybot_party.png') }}" alt="AbbyBot" class="img-fluid modal-image">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Close</button>
+            </div>
         </div>
-        <div class="modal-body text-center">
-            <img src="{{ url_for('static', filename='img/emotes/abbybot_party.png') }}" alt="AbbyBot" class="img-fluid mb-3 modal-image">
-            <p class="lead">You have successfully added AbbyBot to your wishlist! see you very soon!</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-success" data-bs-dismiss="modal">Close</button>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
+
 {% endblock %}
 
 {% block extra_js %}
+
 <script>
     // Check if the URL has a modal query parameter to show the success modal
     const urlParams = new URLSearchParams(window.location.search);
@@ -424,4 +428,5 @@
         return new bootstrap.Tooltip(tooltipTriggerEl);
     });
 </script>
+
 {% endblock %}
