@@ -32,6 +32,7 @@ def create_app():
     from app.routes.abbybot_privileges import abbybot_privileges_bp  # Import the new blueprint
     from app.routes.wishlist import wishlist_bp  # Import the new wishlist blueprint
     from app.routes.wip import wip_bp
+    from app.routes.dashboard import dashboard_bp
 
     from app.routes.handlers.error_handlers import error_handlers_bp
 
@@ -40,5 +41,6 @@ def create_app():
     app.register_blueprint(wishlist_bp)
     app.register_blueprint(wip_bp)
     app.register_blueprint(error_handlers_bp)
+    app.register_blueprint(dashboard_bp)
     
     return app
