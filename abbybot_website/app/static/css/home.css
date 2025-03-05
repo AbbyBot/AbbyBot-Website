@@ -246,6 +246,7 @@
     max-width: 100%;
     height: auto;
     border-radius: 10px;
+    width: 100%;
 }
 
 
@@ -288,5 +289,73 @@
 [data-aos].aos-animate {
     opacity: 1;
     transform: scale(1);
+}
+
+.dark-modal {
+    background-color: #2c2f33;
+    color: white;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    max-width: 800px;
+    margin: auto;
+}
+
+.dark-modal .modal-header,
+.dark-modal .modal-footer {
+    border: none;
+    justify-content: center;
+}
+
+.dark-modal .modal-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    width: 100%;
+    text-align: center;
+}
+
+.dark-modal .modal-body {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dark-modal .modal-body .modal-text {
+    text-align: left;
+    flex: 1;
+}
+
+.dark-modal .modal-body .modal-image {
+    max-width: 200px;
+    height: auto;
+    border-radius: 10px;
+    margin-left: 20px;
+}
+
+.dark-modal .btn-success {
+    background-color: #4caf50;
+    border: none;
+    width: 100%;
+    padding: 10px 0;
+}
+
+.dark-modal .btn-success:hover {
+    background-color: #45a049;
+}
+
+.dark-modal .custom-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.dark-modal .custom-close:hover {
+    color: #ccc;
 }
 

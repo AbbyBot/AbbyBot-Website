@@ -29,7 +29,7 @@
                     {{ abbybot_subtitles|random|safe }}</p>
                 </div>
                 <div class="button-group mt-4" data-aos="fade-up" data-aos-delay="800">
-                    <a href="/wishlist" class="btn btn-success btn-lg me-3 mb-2">
+                    <a href="/wishlist" class="btn btn-success btn-lg me-3 mb-2 btn-wishlist">
                         <i class="fa-solid fa-address-book me-2"></i> Add to Wishlist
                     </a>
                     <a href="#overview-section" class="btn btn-outline-light btn-lg mb-2">
@@ -314,10 +314,10 @@
             
             <div class="col-md-4 col-lg-3 mb-4" data-aos="fade-up">
                 <div class="card text-center border-0 shadow-sm">
-                    <img src="{{ url_for('static', filename='img/staff_profiles/astronautmarkus.png') }}" alt="Member 1" class="card-img-top rounded-circle mx-auto mt-4" style="width: 120px; height: 120px; object-fit: cover;">
+                    <img src="https://github.com/AstronautMarkus.png" alt="AstronautMarkus" class="card-img-top rounded-circle mx-auto mt-4" style="width: 120px; height: 120px; object-fit: cover;">
                     <div class="card-body">
                         <h5 class="card-title mb-1">AstronautMarkus</h5>
-                        <p class="card-text text-muted mb-2">Project Leader</p>
+                        <p class="card-text text-muted mb-2">Project Leader, Bot / API dev</p>
                         <div class="social-icons">
                             <a href="https://www.linkedin.com/in/markusreyes/" class="text-light me-2"><i class="fab fa-linkedin"></i></a>
                             <a href="https://github.com/AstronautMarkus" class="text-light me-2"><i class="fab fa-github"></i></a>
@@ -329,10 +329,10 @@
 
             <div class="col-md-4 col-lg-3 mb-4" data-aos="fade-up">
                 <div class="card text-center border-0 shadow-sm">
-                    <img src="{{ url_for('static', filename='img/staff_profiles/anzarkept.png') }}" alt="Member 1" class="card-img-top rounded-circle mx-auto mt-4" style="width: 120px; height: 120px; object-fit: cover;">
+                    <img src="https://github.com/anzar2.png" alt="Anzar" class="card-img-top rounded-circle mx-auto mt-4" style="width: 120px; height: 120px; object-fit: cover;">
                     <div class="card-body">
                         <h5 class="card-title mb-1">Sr. Teorema</h5>
-                        <p class="card-text text-muted mb-2">Dashboard Manager</p>
+                        <p class="card-text text-muted mb-2">Dashboard Manager / API dev</p>
                         <div class="social-icons">
                             <a href="https://github.com/anzar2" class="text-light me-2"><i class="fab fa-github"></i></a>
                         </div>
@@ -342,7 +342,7 @@
 
             <div class="col-md-4 col-lg-3 mb-4" data-aos="fade-up">
                 <div class="card text-center border-0 shadow-sm">
-                    <img src="{{ url_for('static', filename='img/staff_profiles/soledadlml.png') }}" alt="Member 1" class="card-img-top rounded-circle mx-auto mt-4" style="width: 120px; height: 120px; object-fit: cover;">
+                    <img src="https://github.com/Albedofan69420.png" alt="Soledad" class="card-img-top rounded-circle mx-auto mt-4" style="width: 120px; height: 120px; object-fit: cover;">
                     <div class="card-body">
                         <h5 class="card-title mb-1">✨Soledad✨</h5>
                         <p class="card-text text-muted mb-2">Art designer</p>
@@ -389,39 +389,55 @@
 
 </section>
 
-<!-- Modal -->
+
 <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="successModalLabel">Success!</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content dark-modal">
+            <div class="modal-header">
+                <h5 class="modal-title" id="successModalLabel">AbbyBotProject</h5>
+                <button type="button" class="custom-close" data-bs-dismiss="modal" aria-label="Close">&times;</button>
+            </div>
+            <div class="modal-body d-flex align-items-center justify-content-between">
+                <div class="modal-text">
+                    <p class="lead">Congratulations! You've just taken the first step towards an enhanced Discord experience. AbbyBot is now on your wishlist, and exciting features await you in the near future. Stay tuned for updates and get ready to transform your server!</p>
+                </div>
+                <img src="{{ url_for('static', filename='img/emotes/abbybot_party.png') }}" alt="AbbyBot" class="img-fluid modal-image">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Close</button>
+            </div>
         </div>
-        <div class="modal-body text-center">
-            <img src="{{ url_for('static', filename='img/emotes/abbybot_party.png') }}" alt="AbbyBot" class="img-fluid mb-3 modal-image">
-            <p class="lead">You have successfully added AbbyBot to your wishlist! see you very soon!</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-success" data-bs-dismiss="modal">Close</button>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
+
 {% endblock %}
 
 {% block extra_js %}
+
 <script>
-    // Check if the URL has a modal query parameter to show the success modal
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.has('modal') && urlParams.get('modal') === 'show') {
-        var myModal = new bootstrap.Modal(document.getElementById('successModal'));
-        myModal.show();
-    }
+    // Show the success modal if there's a flash message
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                {% if category == 'success' %}
+                    var myModal = new bootstrap.Modal(document.getElementById('successModal'));
+                    myModal.show();
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
 
     // Initialize Bootstrap tooltips
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
     var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
         return new bootstrap.Tooltip(tooltipTriggerEl);
     });
+
+    // Clear flash messages when the modal is closed
+    var successModal = document.getElementById('successModal');
+    successModal.addEventListener('hidden.bs.modal', function () {
+        fetch('/clear-flash-messages', { method: 'POST' });
+    });
 </script>
+
 {% endblock %}
