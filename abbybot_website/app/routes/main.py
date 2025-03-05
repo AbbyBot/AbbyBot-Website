@@ -102,9 +102,7 @@ def news_detail(slug):
     return render_template('news_detail.html', news=news_item)
 
 
-@main_bp.route('/socials')
-def socials():
- return render_template('socials.html')
+
 
 @main_bp.route('/user-responsibilities')
 def user_responsibilities():
