@@ -32,22 +32,6 @@ def index():
         return render_template('index.html', error_message=error_message)
 
 
-
-
-
-@main_bp.route('/status')
-def bot_status():
-    try:
-        response = execute_query("wishlist", "SELECT 1")
-        if response:
-            return render_template('bot-status.html')
-        else:
-            raise mysql.connector.Error("Failed to ping database")
-    except mysql.connector.Error as err:
-        error_message = f"At this time we are unable to verify the current status of AbbyBot. Please come back later."
-        return render_template('bot-status.html', error_message=error_message)
-
-
 # News list
 @main_bp.route('/abbybot-news')
 def news_list():
