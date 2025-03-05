@@ -89,11 +89,6 @@ def bot_status():
         return render_template('bot-status.html', error_message=error_message)
 
 
-# Email regex pattern
-EMAIL_REGEX = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
-DISCORD_REGEX = r'^[\w.]{2,32}$'  # New format without hashtags, allows letters, numbers, underscores, and periods.
-
-
 # News list
 @main_bp.route('/abbybot-news')
 def news_list():
@@ -122,9 +117,6 @@ def news_detail(slug):
         abort(404)  # If no news found, return 404
     return render_template('news_detail.html', news=news_item)
 
-@main_bp.route('/wip')
-def wip():
- return render_template('wip.html')
 
 @main_bp.route('/socials')
 def socials():
@@ -198,7 +190,7 @@ def handle_generic_error(error):
 
 @main_bp.route('/dashboard')
 def dashboard():
-    return redirect(url_for('main.wip'))
+    return redirect(url_for('wip.wip'))
 
 app.register_blueprint(main_bp)
 
