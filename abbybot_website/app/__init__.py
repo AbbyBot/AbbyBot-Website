@@ -36,6 +36,7 @@ def create_app():
     from app.routes.socials import socials_bp
     from app.routes.status import status_bp
     from app.routes.status_data import status_data_bp
+    from app.routes.bot_policies import bot_policies_bp
 
     from app.routes.handlers.error_handlers import error_handlers_bp
 
@@ -48,5 +49,6 @@ def create_app():
     app.register_blueprint(socials_bp)
     app.register_blueprint(status_bp)
     app.register_blueprint(status_data_bp)
+    app.register_blueprint(bot_policies_bp)
     
     return app

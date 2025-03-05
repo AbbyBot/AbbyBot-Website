@@ -67,9 +67,7 @@ def news_detail(slug):
 def user_responsibilities():
  return render_template('user_responsibilities.html')
 
-@main_bp.route('/bot-policies')
-def bot_policies():
- return render_template('bot_policies.html')
+
 
 # commands endpoint
 
