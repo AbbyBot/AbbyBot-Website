@@ -1,4 +1,4 @@
-from flask import Blueprint, redirect, render_template, url_for
+from flask import Blueprint, render_template
 
 
 error_handlers_bp = Blueprint('error_handlers', __name__)

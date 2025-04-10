@@ -2,7 +2,6 @@ from flask import Blueprint, render_template
 import mysql.connector
 from ..utilities.db_connections import execute_query
 
-
 commands_bp = Blueprint('commands', __name__)
 
 @commands_bp.route('/commands')

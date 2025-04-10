@@ -1,5 +1,4 @@
 from flask import Blueprint, render_template, abort
-import mysql.connector
 from ..utilities.db_connections import execute_query
 
 abbybot_news_bp = Blueprint('abbybot_news', __name__)
