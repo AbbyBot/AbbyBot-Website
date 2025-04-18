@@ -37,7 +37,6 @@ def create_app():
     from app.routes.bot_policies import bot_policies_bp
     from app.routes.user_responsibilities import user_responsibilities_bp
     from app.routes.commands import commands_bp
-    from app.routes.abbybot_news import abbybot_news_bp
     from app.routes.handlers.error_handlers import error_handlers_bp
 
     app.register_blueprint(main_bp)
@@ -52,6 +51,5 @@ def create_app():
     app.register_blueprint(bot_policies_bp)
     app.register_blueprint(user_responsibilities_bp)
     app.register_blueprint(commands_bp)
-    app.register_blueprint(abbybot_news_bp)
     
     return app
