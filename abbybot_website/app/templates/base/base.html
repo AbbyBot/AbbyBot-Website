@@ -43,83 +43,12 @@
     {% block extra_css %}{% endblock %}
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand d-flex align-items-center" href="/">
-                <img style="width: 32px;" src="{{ url_for('static', filename='img/icon/abbybot_logo.png') }}" alt="Logo" class="rounded-circle me-2">
-                <span class="navbar-title">AbbyBotProject</span>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="/wip"><i class="fa-solid fa-house me-2"></i> Dashboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/commands"><i class="fas fa-list nav-icon me-2"></i> Commands</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/status"><i class="fa-solid fa-heart-pulse me-2"></i> Status </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/socials"><i class="fa-solid fa-share-from-square"></i> Socials</a>
-                    </li>
-                </ul>
-                <div class="d-flex">
-                    <a href="/abbybot-privileges" class="btn btn-premium me-2"><i class="fa-solid fa-coins me-2"></i> AbbyBot Privileges</a>
-                    <a href="/wishlist" class="btn btn-add me-2"><i class="fa-solid fa-address-book me-2"></i> Add to Wishlist</a>
-                </div>
-            </div>
-        </div>
-    </nav>
+    {% include 'base/components/navbar.html' %}
 
     {% block content %}
     {% endblock %}
 
-    <!-- Footer -->
-    <footer class="footer bg-dark text-light py-4">
-        <div class="container">
-            <div class="row">
-                <!-- About section -->
-                <div class="col-md-4 mb-3">
-                    <h5 class="mb-3">About AbbyBot</h5>
-                    <p>AbbyBot is a multifunctional app that seeks to improve your experience on Discord servers, created by <a class="text-info" href="https://reyesandfriends.cl">ReyesAndFriends.cl</a> team.</p>
-                </div>
-                <!-- URLs -->
-                <div class="col-md-4 mb-3">
-                    <h5 class="mb-3">Quick Links</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="/wip" class="text-light">Dashboard</a></li>
-                        <li><a href="/commands" class="text-light">Commands</a></li>
-                        <li><a href="/status" class="text-light">Status</a></li>
-                        <li><a href="/user-responsibilities" class="text-light">User Responsibilities</a></li>
-                        <li><a href="/bot-policies" class="text-light">Bot Policies</a></li>
-                    </ul>
-                </div>
-                <!-- Contact -->
-                <div class="col-md-4 mb-3">
-                    <h5 class="mb-3">Contact Us</h5>
-                    <ul class="list-unstyled">
-                        <li><i class="fas fa-envelope me-2"></i> <a href="mailto:contact@abbybotproject.com" class="text-light">contact@abbybotproject.com</a></li>
-                    </ul>
-                </div>
-            </div>
-            <hr class="my-3 border-secondary">
-            <div class="d-flex justify-content-between align-items-center">
-                <p class="mb-0">&copy; <span id="currentYear"></span> AbbyBot. All rights reserved.</p>
-                <div class="footer-socials">
-                    <a href="https://github.com/abbybot" class="text-light me-3"><i class="fab fa-github"></i></a>
-                    <a href="https://www.instagram.com/abbybotproject/" class="text-light me-3"><i class="fab fa-instagram"></i></a>
-                    <a href="https://discord.gg/E7JceWrzvW" class="text-light"><i class="fab fa-discord"></i></a>
-                </div>
-            </div>
-            <div class="text-center mt-3">
-                <p class="mb-0">Version: 2.1.4</p>
-            </div>
-        </div>
-    </footer>    
+    {% include 'base/components/footer.html' %}
 
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.js"></script>
     <script>
