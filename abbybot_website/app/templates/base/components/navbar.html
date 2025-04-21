@@ -23,6 +23,23 @@
                 </li>
             </ul>
             <div class="d-flex">
+                <div class="dropdown me-2">
+                    <button class="btn btn-success dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img style="width: 20px;" src="{{ url_for('static', filename='img/flags/en_flag.svg') }}" alt="English" class="me-1"> en
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+                        <li>
+                            <a class="dropdown-item" href="">
+                                <img style="width: 20px;" src="{{ url_for('static', filename='img/flags/en_flag.svg') }}" alt="English" class="me-2"> English
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="">
+                                <img style="width: 20px;" src="{{ url_for('static', filename='img/flags/es_flag.svg') }}" alt="Spanish" class="me-2"> Español
+                            </a>
+                        </li>
+                    </ul>
+                </div>
                 <a href="/abbybot-privileges" class="btn btn-premium me-2"><i class="fa-solid fa-coins me-2"></i> AbbyBot Privileges</a>
                 <a href="/wishlist" class="btn btn-add me-2"><i class="fa-solid fa-address-book me-2"></i> Add to Wishlist</a>
             </div>
