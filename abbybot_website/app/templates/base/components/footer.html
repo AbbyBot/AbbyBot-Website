@@ -1,30 +1,47 @@
 <footer class="footer bg-dark text-light py-4">
     <div class="container">
         <div class="row">
-            <div class="col-md-4 mb-3">
+
+            <div class="col-md-3 mb-3">
                 <h5 class="mb-3">About AbbyBot</h5>
-                <p>AbbyBot is a multifunctional app that seeks to improve your experience on Discord servers, created by <a class="text-info" href="https://reyesandfriends.cl">ReyesAndFriends.cl</a> team.</p>
+                <p>
+                    AbbyBot is a community-driven Discord bot designed to enhance your server experience with a wide range of features and commands. Developed by 
+                    <a class="text-info" href="https://reyesandfriends.cl" target="_blank" >
+                        <img src="{{ url_for('static', filename='img/logos/Reyes&Friends-02.svg') }}" alt="Reyes&Friends Logo" style="height: 22px; width: auto; vertical-align: middle; position: relative; top: -3px;">
+                    </a>
+                </p>
             </div>
-            <div class="col-md-4 mb-3">
+
+            <div class="col-md-3 mb-3">
                 <h5 class="mb-3">Quick Links</h5>
                 <ul class="list-unstyled">
-                    <li><a href="/wip" class="text-light">Dashboard</a></li>
+                    <li><a href="/" class="text-light">Home</a></li>
                     <li><a href="/commands" class="text-light">Commands</a></li>
                     <li><a href="/status" class="text-light">Status</a></li>
-                    <li><a href="/user-responsibilities" class="text-light">User Responsibilities</a></li>
-                    <li><a href="/bot-policies" class="text-light">Bot Policies</a></li>
+                    <li><a href="/socials" class="text-light">Socials</a></li>
                 </ul>
             </div>
-            <div class="col-md-4 mb-3">
+
+            <div class="col-md-3 mb-3">
+                <h5 class="mb-3">Policies</h5>
+                <ul class="list-unstyled">
+                    <li><a href="/bot-policies" class="text-light">Bot Policies</a></li>
+                    <li><a href="/user-responsibilities" class="text-light">User Responsibilities</a></li>
+                </ul>
+            </div>
+
+            <div class="col-md-3 mb-3">
                 <h5 class="mb-3">Contact Us</h5>
                 <ul class="list-unstyled">
                     <li><i class="fas fa-envelope me-2"></i> <a href="mailto:contact@abbybotproject.com" class="text-light">contact@abbybotproject.com</a></li>
+                    <li><i class="fab fa-instagram me-2"></i> <a href="https://www.instagram.com/abbybotproject/" class="text-light" target="_blank">@abbybotproject</a></li>
                 </ul>
             </div>
+            
         </div>
         <hr class="my-3 border-secondary">
         <div class="d-flex justify-content-between align-items-center">
-            <p class="mb-0">&copy; <span id="currentYear"></span> Reyes&Friends team. All rights reserved.</p>
+            <p class="mb-0">&copy; <span id="currentYear"></span> AbbyBotProject team. All rights reserved.</p>
             <div class="footer-socials">
                 <a href="https://github.com/abbybot" class="text-light me-3"><i class="fab fa-github"></i></a>
                 <a href="https://www.instagram.com/abbybotproject/" class="text-light me-3"><i class="fab fa-instagram"></i></a>
@@ -32,7 +49,7 @@
             </div>
         </div>
         <div class="text-center mt-3">
-            <p class="mb-0">Version: 2.1.4</p>
+            <p class="mb-0">Version: 2.1.5</p>
         </div>
     </div>
 </footer>
