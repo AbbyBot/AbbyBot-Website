@@ -51,7 +51,7 @@
                 {% for category in command_categories %}
                 <h3 class="command-category-title">{{ category.category_name }}</h3>
                 {% for command in category.commands %}
-                <li class="command-item" data-aos="fade-right">
+                <li class="command-item bg-dark" data-aos="fade-right">
                     <div class="command-header">
                         <strong class="command-code">{{ command.command_code }}</strong>
                         <span class="command-usage">{{ command.usage }}</span>
