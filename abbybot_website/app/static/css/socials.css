@@ -11,9 +11,8 @@
 }
 
 .social-card {
-    border: none;
+    border: 1px solid #9a9a9a;
     border-radius: 12px;
-    background-color: #2c2f33;
     color: white;
     transition: transform 0.3s ease-in-out;
     overflow: hidden;

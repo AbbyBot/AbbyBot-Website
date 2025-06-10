@@ -43,7 +43,7 @@
 
 .stat-card {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid #444;
+    border: 1px solid #9a9a9a!important;
 }
 
 .stat-card:hover {
@@ -68,11 +68,9 @@
 }
 
 
-
-
 .stat-card {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid #444;
+    border: 1px solid #9a9a9a;
 }
 
 .stat-card:hover {
@@ -112,7 +110,7 @@
 
 .info-card, .terms-card {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid #444;
+    border: 1px solid #9a9a9a;
 }
 
 .info-card:hover, .terms-card:hover {
@@ -154,16 +152,14 @@
 }
 
 #staff-section .card {
-    background-color: #222; 
-    color: #ddd; 
-    border: none;
+    border: 1px solid #9a9a9a!important;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 #staff-section .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5)!important;
 }
+
 
 #staff-section .card-title {
     font-size: 1.2rem;
@@ -173,26 +169,18 @@
 
 #staff-section .card-text {
     font-size: 0.9rem;
-    color: #bbb; 
+    color: #ffffff; 
 }
 
 #staff-section .social-icons a {
     font-size: 1.2rem;
     color: #aaa;
-    transition: color 0.3s ease;
+    transition: color 0.2s ease;
 }
 
 #staff-section .social-icons a:hover {
     color: #fff; 
 }
-
-
-#staff-section .card-img-top {
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
-}
-
-
-
 
 .cta-section {
     color: #ddd;

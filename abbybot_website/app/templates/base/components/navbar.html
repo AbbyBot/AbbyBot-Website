@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand d-flex align-items-center" href="/">
+            <img style="width: 32px;" src="{{ url_for('static', filename='img/icon/abbybot_logo.png') }}" alt="Logo" class="rounded-circle me-2">
+            <span class="navbar-title">AbbyBotProject</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/commands"><i class="fas fa-list nav-icon me-2"></i> Commands</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/status"><i class="fa-solid fa-heart-pulse me-2"></i> Status </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/socials"><i class="fa-solid fa-share-from-square"></i> Socials</a>
+                </li>
+            </ul>
+            <div class="d-flex">
+                <a href="/abbybot-privileges" class="btn btn-premium me-2"><i class="fa-solid fa-coins me-2"></i> AbbyBot Privileges</a>
+                <a href="/wishlist" class="btn btn-add me-2"><i class="fa-solid fa-address-book me-2"></i> Add to Wishlist</a>
+            </div>
+        </div>
+    </div>
+</nav>
