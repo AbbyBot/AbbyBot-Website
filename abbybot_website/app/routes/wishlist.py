@@ -80,11 +80,12 @@ def wishlist():
             """, (name, email, discord_username, reason, how_learned), fetchall=False, commit=True)
             
             # Send confirmation email
+            base_url = request.url_root
             msg = Message(
                 subject="Thank you for adding AbbyBot to your wishlist!",
                 recipients=[email]
             )
-            msg.html = render_template('emails/wishlist_added.html', username=discord_username)
+            msg.html = render_template('emails/wishlist_added.html', username=discord_username, base_url=base_url)
             mail.send(msg)
             
             flash("Your wishlist submission has been received successfully!", 'success')
