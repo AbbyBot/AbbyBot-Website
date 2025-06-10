@@ -10,9 +10,6 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="/wip"><i class="fa-solid fa-house me-2"></i> Dashboard</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="/commands"><i class="fas fa-list nav-icon me-2"></i> Commands</a>
                 </li>
                 <li class="nav-item">
@@ -23,23 +20,6 @@
                 </li>
             </ul>
             <div class="d-flex">
-                <div class="dropdown me-2">
-                    <button class="btn btn-success dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img style="width: 20px;" src="{{ url_for('static', filename='img/flags/en_flag.svg') }}" alt="English" class="me-1"> en
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="languageDropdown">
-                        <li>
-                            <a class="dropdown-item" href="">
-                                <img style="width: 20px;" src="{{ url_for('static', filename='img/flags/en_flag.svg') }}" alt="English" class="me-2"> English
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="">
-                                <img style="width: 20px;" src="{{ url_for('static', filename='img/flags/es_flag.svg') }}" alt="Spanish" class="me-2"> Español
-                            </a>
-                        </li>
-                    </ul>
-                </div>
                 <a href="/abbybot-privileges" class="btn btn-premium me-2"><i class="fa-solid fa-coins me-2"></i> AbbyBot Privileges</a>
                 <a href="/wishlist" class="btn btn-add me-2"><i class="fa-solid fa-address-book me-2"></i> Add to Wishlist</a>
             </div>
